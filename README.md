@@ -1,29 +1,28 @@
 # E-Store:  Sevens Shoe Store
 # Modify this document to expand any and all sections that are applicable for a better understanding from your users/testers/collaborators (remove this comment and other instructions areas for your FINAL release)
 
-An online E-store system built in Java 11=> and ___ _replace with other platform requirements_ ___
-  
+An online E-store system built in Java 11+Maven and NodeJS+Angular
+
 ## Team
 
 - Domenic Mangano
-- MEMBER2
+- Zach Kroesen
 - MEMBER3
 - MEMBER4
 
 
 ## Prerequisites
 
-- Java 8=>11 (Make sure to have correct JAVA_HOME setup in your environment)
-- Maven
--  _add any other tech stack requirements_
-
+- Java 11
+- Maven 
+- Node.JS 18.x or higher
 
 ## How to run it
 
-1. Clone the repository and go to the root directory.
-2. Execute `mvn compile exec:java`
+1. Clone the repository and go to the project directory.
+2. Execute `cd estore-api; mvn compile exec:java`
+3. In another terminal, `cd estore-ui; npm i; npm start`
 3. Open in your browser `http://localhost:8080/`
-4.  _add any other steps required or examples of how to use/run_
 
 ## Known bugs and disclaimers
 (It may be the case that your implementation is not perfect.)

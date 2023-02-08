@@ -8,7 +8,8 @@ An online E-store system built in Java 11+Maven and NodeJS+Angular
 - Domenic Mangano
 - Zach Kroesen
 - Lucas Romero
-- MEMBER4
+- Connor Bastian
+- MEMBER 5
 
 
 ## Prerequisites

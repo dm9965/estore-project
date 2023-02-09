@@ -12,18 +12,19 @@ An online E-store system built in Java 11+Maven and NodeJS+Angular
 - MEMBER 5
 
 
-## Prerequisites
+## Prerequisites for development environment
 
 - Java 11
 - Maven 
 - Node.JS 18.x or higher
+- Angular CLI installed
 
-## How to run it
+## Starting the development environment
 
 1. Clone the repository and go to the project directory.
-2. Execute `cd estore-api; mvn compile exec:java`
-3. In another terminal, `cd estore-ui; npm i; npm start`
-3. Open in your browser `http://localhost:8080/`
+2. To run the backend, `cd estore-api; mvn compile exec:java`
+3. To run the frontend, `cd estore-ui; npm i; npm start`
+3. Open in your browser `http://localhost:4200/`
 
 ## Known bugs and disclaimers
 (It may be the case that your implementation is not perfect.)

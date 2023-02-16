@@ -151,6 +151,7 @@ public class ShoeFileDAO implements ShoeDAO{
                 newShoe.setPrice(newShoe.getPrice());
                 newShoe.setMaterial(newShoe.getMaterial());
                 newShoe.setStyle(newShoe.getStyle());
+                newShoe.setSizing(newShoe.getSizing());
 
                 shoes.put(newShoe.getId(),newShoe);
                 save(); // may throw an IOException

@@ -1,18 +1,16 @@
 package com.estore.api.estoreapi.persistence;
 
+import com.estore.api.estoreapi.model.Shoe;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.logging.Logger;
-
-import com.estore.api.estoreapi.model.Shoe;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 @Component
 public class ShoeFileDAO implements ShoeDAO{
@@ -51,7 +49,7 @@ public class ShoeFileDAO implements ShoeDAO{
             return id;
         }
 
-        /**
+    /**
          * Generates an array of {@linkplain Shoe heroes} from the tree map
          *
          * @return  The array of {@link Shoe heroes}, may be empty
@@ -60,15 +58,15 @@ public class ShoeFileDAO implements ShoeDAO{
             return getAllShoes(null);
         }
 
-        /**
-         * Generates an array of {@linkplain Shoe shoes} from the tree map for any
-         * {@linkplain Shoe shoes} that contains the text specified by containsText
-         * <br>
-         * If containsText is null, the array contains all of the {@linkplain Hero heroes}
-         * in the tree map
-         *
-         * @return  The array of {@link Shoe shoes}, may be empty
-         */
+    /**
+     * Generates an array of {@linkplain Shoe shoes} from the tree map for any
+     * {@linkplain Shoe shoes} that contains the text specified by containsText
+     * <br>
+     * If containsText is null, the array contains all of the {@linkplain Shoe shoes}
+     * in the tree map
+     *
+     * @return The array of {@link Shoe shoes}, may be empty
+     */
         private Shoe[] getAllShoes(String containsText) { // if containsText == null, no filter
             ArrayList<Shoe> shoeArrayList = new ArrayList<>();
 
@@ -127,10 +125,6 @@ public class ShoeFileDAO implements ShoeDAO{
             return true;
         }
 
-        @Override
-        public Shoe getShoeByID(int ID) {
-
-        }
         /**
          ** {@inheritDoc}
          */
@@ -169,27 +163,33 @@ public class ShoeFileDAO implements ShoeDAO{
          */
         @Override
         public Shoe updateShoe(Shoe shoe) throws IOException {
-            synchronized(shoes) {
+            synchronized (shoes) {
                 if (!shoes.containsKey(shoe.getId()))
                     return null;  // hero does not exist
 
-                shoes.put(shoe.getId(),shoe);
+                shoes.put(shoe.getId(), shoe);
                 save(); // may throw an IOException
                 return shoe;
             }
         }
 
-        /**
-         ** {@inheritDoc}
-         */
-        @Override
-        public boolean deleteShoeById(int id) throws IOException {
-            synchronized(shoes) {
-                if (shoes.containsKey(id)) {
-                    shoes.remove(id);
-                    return save();
-                }
-                else
+    @Override
+    public Shoe getShoeById(int id) throws IOException {
+        synchronized (shoes) {
+            return (shoes.getOrDefault(id, null));
+        }
+    }
+
+    /**
+     * * {@inheritDoc}
+     */
+    @Override
+    public boolean deleteShoeById(int id) throws IOException {
+        synchronized (shoes) {
+            if (shoes.containsKey(id)) {
+                shoes.remove(id);
+                return save();
+            } else
                     return false;
             }
         }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,24 +15,23 @@ import java.util.logging.Logger;
 
 @Component
 public class ShoeFileDAO implements ShoeDAO{
-        private static final Logger LOG = Logger.getLogger(ShoeFileDAO.class.getName());
-        final Map<Integer,Shoe> shoes = new HashMap<>();   // Provides a local cache of the hero objects
-        // so that we don't need to read from the file
-        // each time
-        private final ObjectMapper objectMapper;  // Provides conversion between Shoe
-        // objects and JSON text format written
-        // to the file
-        private static int nextId;  // The next Id to assign to a new hero
-        private final String filename;    // Filename to read from and write to
+    private static final Logger LOG = Logger.getLogger(ShoeFileDAO.class.getName());
+    // objects and JSON text format written
+    // to the file
+    private static int nextId;  // The next Id to assign to a new shoe
+    final Map<Integer, Shoe> shoes = new HashMap<>();   // Provides a local cache of the shoe objects
+    // so that we don't need to read from the file
+    // each time
+    private final ObjectMapper objectMapper;  // Provides conversion between Shoe
+    private final String filename;    // Filename to read from and write to
 
-        /**
-         * Creates a Hero File Data Access Object
-         *
-         * @param filename Filename to read from and write to
-         * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
-         *
-         * @throws IOException when file cannot be accessed or read from
-         */
+    /**
+     * Creates a Shoe File Data Access Object
+     *
+     * @param filename     Filename to read from and write to
+     * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
+     * @throws IOException when file cannot be accessed or read from
+     */
         public ShoeFileDAO(@Value("${shoes.file}") String filename,ObjectMapper objectMapper) throws IOException {
             this.filename = filename;
             this.objectMapper = objectMapper;
@@ -50,11 +50,11 @@ public class ShoeFileDAO implements ShoeDAO{
         }
 
     /**
-         * Generates an array of {@linkplain Shoe heroes} from the tree map
-         *
-         * @return  The array of {@link Shoe heroes}, may be empty
-         */
-        public Shoe[] getAllShoes() {
+         * Generates an array of {@linkplain Shoe shoes} from the tree map
+     *
+     * @return The array of {@link Shoe shoes}, may be empty
+     */
+    public Shoe[] getAllShoes() {
             return getAllShoes(null);
         }
 
@@ -62,9 +62,6 @@ public class ShoeFileDAO implements ShoeDAO{
      * Generates an array of {@linkplain Shoe shoes} from the tree map for any
      * {@linkplain Shoe shoes} that contains the text specified by containsText
      * <br>
-     * If containsText is null, the array contains all of the {@linkplain Shoe shoes}
-     * in the tree map
-     *
      * @return The array of {@link Shoe shoes}, may be empty
      */
         private Shoe[] getAllShoes(String containsText) { // if containsText == null, no filter
@@ -109,12 +106,12 @@ public class ShoeFileDAO implements ShoeDAO{
          */
         private boolean load() throws IOException {
             nextId = 0;
-            // Deserializes the JSON objects from the file into an array of heroes
+            // Deserializes the JSON objects from the file into an array of shoes
             // readValue will throw an IOException if there's an issue with the file
             // or reading from the file
             Shoe[] shoeArray = objectMapper.readValue(new File(filename),Shoe[].class);
 
-            // Add each hero to the tree map and keep track of the greatest id
+            // Add each shoe to the tree map and keep track of the greatest id
             for (Shoe shoe : shoeArray) {
                 shoes.put(shoe.getId(),shoe);
                 if (shoe.getId() > nextId)
@@ -140,7 +137,10 @@ public class ShoeFileDAO implements ShoeDAO{
          */
         @Override
         public Shoe createShoe(Shoe shoe) throws IOException {
-            synchronized(shoes) {
+            synchronized (shoes) {
+                if (shoes.containsKey(shoe.getId())) {
+                    throw new FileAlreadyExistsException("ID already exists.");
+                }
                 // We create a new hero object because the id field is immutable
                 // and we need to assign the next unique id
                 Shoe newShoe = new Shoe();

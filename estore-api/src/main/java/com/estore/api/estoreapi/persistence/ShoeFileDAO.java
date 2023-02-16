@@ -61,13 +61,13 @@ public class ShoeFileDAO implements ShoeDAO{
         }
 
         /**
-         * Generates an array of {@linkplain Hero heroes} from the tree map for any
+         * Generates an array of {@linkplain Shoe shoes} from the tree map for any
          * {@linkplain Shoe shoes} that contains the text specified by containsText
          * <br>
          * If containsText is null, the array contains all of the {@linkplain Hero heroes}
          * in the tree map
          *
-         * @return  The array of {@link Hero heroes}, may be empty
+         * @return  The array of {@link Shoe shoes}, may be empty
          */
         private Shoe[] getAllShoes(String containsText) { // if containsText == null, no filter
             ArrayList<Shoe> shoeArrayList = new ArrayList<>();
@@ -110,9 +110,7 @@ public class ShoeFileDAO implements ShoeDAO{
          * @throws IOException when file cannot be accessed or read from
          */
         private boolean load() throws IOException {
-            shoes = new TreeMap<>();
             nextId = 0;
-
             // Deserializes the JSON objects from the file into an array of heroes
             // readValue will throw an IOException if there's an issue with the file
             // or reading from the file
@@ -130,7 +128,7 @@ public class ShoeFileDAO implements ShoeDAO{
         }
 
         @Override
-        public Shoe getShoeByID() {
+        public Shoe getShoeByID(int ID) {
 
         }
         /**

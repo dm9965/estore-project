@@ -3,6 +3,7 @@ package com.estore.api.estoreapi.persistence;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
@@ -16,14 +17,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ShoeFileDAO implements ShoeDAO{
         private static final Logger LOG = Logger.getLogger(ShoeFileDAO.class.getName());
-        Map<Integer,Shoe> shoes;   // Provides a local cache of the hero objects
+        final Map<Integer,Shoe> shoes = new HashMap<>();   // Provides a local cache of the hero objects
         // so that we don't need to read from the file
         // each time
-        private ObjectMapper objectMapper;  // Provides conversion between Shoe
+        private final ObjectMapper objectMapper;  // Provides conversion between Shoe
         // objects and JSON text format written
         // to the file
         private static int nextId;  // The next Id to assign to a new hero
-        private String filename;    // Filename to read from and write to
+        private final String filename;    // Filename to read from and write to
 
         /**
          * Creates a Hero File Data Access Object
@@ -61,7 +62,7 @@ public class ShoeFileDAO implements ShoeDAO{
 
         /**
          * Generates an array of {@linkplain Hero heroes} from the tree map for any
-         * {@linkplain Hero heroes} that contains the text specified by containsText
+         * {@linkplain Shoe shoes} that contains the text specified by containsText
          * <br>
          * If containsText is null, the array contains all of the {@linkplain Hero heroes}
          * in the tree map
@@ -72,7 +73,7 @@ public class ShoeFileDAO implements ShoeDAO{
             ArrayList<Shoe> shoeArrayList = new ArrayList<>();
 
             for (Shoe shoe : shoes.values()) {
-                if (containsText == null || shoe.getName().contains(containsText)) {
+                if (containsText == null || shoe.getBrand().contains(containsText)) {
                     shoeArrayList.add(shoe);
                 }
             }
@@ -128,26 +129,17 @@ public class ShoeFileDAO implements ShoeDAO{
             return true;
         }
 
+        @Override
+        public Shoe getShoeByID() {
+
+        }
         /**
          ** {@inheritDoc}
          */
         @Override
         public Shoe[] searchShoes(String containsText) {
             synchronized(shoes) {
-                return getShoes(containsText);
-            }
-        }
-
-        /**
-         ** {@inheritDoc}
-         */
-        @Override
-        public Shoe getHero(int id) {
-            synchronized(heroes) {
-                if (heroes.containsKey(id))
-                    return heroes.get(id);
-                else
-                    return null;
+                return getAllShoes(containsText);
             }
         }
 
@@ -159,7 +151,15 @@ public class ShoeFileDAO implements ShoeDAO{
             synchronized(shoes) {
                 // We create a new hero object because the id field is immutable
                 // and we need to assign the next unique id
-                Shoe newShoe = new Shoe(nextId(),shoe.getName());
+                Shoe newShoe = new Shoe();
+                newShoe.setBrand(newShoe.getBrand());
+                newShoe.setColor(newShoe.getColor());
+                newShoe.setId(newShoe.getId());
+                newShoe.setSize(newShoe.getSize());
+                newShoe.setPrice(newShoe.getPrice());
+                newShoe.setMaterial(newShoe.getMaterial());
+                newShoe.setStyle(newShoe.getStyle());
+
                 shoes.put(newShoe.getId(),newShoe);
                 save(); // may throw an IOException
                 return newShoe;
@@ -172,7 +172,7 @@ public class ShoeFileDAO implements ShoeDAO{
         @Override
         public Shoe updateShoe(Shoe shoe) throws IOException {
             synchronized(shoes) {
-                if (shoes.containsKey(shoe.getId()) == false)
+                if (!shoes.containsKey(shoe.getId()))
                     return null;  // hero does not exist
 
                 shoes.put(shoe.getId(),shoe);
@@ -185,7 +185,7 @@ public class ShoeFileDAO implements ShoeDAO{
          ** {@inheritDoc}
          */
         @Override
-        public boolean deleteShoe(int id) throws IOException {
+        public boolean deleteShoeById(int id) throws IOException {
             synchronized(shoes) {
                 if (shoes.containsKey(id)) {
                     shoes.remove(id);

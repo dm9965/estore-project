@@ -20,7 +20,7 @@ public interface ShoeDAO {
      * @return The shoe in question, or null if no shoe by that id exists
      * @throws IOException if there is an issue within the DAO
      */
-    Shoe getShoeById(int id);
+    Shoe getShoeById(int id) throws IOException;
 
     /**
      * Retrieves all the shoes
@@ -28,7 +28,7 @@ public interface ShoeDAO {
      * @return An array of all the shoes in the DAO
      * @throws IOException if there is an issue within the DAO
      */
-    Shoe[] getAllShoes();
+    Shoe[] getAllShoes() throws IOException;
 
     /**
      * Searches the shoes' properties with a given string
@@ -37,7 +37,7 @@ public interface ShoeDAO {
      * @return An array of shoes that match the criteria, can be empty if no results
      * @throws IOException if there is an issue within the DAO
      */
-    Shoe[] searchShoes(String searchText);
+    Shoe[] searchShoes(String searchText) throws IOException;
 
     /**
      * Creates a shoe given a blank shoe object.
@@ -48,7 +48,7 @@ public interface ShoeDAO {
      * @throws IOException                if there is an issue within the DAO
      * @throws FileAlreadyExistsException if the given id conflicts with one within the DAO
      */
-    Shoe createShoe(Shoe newShoe);
+    Shoe createShoe(Shoe newShoe) throws IOException, FileAlreadyExistsException;
 
     /**
      * Updates the given shoe object within the DAO, given the shoe object to update
@@ -59,7 +59,7 @@ public interface ShoeDAO {
      * @throws IOException           if there is an issue within the DAO
      * @throws FileNotFoundException if the given shoe id does not exist within the DAO
      */
-    Shoe updateShoe(Shoe updateShoe);
+    Shoe updateShoe(Shoe updateShoe) throws IOException, FileNotFoundException;
 
     /**
      * Deletes the shoe given the id
@@ -68,6 +68,6 @@ public interface ShoeDAO {
      * @return a boolean represneting if the shoe was deleted successfully (true) or if it didn't exist (false)
      * @throws IOException if there is an issue within the DAO
      */
-    boolean deleteShoeById(int id);
+    boolean deleteShoeById(int id) throws IOException;
 
 }

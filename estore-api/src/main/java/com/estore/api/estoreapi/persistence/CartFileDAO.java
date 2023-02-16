@@ -1,6 +1,7 @@
 package com.estore.api.estoreapi.persistence;
 
 import com.estore.api.estoreapi.model.Shoe;
+import com.estore.api.estoreapi.utils.FlatFileOps;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ public class CartFileDAO implements CartDAO {
      * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
      * @throws IOException when file cannot be accessed or read from
      */
-    public CartFileDAO(@Value("${shoes.file}") String filename, ObjectMapper objectMapper) throws IOException {
+    public CartFileDAO(@Value("${dao.carts}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load();  // load the shoees from the file
@@ -116,6 +117,7 @@ public class CartFileDAO implements CartDAO {
         // Deserializes the JSON objects from the file into an array of shoees
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
+        FlatFileOps.ensureDataFileExists(filename);
         Shoe[] shoeArray = objectMapper.readValue(new File(filename), Shoe[].class);
 
         // Add each shoe to the tree map and keep track of the greatest id

@@ -73,9 +73,9 @@ public class ShoeFileDAO implements ShoeDAO{
                 }
             }
 
-            Shoe[] heroArray = new Shoe[shoeArrayList.size()];
-            shoeArrayList.toArray(heroArray);
-            return heroArray;
+            Shoe[] shoeArray = new Shoe[shoeArrayList.size()];
+            shoeArrayList.toArray(shoeArray);
+            return shoeArray;
         }
 
         /**

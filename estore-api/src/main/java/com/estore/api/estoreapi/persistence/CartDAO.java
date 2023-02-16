@@ -1,19 +1,20 @@
 package com.estore.api.estoreapi.persistence;
 
-import java.io.IOException;
 import com.estore.api.estoreapi.model.Shoe;
+
+import java.io.IOException;
 
 /**
  * Defines interface for cart object persistence
- * 
+ *
  * @author Lucas Romero ltr6274@rit.edu
  */
 public interface CartDAO {
     /**
      * Retrieves all items in cart by userId
-     * 
+     *
      * @return array of Shoe objects, may be empty
-     * 
+     *
      * @throws IOException if issue with underlying storage
      */
     Shoe[] getCart(int userId) throws IOException;

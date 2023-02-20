@@ -44,7 +44,7 @@ public class CartFileDAO implements CartDAO {
     }
 
     /**
-     * Generates the next id for a new {@linkplain shoe shoe}
+     * Generates the next id for a new {@linkplain Shoe shoe}
      *
      * @return The next id
      */
@@ -55,29 +55,26 @@ public class CartFileDAO implements CartDAO {
     }
 
     /**
-     * Generates an array of {@linkplain shoe shoees} from the tree map
+     * Generates an array of {@linkplain Shoe shoes} from the tree map
      *
-     * @return The array of {@link shoe shoees}, may be empty
+     * @return The array of {@link Shoe shoes}, may be empty
      */
     private Shoe[] getShoesArray() {
         return getShoesArray(null);
     }
 
     /**
-     * Generates an array of {@linkplain shoe shoees} from the tree map for any
-     * {@linkplain shoe shoees} that contains the text specified by containsText
+     * Generates an array of {@linkplain Shoe shoes} from the tree map for any
+     * {@linkplain Shoe shoes} that contains the text specified by containsText
      * <br>
-     * If containsText is null, the array contains all of the {@linkplain shoe shoees}
+     * If containsText is null, the array contains all of the {@linkplain Shoe shoes}
      * in the tree map
      *
-     * @return The array of {@link shoe shoees}, may be empty
+     * @return The array of {@link Shoe shoes}, may be empty
      */
     private Shoe[] getShoesArray(String containsText) { // if containsText == null, no filter
-        ArrayList<Shoe> shoeArrayList = new ArrayList<>();
 
-        for (Shoe shoe : shoes.values()) {
-            shoeArrayList.add(shoe);
-        }
+        ArrayList<Shoe> shoeArrayList = new ArrayList<>(shoes.values());
 
         Shoe[] shoeArray = new Shoe[shoeArrayList.size()];
         shoeArrayList.toArray(shoeArray);
@@ -86,9 +83,9 @@ public class CartFileDAO implements CartDAO {
 
 
     /**
-     * Saves the {@linkplain shoe shoees} from the map into the file as an array of JSON objects
+     * Saves the {@linkplain Shoe shoes} from the map into the file as an array of JSON objects
      *
-     * @return true if the {@link shoe shoees} were written successfully
+     * @return true if the {@link Shoe shoes} were written successfully
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
@@ -96,14 +93,14 @@ public class CartFileDAO implements CartDAO {
 
 
         // Serializes the Java Objects to JSON objects into the file
-        // writeValue will thrown an IOException if there is an issue
+        // writeValue will throw an IOException if there is an issue
         // with the file or reading from the file
         objectMapper.writeValue(new File(filename), shoeArray);
         return true;
     }
 
     /**
-     * Loads {@linkplain shoe shoees} from the JSON file into the map
+     * Loads {@linkplain Shoe shoes} from the JSON file into the map
      * <br>
      * Also sets next id to one more than the greatest id found in the file
      *
@@ -114,7 +111,7 @@ public class CartFileDAO implements CartDAO {
         shoes = new TreeMap<>();
         nextId = 0;
 
-        // Deserializes the JSON objects from the file into an array of shoees
+        // Deserializes the JSON objects from the file into an array of shoes
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
         FlatFileOps.ensureDataFileExists(filename);

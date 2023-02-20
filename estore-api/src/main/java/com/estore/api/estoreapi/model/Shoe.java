@@ -61,7 +61,8 @@ public class Shoe {
     public String toString() {
         return "Shoe{" +
                 "id=" + id +
-                ", sizing='" + sizing + '\'' +
+                ", style='" + style + '\'' +
+                ", sizing=" + sizing +
                 ", size=" + size +
                 ", price=" + price +
                 ", brand='" + brand + '\'' +

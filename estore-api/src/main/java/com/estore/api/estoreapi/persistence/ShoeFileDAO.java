@@ -70,9 +70,13 @@ public class ShoeFileDAO implements ShoeDAO {
     private Shoe[] getAllShoes(String containsText) { // if containsText == null, no filter
         ArrayList<Shoe> shoeArrayList = new ArrayList<>();
 
-        for (Shoe shoe : shoes.values()) {
-            if (containsText == null || shoe.getBrand().contains(containsText)) {
-                shoeArrayList.add(shoe);
+        if (containsText == null) {
+            shoeArrayList.addAll(shoes.values());
+        } else {
+            for (Shoe shoe : shoes.values()) {
+                if (shoe.toString().contains(containsText)) {
+                    shoeArrayList.add(shoe);
+                }
             }
         }
 

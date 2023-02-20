@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
@@ -137,22 +138,25 @@ public class ShoeFileDAO implements ShoeDAO {
      * * {@inheritDoc}
      */
     @Override
-    public Shoe createShoe(Shoe shoe) throws IOException {
+    public Shoe createShoe(Shoe inputShoe) throws IOException {
         synchronized (shoes) {
-            if (shoes.containsKey(shoe.getId())) {
+            if (shoes.containsKey(inputShoe.getId())) {
                 throw new FileAlreadyExistsException("ID already exists.");
             }
-            // We create a new hero object because the id field is immutable
-            // and we need to assign the next unique id
+
+            if (inputShoe.getId() == 0) {
+                inputShoe.setId(nextId());
+            }
+
             Shoe newShoe = new Shoe();
-            newShoe.setBrand(newShoe.getBrand());
-            newShoe.setColor(newShoe.getColor());
-            newShoe.setId(newShoe.getId());
-            newShoe.setSize(newShoe.getSize());
-            newShoe.setPrice(newShoe.getPrice());
-            newShoe.setMaterial(newShoe.getMaterial());
-            newShoe.setStyle(newShoe.getStyle());
-            newShoe.setSizing(newShoe.getSizing());
+            newShoe.setBrand(inputShoe.getBrand());
+            newShoe.setColor(inputShoe.getColor());
+            newShoe.setId(inputShoe.getId());
+            newShoe.setSize(inputShoe.getSize());
+            newShoe.setPrice(inputShoe.getPrice());
+            newShoe.setMaterial(inputShoe.getMaterial());
+            newShoe.setStyle(inputShoe.getStyle());
+            newShoe.setSizing(inputShoe.getSizing());
 
             shoes.put(newShoe.getId(), newShoe);
             save(); // may throw an IOException
@@ -164,13 +168,24 @@ public class ShoeFileDAO implements ShoeDAO {
      * * {@inheritDoc}
      */
     @Override
-    public Shoe updateShoe(Shoe shoe) throws IOException {
+    public Shoe updateShoe(Shoe updateShoe) throws FileNotFoundException, IOException {
         synchronized (shoes) {
-            if (!shoes.containsKey(shoe.getId())) return null;  // hero does not exist
+            if (!shoes.containsKey(updateShoe.getId())) {
+                throw new FileNotFoundException("Shoe does not exist");
+            }
 
-            shoes.put(shoe.getId(), shoe);
+            Shoe currentShoe = shoes.get(updateShoe.getId());
+            if (updateShoe.getStyle() != null) currentShoe.setStyle(updateShoe.getStyle());
+            if (updateShoe.getBrand() != null) currentShoe.setBrand(updateShoe.getBrand());
+            if (updateShoe.getColor() != null) currentShoe.setColor(updateShoe.getColor());
+            if (updateShoe.getMaterial() != null) currentShoe.setMaterial(updateShoe.getMaterial());
+            if (updateShoe.getPrice() != 0) currentShoe.setPrice(updateShoe.getPrice());
+            if (updateShoe.getSize() != 0) currentShoe.setSize(updateShoe.getSize());
+            if (updateShoe.getSizing() != null) currentShoe.setSizing(updateShoe.getSizing());
+
+            shoes.put(currentShoe.getId(), currentShoe);
             save(); // may throw an IOException
-            return shoe;
+            return currentShoe;
         }
     }
 

@@ -52,7 +52,7 @@ public class Cart {
 
     /**
      * Return the total cost of the cart
-     * @return total cost of cart (double)
+     * @return total cost of cart returns double
      */
     public double getTotal()
     {
@@ -67,9 +67,6 @@ public class Cart {
     {
         return items;
     }
-
-
-
 
     
 }

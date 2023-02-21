@@ -14,7 +14,7 @@ import java.nio.file.FileAlreadyExistsException;
 @RequestMapping("shoe")
 public class ShoeController {
 
-    private ShoeDAO shoeDAO;
+    private final ShoeDAO shoeDAO;
 
     ShoeController(ShoeDAO shoeDAO) {
         this.shoeDAO = shoeDAO;
@@ -57,7 +57,7 @@ public class ShoeController {
     public ResponseEntity<Shoe> create(@RequestBody Shoe rawShoe) {
         try {
             Shoe newShoe = shoeDAO.createShoe(rawShoe);
-            return new ResponseEntity<>(newShoe, HttpStatus.OK);
+            return new ResponseEntity<>(newShoe, HttpStatus.CREATED);
         } catch (FileAlreadyExistsException e) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (IOException e) {

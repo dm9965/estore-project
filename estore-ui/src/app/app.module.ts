@@ -12,6 +12,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import { SearchbarComponent } from './navbar/searchbar/searchbar.component';
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import { BrandBarComponent } from './brand-bar/brand-bar.component';
 
 
 @NgModule({
@@ -19,7 +21,8 @@ import { SearchbarComponent } from './navbar/searchbar/searchbar.component';
 		AppComponent,
 		HomeComponent,
   		NavbarComponent,
-    	SearchbarComponent
+    	SearchbarComponent,
+     BrandBarComponent
 	],
 	imports: [
 		BrowserModule,
@@ -29,7 +32,8 @@ import { SearchbarComponent } from './navbar/searchbar/searchbar.component';
 		MatToolbarModule,
 		MatButtonModule,
 		MatInputModule,
-		FormsModule
+		FormsModule,
+		MatButtonToggleModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

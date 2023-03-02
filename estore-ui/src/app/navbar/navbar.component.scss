@@ -2,11 +2,17 @@
 	height: 30px;
 	align-items: center;
 	justify-content: center;
+	width: 100%;
 }
 
 .logo-spacing {
 	margin-left: 1rem;
 	margin-right: 4rem;
+}
+
+.navbar-wrap {
+	display: flex;
+	flex-wrap: wrap;
 }
 
 .icon-button-sizing {

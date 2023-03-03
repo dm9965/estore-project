@@ -1,25 +1,25 @@
-<div>
+
 <mat-toolbar class="navbar-wrap navbar-style" >
 	<mat-toolbar-row class="navbar-style">
 
 		<span class="logo-spacing">{{"7Shoes"}}</span>
 
-		<button mat-button routerLink="/mens">New Arrivals</button>
-		<button mat-button routerLink="/mens">Mens</button>
-		<button mat-button routerLink="/mens">Womens</button>
-		<button mat-button routerLink="/mens">Kids</button>
+		<a mat-button href="/#new-arrivals">New Arrivals</a>
+		<a mat-button href="/#mens">Mens</a>
+		<a mat-button href="/#womens">Womens</a>
+		<a mat-button href="/#kids">Kids</a>
 
 		<app-searchbar></app-searchbar>
 
-		<button mat-icon-button>
+		<a mat-icon-button href="#">
 			<mat-icon routerLink="/home">home</mat-icon>
-		</button>
-		<button mat-icon-button>
+		</a>
+		<a mat-icon-button href="#">
 			<mat-icon routerLink="/cart">shopping_cart</mat-icon>
-		</button>
-		<button mat-icon-button>
+		</a>
+		<a mat-icon-button href="#">
 		<mat-icon routerLink="/profile">face</mat-icon>
-		</button>
+		</a>
 	</mat-toolbar-row>
 </mat-toolbar>
-</div>
+

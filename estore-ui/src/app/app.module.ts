@@ -13,7 +13,8 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import { SearchbarComponent } from './navbar/searchbar/searchbar.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import { BrandBarComponent } from './brand-bar/brand-bar.component';
+import { BrandBarComponent } from './home/brand-bar/brand-bar.component';
+import { FeaturedComponent } from './home/featured/featured.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { BrandBarComponent } from './brand-bar/brand-bar.component';
 		HomeComponent,
   		NavbarComponent,
     	SearchbarComponent,
-     BrandBarComponent
+     BrandBarComponent,
+     FeaturedComponent
 	],
 	imports: [
 		BrowserModule,

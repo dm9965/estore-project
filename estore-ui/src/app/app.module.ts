@@ -8,23 +8,23 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {HomeComponent} from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import {NavbarComponent} from './navbar/navbar.component';
 import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
-import { SearchbarComponent } from './navbar/searchbar/searchbar.component';
+import {SearchbarComponent} from './navbar/searchbar/searchbar.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import { BrandBarComponent } from './home/brand-bar/brand-bar.component';
-import { FeaturedComponent } from './home/featured/featured.component';
+import {BrandBarComponent} from './home/brand-bar/brand-bar.component';
+import {FeaturedComponent} from './home/featured/featured.component';
 
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HomeComponent,
-  		NavbarComponent,
-    	SearchbarComponent,
-     BrandBarComponent,
-     FeaturedComponent
+		NavbarComponent,
+		SearchbarComponent,
+		BrandBarComponent,
+		FeaturedComponent
 	],
 	imports: [
 		BrowserModule,

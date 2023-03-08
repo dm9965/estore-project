@@ -3,7 +3,11 @@ package com.estore.api.estoreapi;
 import com.estore.api.estoreapi.controller.ShoeController;
 import com.estore.api.estoreapi.model.Shoe;
 import com.estore.api.estoreapi.persistence.ShoeDAO;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -62,7 +66,7 @@ public class ShoeControllerTest {
     @Test
     public void testCreateShoeFailed() throws IOException {
         Shoe shoe = new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red");
-        Mockito.when(this.mockShoeDAO.createShoe(shoe)).thenReturn(null);
+        Mockito.when(this.mockShoeDAO.createShoe(shoe)).thenThrow(new FileAlreadyExistsException("This Shoe Already Exists"));
         ResponseEntity<Shoe> response = this.shoeController.create(shoe);
         Assertions.assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
     }
@@ -88,8 +92,8 @@ public class ShoeControllerTest {
 
     @Test
     public void testUpdateShoeFailed() throws IOException {
-        Shoe shoe = new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red");
-        Mockito.when(this.mockShoeDAO.updateShoe(shoe)).thenReturn(null);
+        Shoe shoe = new Shoe(4, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red");
+        Mockito.when(this.mockShoeDAO.updateShoe(shoe)).thenThrow(new FileNotFoundException());
         ResponseEntity<Shoe> response = this.shoeController.update(shoe);
         Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -141,18 +145,23 @@ public class ShoeControllerTest {
     }
 
     @Test
-    public void testDeleteShoe() {
-        throw new Error("Unresolved compilation problem: \n\tThe method thenReturn(Shoe) in the type OngoingStubbing<Shoe> is not applicable for the arguments (boolean)\n");
+    public void testDeleteShoe() throws IOException {
+        int shoeId = 1;
+        Mockito.when(this.mockShoeDAO.deleteShoeById(shoeId)).thenReturn(true);
+        ResponseEntity<Shoe> response = this.shoeController.delete(shoeId);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
-    public void testDeleteShoeNotFound() {
-        throw new Error("Unresolved compilation problem: \n\tThe method thenReturn(Shoe) in the type OngoingStubbing<Shoe> is not applicable for the arguments (boolean)\n");
-    }
+    public void testDeleteShoeNotFound() throws IOException {
+        int shoeId = 1;
+        Mockito.when(this.mockShoeDAO.deleteShoeById(shoeId)).thenReturn(false);
+        ResponseEntity<Shoe> response = this.shoeController.delete(shoeId);
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());    }
     @Test
     public void testDeleteShoeHandleException() throws IOException {
         int shoeId = 99;
-        Mockito.doThrow(new IOException()).when(this.mockShoeDAO).deleteShoeById(shoeId);
+        Mockito.doThrow(new IOException(new FileNotFoundException())).when(this.mockShoeDAO).deleteShoeById(shoeId);
         ResponseEntity<Shoe> response = this.shoeController.delete(shoeId);
         Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }

@@ -82,9 +82,9 @@ public class ShoeController {
         try {
             boolean deleted = shoeDAO.deleteShoeById(id);
             if (deleted) {
-                return new ResponseEntity<>(true, HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
-            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

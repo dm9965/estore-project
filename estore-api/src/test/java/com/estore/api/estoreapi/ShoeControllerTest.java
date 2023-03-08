@@ -104,7 +104,9 @@ public class ShoeControllerTest {
 
     @Test
     public void testGetAllShoes() throws IOException {
-        Shoe[] shoes = new Shoe[]{new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red"), new Shoe(2, "Yeezy 350 V2", MENS, 12, 229.99, "Adidas", "Mesh", "Zebra")};
+        Shoe[] shoes = new Shoe[]{
+                new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red"),
+                new Shoe(2, "Yeezy 350 V2", MENS, 12, 229.99, "Adidas", "Mesh", "Zebra")};
         Mockito.when(this.mockShoeDAO.getAllShoes()).thenReturn(shoes);
         ResponseEntity<Shoe[]> response = this.shoeController.getAllShoes();
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -121,7 +123,9 @@ public class ShoeControllerTest {
     @Test
     public void testSearchShoes() throws IOException {
         String searchString = "Jordan";
-        Shoe[] shoes = new Shoe[]{new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red"), new Shoe(2, "Yeezy 350 V2", MENS, 12, 229.99, "Adidas", "Mesh", "Zebra")};
+        Shoe[] shoes = new Shoe[]{
+                new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red"),
+                new Shoe(2, "Yeezy 350 V2", MENS, 12, 229.99, "Adidas", "Mesh", "Zebra")};
         Mockito.when(this.mockShoeDAO.searchShoes(searchString)).thenReturn(shoes);
         ResponseEntity<Shoe[]> response = this.shoeController.search(searchString);
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());

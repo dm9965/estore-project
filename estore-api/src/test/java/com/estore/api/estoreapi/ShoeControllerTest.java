@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import static com.estore.api.estoreapi.enums.Sizing.MENS;
 
 @Tag("Controller-tier")

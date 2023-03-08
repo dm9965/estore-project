@@ -16,7 +16,7 @@ public class ShoeController {
 
     private final ShoeDAO shoeDAO;
 
-    ShoeController(ShoeDAO shoeDAO) {
+    public ShoeController(ShoeDAO shoeDAO) {
         this.shoeDAO = shoeDAO;
     }
 
@@ -78,7 +78,7 @@ public class ShoeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable int id) {
+    public ResponseEntity<Shoe> delete(@PathVariable int id) {
         try {
             boolean deleted = shoeDAO.deleteShoeById(id);
             if (deleted) {

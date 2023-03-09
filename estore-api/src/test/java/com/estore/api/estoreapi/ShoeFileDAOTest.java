@@ -1,197 +1,238 @@
 package com.estore.api.estoreapi;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import com.estore.api.estoreapi.controller.ShoeController;
+import com.estore.api.estoreapi.model.Shoe;
+import com.estore.api.estoreapi.persistence.ShoeDAO;
 
-import java.io.File;
 import java.io.IOException;
 
-import com.estore.api.estoreapi.persistence.ShoeFileDAO;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-/**
- * Test the Hero File DAO class
- * 
- * @author SWEN Faculty
- */
+import static com.estore.api.estoreapi.enums.Sizing.MENS;
+
 @Tag("Persistence-tier")
 public class ShoeFileDAOTest {
-    ShoeFileDAO shoeFileDAO;
-    Shoe[] testShoes;
-    ObjectMapper mockObjectMapper;
+    private ShoeController mockShoeController;
+    private ShoeDAO ShoeFileDAO;
+  
+   @BeforeEach
+   public void setupShoeFileDAO() throws IOException {
+        this.mockShoeController = Mockito.mock(ShoeController.class);
+        this.ShoeFileDAO = new ShoeFileDAO();
+   }
 
-    /**
-     * Before each test, we will create and inject a Mock Object Mapper to
-     * isolate the tests from the underlying file
-     * @throws IOException
-     */
-    @BeforeEach
-    public void setupHeroFileDAO() throws IOException {
-        mockObjectMapper = mock(ObjectMapper.class);
-        testShoes = new Shoe[3];
-        testShoes[0] = new Shoe(99,"Wi-Fire");
-        testShoes[1] = new Hero(100,"Galactic Agent");
-        testShoes[2] = new Hero(101,"Ice Gladiator");
-
-        // When the object mapper is supposed to read from the file
-        // the mock object mapper will return the hero array above
-        when(mockObjectMapper
-            .readValue(new File("doesnt_matter.txt").Shoe[].class))
-                .thenReturn(testShoes);
-        shoeFileDAO = new ShoeFileDAO("doesnt_matter.txt",mockObjectMapper);
+   @Test
+   public void testGetShoes() throws IOException {
+        Shoe shoe = new Shoe();
+        Shoe[] shoeArray = new Shoe[shoe];
+      
+        Mockito.when(this.mockShoeController.getAllShoes()).thenReturn(shoeArray);
+      
+        ResponseEntity<Shoe[]> response = this.mockShoeDAO.getAllShoes(shoeArray);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals(shoeArray, response.getBody());
     }
 
     @Test
-    public void testGetShoes() {
-        // Invoke
-        Shoe[] shoes = shoeFileDAO.getAllShoes();
-
-        // Analyze
-        assertEquals(shoes.length,testShoes.length);
-        for (int i = 0; i < testShoes.length;++i)
-            assertEquals(shoes[i],testShoes[i]);
+    public void testGetShoesNotFound() throws Exception {
+        Shoe shoe = new Shoe();
+        Shoe[] shoeArray = new Shoe[shoe];
+        
+        Mockito.when(this.mockShoeController.getShoeById(shoeId)).thenReturn([""]);
+        
+        ResponseEntity<Shoe> response = this.shoeFileDAO.getAllShoes(shoe);
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
-    public void testFindShoes() {
-        // Invoke
-        Shoe[] shoes = shoeFileDAO.findShoes("la");
+    public void testGetShoesHandleException() throws Exception {
+        Shoe shoe = new Shoe();
+        Shoe[] shoeArray = new Shoe[shoe];
+        
+        Mockito.doThrow(new IOException()).when(this.ShoeFileDAO).getAllShoes(shoeArray);
+        
+        ResponseEntity<Shoe> response = this.shoeFileDAO.getAllShoes(shoeId);
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 
-        // Analyze
-        assertEquals(shoes.length,2);
-        assertEquals(shoes[0],testShoes[1]);
-        assertEquals(shoes[1],testShoes[2]);
+//-----------------------------------------------------------------------------------
+
+   @Test
+   public void testFindShoes() throws IOException {
+       Shoe shoe = new Shoe();
+      
+       Mockito.when(this.mockShoeController.searchShoes(shoe.getId())).thenReturn(shoe);
+      
+       ResponseEntity<Shoe> response = this.mockShoeDAO.searchShoes(shoe);
+       Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+       Assertions.assertEquals(shoe, response.getBody());
+   }
+
+   @Test
+   public void testFindShoesNotFound() throws Exception {
+       Shoe shoe = new Shoe();
+      
+       Mockito.when(this.mockShoeController.searchShoes(shoe.getId())).thenReturn(shoe);
+      
+       ResponseEntity<Shoe> response = this.mockShoeDAO.searchShoes(shoe);
+       Assertions.assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+       Assertions.assertEquals(shoe, response.getBody());
+   }
+
+   @Test
+   public void testFindShoesHandleException() throws Exception {
+       Shoe shoe = new Shoe();
+      
+       Mockito.when(this.mockShoeController.searchShoes(shoe.getId())).thenReturn(shoe);
+      
+       ResponseEntity<Shoe> response = this.mockShoeDAO.searchShoes(shoe);
+       Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+       Assertions.assertEquals(shoe, response.getBody());
+   }
+
+//-----------------------------------------------------------------------------------
+
+   @Test
+   public void testGetShoe() throws IOException {
+       Shoe shoe = new Shoe();
+       
+       Mockito.when(this.mockShoeController.getShoeById(shoe.getId())).thenReturn(shoe);
+       
+       ResponseEntity<Shoe> response = this.mockShoeDAO.getShoeById(shoe.getId());
+       Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+       Assertions.assertEquals(shoe, response.getBody());
+   }
+
+   @Test
+   public void testGetShoeNotFound() throws IOException {
+        Shoe shoe = new Shoe();
+      
+        Mockito.when(this.mockShoeController.getShoeByID(shoe.getId())).thenReturn(shoe);
+   
+        ResponseEntity<Shoe> response = this.mockShoeDAO.getShoeByID(shoe);
+        Assertions.assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+        Assertions.assertEquals(shoe, response.getBody());
+   }
+
+   @Test
+   public void testGetShoeHandleException() throws IOException {
+        Shoe shoe = new Shoe();
+      
+        Mockito.when(this.mockShoeController.getShoeById(shoe.getId())).thenReturn(shoe);
+   
+        ResponseEntity<Shoe> response = this.mockShoeDAO.getShoeByID(shoe);
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        Assertions.assertEquals(shoe, response.getBody());
+   }
+
+ //-----------------------------------------------------------------------------------  
+
+   @Test
+   public void testDeleteShoe() throws IOException {
+        Shoe[] shoeArray = new Shoe[shoeArray];
+      
+        Mockito.when(this.mockShoeController.getAllShoes()).thenReturn(shoeArray);
+      
+        ResponseEntity<Shoe> response = this.mockShoeFileDAO.getAllShoes(shoe);
+        Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assertions.assertEquals(shoe, response.getBody());
+   }
+
+   @Test
+   public void testDeleteShoeNotFound() throws Exception {
+        Shoe shoe = new Shoe();
+      
+        Mockito.when(this.mockShoeController.deleteShoeByID(shoe.getId())).thenReturn(shoe.getId);
+   
+        ResponseEntity<Shoe> response = this.mockShoeDAO.deleteShoeByID(shoe.getId());
+        Assertions.assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+        Assertions.assertEquals(shoe, response.getBody());
+   }
+
+   @Test
+   public void testDeleteShoeHandleException() throws Exception {
+    Shoe shoe = new Shoe();
+      
+    Mockito.when(this.mockShoeController.deleteShoeById(shoe.getId())).thenReturn(shoe.getId);
+   
+    ResponseEntity<Shoe> response = this.mockShoeDAO.deleteShoeByID(shoe);
+    Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    Assertions.assertEquals(shoe, response.getBody());
+   }
+
+//-----------------------------------------------------------------------------------
+
+   @Test
+   public void testCreateShoe() throws Exception {
+       Shoe shoe = new Shoe();
+      
+       Mockito.when(this.mockShoeController.createShoe(shoe)).thenReturn(shoe);
+      
+       ResponseEntity<Shoe> response = this.mockShoeFileDAO.createShoe(shoe);
+       Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+       Assertions.assertEquals(shoe, response.getBody());
+   }
+
+   @Test
+   public void testCreateShoeFailed() throws Exception {
+    Shoe shoe = new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red");
+        
+    Mockito.when(this.mockShoeController.createShoe(shoe)).thenReturn(null);
+        
+    ResponseEntity<Shoe> response = this.shoeFileDAO.create(shoe); 
+    Assertions.assertEquals(HttpStatus.CONFLICT, response.getStatusCode());
+   }
+
+   @Test
+   public void testCreateShoeHandleException() throws Exception {
+    Shoe shoe = new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red");
+   
+    Mockito.doThrow(new IOException()).when(this.mockShoeDAO).createShoe(shoe);
+    
+    ResponseEntity<Shoe> response = this.shoeFileDAO.createShoe(shoe);
+    Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+   }
+
+//-----------------------------------------------------------------------------------
+
+   @Test
+   public void testUpdateShoe() throws IOException {
+       Shoe[] shoeArray = new Shoe[shoeArray];
+      
+       Mockito.when(this.mockShoeDAO.updateShoe()).thenReturn(shoeArray);
+      
+       ResponseEntity<Shoe> response = this.mockShoeFileDAO.updateShoe(shoe);
+       Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+       Assertions.assertEquals(shoe, response.getBody());
     }
 
     @Test
-    public void testGetShoeById() {
-        // Invoke
-        Shoe shoe = shoeFileDAO.getShoeById(99);
-
-        // Analzye
-        assertEquals(shoe,testShoes[0]);
+    public void testUpdateShoeNotFound() throws Exception {
+        Shoe shoe = new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red");
+        
+        Mockito.when(this.mockShoeDAO.updateShoe(shoe)).thenReturn(null);
+       
+        ResponseEntity<Shoe> response = this.shoeFileDAO.updateShoe(shoe);
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
     @Test
-    public void testDeleteShoeById() {
-        // Invoke
-        boolean result = assertDoesNotThrow(() -> shoeFileDAO.deleteShoeById(99),
-                            "Unexpected exception thrown");
-
-        // Analzye
-        assertEquals(result,true);
-        // We check the internal tree map size against the length
-        // of the test heroes array - 1 (because of the delete)
-        // Because heroes attribute of HeroFileDAO is package private
-        // we can access it directly
-        assertEquals(shoeFileDAO.shoes.size(),testShoes.length-1);
+    public void testUpdateShoeHandleException() throws IOException {
+        Shoe shoe = new Shoe(1, "Jordan 1 Chicago", MENS, 12, 229.99, "Jordan", "leather", "Red");
+       
+        Mockito.doThrow(new IOException()).when(this.mockShoeDAO).updateShoe(shoe);
+        
+        ResponseEntity<Shoe> response = this.shoeFileDAO.updateShoe(shoe);
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
-    @Test
-    public void testCreateHero() {
-        // Setup
-        Shoe shoe = new shoe(102,"Wonder-Person");
 
-        // Invoke
-        Hero result = assertDoesNotThrow(() -> heroFileDAO.createHero(hero),
-                                "Unexpected exception thrown");
-
-        // Analyze
-        assertNotNull(result);
-        Hero actual = heroFileDAO.getHero(hero.getId());
-        assertEquals(actual.getId(),hero.getId());
-        assertEquals(actual.getName(),hero.getName());
-    }
-
-    @Test
-    public void testUpdateHero() {
-        // Setup
-        Hero hero = new Hero(99,"Galactic Agent");
-
-        // Invoke
-        Hero result = assertDoesNotThrow(() -> heroFileDAO.updateHero(hero),
-                                "Unexpected exception thrown");
-
-        // Analyze
-        assertNotNull(result);
-        Hero actual = heroFileDAO.getHero(hero.getId());
-        assertEquals(actual,hero);
-    }
-
-    @Test
-    public void testSaveException() throws IOException{
-        doThrow(new IOException())
-            .when(mockObjectMapper)
-                .writeValue(any(File.class),any(Hero[].class));
-
-        Hero hero = new Hero(102,"Wi-Fire");
-
-        assertThrows(IOException.class,
-                        () -> heroFileDAO.createHero(hero),
-                        "IOException not thrown");
-    }
-
-    @Test
-    public void testGetHeroNotFound() {
-        // Invoke
-        Hero hero = heroFileDAO.getHero(98);
-
-        // Analyze
-        assertEquals(hero,null);
-    }
-
-    @Test
-    public void testDeleteHeroNotFound() {
-        // Invoke
-        boolean result = assertDoesNotThrow(() -> heroFileDAO.deleteHero(98),
-                                                "Unexpected exception thrown");
-
-        // Analyze
-        assertEquals(result,false);
-        assertEquals(heroFileDAO.heroes.size(),testHeroes.length);
-    }
-
-    @Test
-    public void testUpdateHeroNotFound() {
-        // Setup
-        Hero hero = new Hero(98,"Bolt");
-
-        // Invoke
-        Hero result = assertDoesNotThrow(() -> heroFileDAO.updateHero(hero),
-                                                "Unexpected exception thrown");
-
-        // Analyze
-        assertNull(result);
-    }
-
-    @Test
-    public void testConstructorException() throws IOException {
-        // Setup
-        ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
-        // We want to simulate with a Mock Object Mapper that an
-        // exception was raised during JSON object deseerialization
-        // into Java objects
-        // When the Mock Object Mapper readValue method is called
-        // from the HeroFileDAO load method, an IOException is
-        // raised
-        doThrow(new IOException())
-            .when(mockObjectMapper)
-                .readValue(new File("doesnt_matter.txt"),Hero[].class);
-
-        // Invoke & Analyze
-        assertThrows(IOException.class,
-                        () -> new HeroFileDAO("doesnt_matter.txt",mockObjectMapper),
-                        "IOException not thrown");
-    }
 }
+
+

@@ -57,6 +57,21 @@ public class Shoe {
     @JsonProperty("color")
     private String color;
 
+    public Shoe() {
+
+    }
+
+    public Shoe(int id, String style, Sizing sizing, int size, double price, String brand, String material, String color) {
+        this.id = id;
+        this.style = style;
+        this.sizing = sizing;
+        this.size = size;
+        this.price = price;
+        this.brand = brand;
+        this.material = material;
+        this.color = color;
+    }
+
     @Override
     public String toString() {
         return "Shoe{" +

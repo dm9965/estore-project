@@ -40,7 +40,7 @@ public class CartFileDAO implements CartDAO {
     public CartFileDAO(@Value("${dao.carts}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();  // load the shoees from the file
+        load();  // load the shoes from the file
     }
 
     /**

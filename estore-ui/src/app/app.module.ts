@@ -15,6 +15,8 @@ import { SearchbarComponent } from './navbar/searchbar/searchbar.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import { BrandBarComponent } from './home/brand-bar/brand-bar.component';
 import { FeaturedComponent } from './home/featured/featured.component';
+import { BrowsePageComponent } from './browse-page/browse-page.component';
+import { FilterMenuComponent } from './browse-page/filter-menu/filter-menu.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { FeaturedComponent } from './home/featured/featured.component';
   		NavbarComponent,
     	SearchbarComponent,
      BrandBarComponent,
-     FeaturedComponent
+     FeaturedComponent,
+     BrowsePageComponent,
+     FilterMenuComponent
 	],
 	imports: [
 		BrowserModule,

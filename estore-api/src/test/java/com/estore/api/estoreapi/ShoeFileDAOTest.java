@@ -1,7 +1,6 @@
 package com.estore.api.estoreapi;
 
 import com.estore.api.estoreapi.model.Shoe;
-import com.estore.api.estoreapi.persistence.ShoeDAO;
 import com.estore.api.estoreapi.persistence.ShoeFileDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
@@ -23,7 +22,7 @@ public class ShoeFileDAOTest {
 
     Shoe[] mockShoeArray;
 
-    ShoeDAO mockShoeFileDAO;
+    ShoeFileDAO mockShoeFileDAO;
 
     public ShoeFileDAOTest() {
     }
@@ -126,7 +125,7 @@ public class ShoeFileDAOTest {
         ObjectMapper mockObjectMapper = (ObjectMapper) mock(ObjectMapper.class);
         ((ObjectMapper) doThrow(new IOException()).when(mockObjectMapper)).readValue(new File("data/doesnt_matter.txt"), Shoe[].class);
         Assertions.assertThrows(IOException.class, () -> {
-            new ShoeFileDAO("doesnt_matter.txt", mockObjectMapper);
+            new ShoeFileDAO("data/doesnt_matter.txt", mockObjectMapper);
         }, "IOException not thrown");
     }
 }

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Shoe {
 
+    public static final String STRING_FORMAT =  "Shoe [id=%d, style='%s', sizing=%s, size=%d, price=%.2f, brand='%s', material='%s', color='%s']";
     /**
      * Identifies this shoe within the system, must be unique
      */
@@ -74,17 +75,9 @@ public class Shoe {
 
     @Override
     public String toString() {
-        return "Shoe{" +
-                "id=" + id +
-                ", style='" + style + '\'' +
-                ", sizing=" + sizing +
-                ", size=" + size +
-                ", price=" + price +
-                ", brand='" + brand + '\'' +
-                ", material='" + material + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+        return String.format(STRING_FORMAT, id, style, sizing, size, price, brand, material, color);
     }
+
 
     public int getId() {
         return id;

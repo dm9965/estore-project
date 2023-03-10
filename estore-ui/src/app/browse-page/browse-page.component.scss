@@ -1,5 +1,4 @@
 .constrained {
-
 	padding: 1rem;
 	margin: 1rem;
 	background-color: rgba(0,0,0,0.1);
@@ -7,6 +6,25 @@
 	height: 85%;
 	min-width: 24px;
 	float: left;
+}
 
-
+.headerFont {
+	margin-top: 1rem;
+	margin-left: 1rem;
+	margin-bottom: 0px;
+	font-style: normal;
+	font-variant-caps: normal;
+	font-variant-ligatures: normal;
+	font-variant-numeric: normal;
+	font-variant-east-asian: normal;
+	font-variant-alternates: normal;
+	font-kerning: auto;
+	font-optical-sizing: auto;
+	font-feature-settings: normal;
+	font-variation-settings: normal;
+	font-weight: 700;
+	font-stretch: normal;
+	font-size: 3rem;
+	line-height: 1.1;
+	font-family: Roboto, Arial, sans-serif;
 }

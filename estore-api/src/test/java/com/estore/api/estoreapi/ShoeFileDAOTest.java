@@ -113,7 +113,7 @@ public class ShoeFileDAOTest {
 
     @Test
     public void testUpdateHeroNotFound() {
-        Shoe shoe = new Shoe(98, "Bolt");
+        Shoe shoe = new Shoe(5, "Stan Smiths", MENS, 11, 89.99, "Adidas", "Leather", "White");
         Shoe result = (Shoe) Assertions.assertDoesNotThrow(() -> {
             return this.mockShoeFileDAO.updateShoe(shoe);
         });

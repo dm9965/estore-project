@@ -7,6 +7,7 @@ import com.estore.api.estoreapi.persistence.ShoeDAO;
 import java.io.File;
 import java.io.IOException;
 
+import com.estore.api.estoreapi.persistence.ShoeFileDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -52,9 +53,6 @@ public class ShoeFileDAOTest {
         }
     }
 
-
-//------------------------------------------------------------------------------------
-
    @Test
    public void testSearchShoesByStyle() throws IOException {
        Shoe[] shoeArray = this.mockShoeFileDAO.searchShoes("Yeezy");
@@ -62,14 +60,11 @@ public class ShoeFileDAOTest {
        Assertions.assertEquals(shoeArray[0], this.mockShoeArray[1]);
    }
 
-//-----------------------------------------------------------------------------------
-
    @Test
    public void testGetShoeById() throws IOException {
        Shoe shoe = this.mockShoeFileDAO.getShoeById(1);
        Assertions.assertEquals(shoe, this.mockShoeArray[0]);
    }
-
 
    @Test
    public void testDeleteShoeById() throws IOException {
@@ -79,8 +74,6 @@ public class ShoeFileDAOTest {
        Assertions.assertTrue(result);
        Assertions.assertEquals(this.mockShoeFileDAO.getAllShoes(), this.mockShoeArray.length - 1);
    }
-
-//-----------------------------------------------------------------------------------
 
    @Test
    public void testCreateShoe() throws Exception {
@@ -100,8 +93,6 @@ public class ShoeFileDAOTest {
        Assertions.assertEquals(actual.getColor(), shoe.getColor());
    }
 
-//-----------------------------------------------------------------------------------
-
    @Test
    public void testUpdateShoe() throws IOException {
        Shoe shoe = new Shoe(5, "Stan Smiths", MENS, 11, 89.99, "Adidas", "Leather", "White");
@@ -114,6 +105,27 @@ public class ShoeFileDAOTest {
 
     }
 
+    @Test
+    public void testGetShoeNotFound() throws IOException {
+        Shoe shoe = this.mockShoeFileDAO.getShoeById(98);
+        Assertions.assertEquals(shoe, (Object)null);
+    }
 
+    @Test
+    public void testUpdateHeroNotFound() {
+        Shoe shoe = new Shoe(98, "Bolt");
+        Shoe result = (Shoe) Assertions.assertDoesNotThrow(() -> {
+            return this.mockShoeFileDAO.updateShoe(shoe);
+        });
+        Assertions.assertNull(result);
+    }
 
+    @Test
+    public void testConstructorException() throws IOException {
+        ObjectMapper mockObjectMapper = (ObjectMapper)Mockito.mock(ObjectMapper.class);
+        ((ObjectMapper)Mockito.doThrow(new IOException()).when(mockObjectMapper)).readValue(new File("doesnt_matter.txt"), Shoe[].class);
+        Assertions.assertThrows(IOException.class, () -> {
+            new ShoeFileDAO("doesnt_matter.txt", mockObjectMapper);
+        }, "IOException not thrown");
+    }
 }

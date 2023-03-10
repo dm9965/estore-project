@@ -124,7 +124,7 @@ public class ShoeFileDAOTest {
     @Test
     public void testConstructorException() throws IOException {
         ObjectMapper mockObjectMapper = (ObjectMapper) mock(ObjectMapper.class);
-        ((ObjectMapper) doThrow(new IOException()).when(mockObjectMapper)).readValue(new File("doesnt_matter.txt"), Shoe[].class);
+        ((ObjectMapper) doThrow(new IOException()).when(mockObjectMapper)).readValue(new File("data/doesnt_matter.txt"), Shoe[].class);
         Assertions.assertThrows(IOException.class, () -> {
             new ShoeFileDAO("doesnt_matter.txt", mockObjectMapper);
         }, "IOException not thrown");

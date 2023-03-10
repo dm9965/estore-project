@@ -1,31 +1,21 @@
 package com.estore.api.estoreapi;
-
-import com.estore.api.estoreapi.controller.ShoeController;
 import com.estore.api.estoreapi.model.Shoe;
 import com.estore.api.estoreapi.persistence.ShoeDAO;
-
 import java.io.File;
 import java.io.IOException;
-
 import com.estore.api.estoreapi.persistence.ShoeFileDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-
 import static com.estore.api.estoreapi.enums.Sizing.MENS;
 import static com.estore.api.estoreapi.enums.Sizing.WOMENS;
+import static org.mockito.Mockito.*;
 
 @Tag("Persistence-tier")
 public class ShoeFileDAOTest {
 
-    private File file;
-    ObjectMapper objectmapper;
     Shoe shoe1, shoe2, shoe3;
 
     Shoe[] mockShoeArray;
@@ -36,12 +26,14 @@ public class ShoeFileDAOTest {
 
    @BeforeEach
    public void setupShoeFileDAO() throws IOException {
-       this.mockShoeFileDAO = Mockito.mock(ShoeDAO.class);
+       this.mockShoeFileDAO = mock(ShoeDAO.class);
        shoe1 = new Shoe(1, "Air Max 90", MENS, 9, 129.99, "Nike", "Leather", "Green");
        shoe2 = new Shoe(2, "Yeezy 500", MENS, 11, 229.99, "Adidas", "Multiple", "Tan");
        shoe3 = new Shoe(3, "Jordan 3 White Cement", WOMENS, 7, 224.99, "Jordan", "Leather", "White");
        mockShoeArray = new Shoe[]{shoe1, shoe2, shoe3};
-       Mockito.when(objectmapper.readValue(file, Shoe[].class)).thenReturn(mockShoeArray);
+       ObjectMapper objectmapper = new ObjectMapper();
+       File file = new File("data/shoes.json");
+       when(objectmapper.readValue(file, Shoe[].class)).thenReturn(mockShoeArray);
    }
    @Test
    public void testGetShoes() throws IOException {
@@ -122,8 +114,8 @@ public class ShoeFileDAOTest {
 
     @Test
     public void testConstructorException() throws IOException {
-        ObjectMapper mockObjectMapper = (ObjectMapper)Mockito.mock(ObjectMapper.class);
-        ((ObjectMapper)Mockito.doThrow(new IOException()).when(mockObjectMapper)).readValue(new File("doesnt_matter.txt"), Shoe[].class);
+        ObjectMapper mockObjectMapper = (ObjectMapper) mock(ObjectMapper.class);
+        ((ObjectMapper) doThrow(new IOException()).when(mockObjectMapper)).readValue(new File("doesnt_matter.txt"), Shoe[].class);
         Assertions.assertThrows(IOException.class, () -> {
             new ShoeFileDAO("doesnt_matter.txt", mockObjectMapper);
         }, "IOException not thrown");

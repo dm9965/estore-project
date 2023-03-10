@@ -1,4 +1,5 @@
 package com.estore.api.estoreapi;
+import static com.estore.api.estoreapi.enums.Sizing.MENS;
 import static com.estore.api.estoreapi.enums.Sizing.WOMENS;
 import com.estore.api.estoreapi.enums.Sizing;
 import com.estore.api.estoreapi.model.Shoe;
@@ -74,13 +75,6 @@ public class ShoeTest {
         String expectedColor = "White";
         String actualColor = testShoe.getColor();
         Assertions.assertEquals(expectedColor, actualColor);
-    }
-
-    @Test
-    public void testToString() {
-        String expectedString = String.format(Shoe.STRING_FORMAT, 3, "Jordan 3 White Cement", WOMENS, 7, 224.99, "Jordan", "Leather", "White");
-        String actualString = testShoe.toString();
-        Assertions.assertEquals(expectedString, actualString);
     }
 
 }

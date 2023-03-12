@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -17,6 +16,8 @@ import { BrandBarComponent } from './home/brand-bar/brand-bar.component';
 import { FeaturedComponent } from './home/featured/featured.component';
 import { BrowsePageComponent } from './browse-page/browse-page.component';
 import { FilterMenuComponent } from './browse-page/filter-menu/filter-menu.component';
+import { ProductPageComponent } from './product-page/product-page.component';
+
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { FilterMenuComponent } from './browse-page/filter-menu/filter-menu.compo
      BrandBarComponent,
      FeaturedComponent,
      BrowsePageComponent,
-     FilterMenuComponent
+     FilterMenuComponent,
+     ProductPageComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -39,7 +41,8 @@ import { FilterMenuComponent } from './browse-page/filter-menu/filter-menu.compo
 		MatButtonModule,
 		MatInputModule,
 		FormsModule,
-		MatButtonToggleModule
+		MatButtonToggleModule,
+		MatIconModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

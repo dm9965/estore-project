@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, TemplateRef, ViewChild} from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { Shoe } from "../Shoe";
 
 @Component({
   selector: 'app-product-page',
@@ -6,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent {
+
 
 }

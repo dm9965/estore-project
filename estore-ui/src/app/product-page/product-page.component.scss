@@ -1,5 +1,5 @@
 .div-design {
-	margin: 1rem 10rem;
+	margin: 3rem 10rem;
 	height: 70%;
 	min-width: 24px;
 	justify-self: center;
@@ -109,6 +109,10 @@
 	margin-left: 2.3rem;
 }
 
+.box_shadow {
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
 .shipping_size img {
 	width: 10px;
 	height: 10px;
@@ -150,4 +154,5 @@
 	background-color: whitesmoke;
 	font-weight: bold;
 	font-size: larger;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }

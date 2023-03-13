@@ -17,6 +17,7 @@ import { FeaturedComponent } from './home/featured/featured.component';
 import { BrowsePageComponent } from './browse-page/browse-page.component';
 import { FilterMenuComponent } from './browse-page/filter-menu/filter-menu.component';
 import { ProductPageComponent } from './product-page/product-page.component';
+import { LoginComponent } from './login/login.component';
 
 
 
@@ -31,6 +32,7 @@ import { ProductPageComponent } from './product-page/product-page.component';
      BrowsePageComponent,
      FilterMenuComponent,
      ProductPageComponent,
+     LoginComponent,
 	],
 	imports: [
 		BrowserModule,

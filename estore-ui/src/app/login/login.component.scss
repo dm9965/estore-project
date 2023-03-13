@@ -9,7 +9,6 @@
 	-webkit-background-clip: text;
 	display: flex;
 	justify-content: space-around;
-
 }
 
 .labelFont {
@@ -29,7 +28,6 @@
 		display: flex;
 		justify-content: center;
 		height: 100vh; /* Set the height of the container to the full viewport height */
-
 }
 
 .login-box {
@@ -42,6 +40,8 @@
 	background-color: rgba(0,0,0,0.2);
 	padding: 1rem;
 	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	border-radius: 25px;
+
 }
 
 .input {

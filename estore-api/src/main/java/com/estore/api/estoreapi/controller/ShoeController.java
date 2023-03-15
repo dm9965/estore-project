@@ -20,7 +20,7 @@ public class ShoeController {
         this.shoeDAO = shoeDAO;
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/shoe/id/{id}")
     public ResponseEntity<Shoe> getShoeById(@PathVariable int id) {
         try {
             Shoe shoe = shoeDAO.getShoeById(id);
@@ -33,7 +33,7 @@ public class ShoeController {
         }
     }
 
-    @GetMapping("/all")
+    @GetMapping("/shoe")
     public ResponseEntity<Shoe[]> getAllShoes() {
         try {
             Shoe[] shoes = shoeDAO.getAllShoes();
@@ -53,7 +53,7 @@ public class ShoeController {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping("/shoe")
     public ResponseEntity<Shoe> create(@RequestBody Shoe rawShoe) {
         try {
             Shoe newShoe = shoeDAO.createShoe(rawShoe);
@@ -65,7 +65,7 @@ public class ShoeController {
         }
     }
 
-    @PatchMapping("/")
+    @PatchMapping("/shoe")
     public ResponseEntity<Shoe> update(@RequestBody Shoe rawShoe) {
         try {
             Shoe updatedShoe = shoeDAO.updateShoe(rawShoe);
@@ -77,7 +77,7 @@ public class ShoeController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/shoe/{id}")
     public ResponseEntity<Shoe> delete(@PathVariable int id) {
         try {
             boolean deleted = shoeDAO.deleteShoeById(id);

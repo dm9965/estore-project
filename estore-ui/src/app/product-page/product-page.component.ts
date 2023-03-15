@@ -1,6 +1,6 @@
 import {Component, TemplateRef, ViewChild} from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Shoe } from "../Shoe";
+import { Shoe } from "../ShoeInterface";
 
 @Component({
   selector: 'app-product-page',

@@ -1,4 +1,4 @@
-enum Sizing {
+export enum Sizing {
 	MENS = 'Mens',
 	WOMENS = 'Womens',
 	KIDS = 'Kids'

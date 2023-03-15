@@ -18,7 +18,8 @@ import { BrowsePageComponent } from './browse-page/browse-page.component';
 import { FilterMenuComponent } from './browse-page/filter-menu/filter-menu.component';
 import { ProductPageComponent } from './product-page/product-page.component';
 import { LoginComponent } from './login/login.component';
-
+import { InventoryPageComponent } from './inventory-page/inventory-page.component';
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -27,12 +28,13 @@ import { LoginComponent } from './login/login.component';
 		HomeComponent,
   		NavbarComponent,
     	SearchbarComponent,
-     BrandBarComponent,
-     FeaturedComponent,
-     BrowsePageComponent,
-     FilterMenuComponent,
-     ProductPageComponent,
-     LoginComponent,
+     	BrandBarComponent,
+     	FeaturedComponent,
+     	BrowsePageComponent,
+     	FilterMenuComponent,
+     	ProductPageComponent,
+     	LoginComponent,
+     	InventoryPageComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -44,7 +46,8 @@ import { LoginComponent } from './login/login.component';
 		MatInputModule,
 		FormsModule,
 		MatButtonToggleModule,
-		MatIconModule
+		MatIconModule,
+		HttpClientModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

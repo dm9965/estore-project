@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Shoe } from "./Shoe";
+import { Shoe } from "./ShoeInterface";
 import { MessageService} from "./message.service";
+import {Sizing} from "./Sizing";
 
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
 
-	private shoeURL = 'http://localhost:8080/shoes';  // URL to web api
+	private shoeURL = 'http://localhost:8080/shoe/all';  // URL to web api
 
 	httpOptions = {
 		headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -10,7 +10,7 @@ import {Sizing} from "./Sizing";
 @Injectable({ providedIn: 'root' })
 export class ProductService {
 
-	private shoeURL = 'http://localhost:8080/shoe/all';  // URL to web api
+	private shoeURL = 'http://localhost:8080/shoe';  // URL to web api
 
 	httpOptions = {
 		headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,7 +19,8 @@ export class ProductService {
 	constructor(public http: HttpClient, private messageService: MessageService) { }
 
 	/** Get all shoes from the server */
-	getShoes(): Observable<Shoe[]> {
+	getAllShoes(): Observable<Shoe[]> {
+		const url = `${this.shoeURL}/all`;
 		return this.http.get<Shoe[]>(this.shoeURL)
 			.pipe(
 				tap(_ => this.log('fetched heroes')),
@@ -150,7 +151,7 @@ export class ProductService {
 	}
 
 	public save(shoes: Shoe[]): Observable<boolean> {
-		return this.getShoes()
+		return this.getAllShoes()
 			.pipe(
 				tap((shoeArray: Shoe[]) => {
 					// Serializes the Java Objects to JSON objects into the file

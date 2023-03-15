@@ -31,12 +31,12 @@ export class InventoryPageComponent {
 	constructor(private productService: ProductService){}
 
 	ngOnInit(): void {
-		this.getShoes();
+		this.getAllShoes();
 	}
 
-	getShoes(): void {
+	getAllShoes(): void {
 		console.log(this.shoes)
-		this.productService.getShoes().subscribe(shoes => this.shoes = shoes);
+		this.productService.getAllShoes().subscribe(shoes => this.shoes = shoes);
 	}
 
 	createShoe(id: number, brand: string, style: string, sizing: string, size: number, price: number, material: string, color: string): void {

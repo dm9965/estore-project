@@ -53,7 +53,7 @@
 		<ul class="column-3">
 			<a class="inline" *ngFor="let shoe of shoes">
 					<span class="inline create-shoe">{{shoe.id}} | {{shoe.brand}} | {{shoe.style}} | {{shoe.sizing}}
-						{{shoe.size}} | {{shoe.price}} | {{shoe.color}}
+						{{shoe.size}} | {{shoe.price}} | {{shoe.material}} | {{shoe.color}}
 						<button type="button" class="delete-button-style" title="delete hero"
 							(click)="deleteShoe(shoe)">Delete</button>
 						<select class="update-button-style" title="update shoe" [(ngModel)]="selectedElement">

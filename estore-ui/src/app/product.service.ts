@@ -16,7 +16,7 @@ export class ProductService {
 		headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 	};
 
-	constructor(private http: HttpClient, private messageService: MessageService) { }
+	constructor(public http: HttpClient, private messageService: MessageService) { }
 
 	/** Get all shoes from the server */
 	getShoes(): Observable<Shoe[]> {
@@ -147,6 +147,24 @@ export class ProductService {
 			// Let the app keep running by returning an empty result.
 			return of(result as T);
 		};
+	}
+
+	public save(shoes: Shoe[]): Observable<boolean> {
+		return this.getShoes()
+			.pipe(
+				tap((shoeArray: Shoe[]) => {
+					// Serializes the Java Objects to JSON objects into the file
+					// writeValue will thrown an IOException if there is an issue
+					// with the file or reading from the file
+					return this.http.put(this.shoeURL, shoeArray, this.httpOptions)
+						.pipe(
+							tap(_ => console.log(`saved shoes`)),
+							catchError(this.handleError<any>('save'))
+						)
+						.subscribe();
+				}),
+				catchError(this.handleError<any>('save'))
+			);
 	}
 
 	/** Log a ProductService message with the MessageService */

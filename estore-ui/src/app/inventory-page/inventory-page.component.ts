@@ -10,18 +10,16 @@ import {Sizing} from "../Sizing";
 })
 export class InventoryPageComponent {
 	shoes: Shoe[] = [];
-	public newShoe: Shoe = new class implements Shoe {
-		brand: string = '';
-		color: string = '';
-		id: number = 0;
-		material: string = '';
-		price: number = 0;
-		size: number = 0;
-		sizing: Sizing = Sizing.MENS || Sizing.KIDS || Sizing.WOMENS;
-		style: string = '';
-	}
+	public newShoe: Shoe = new Shoe();
 	sizing: Sizing = Sizing.WOMENS || Sizing.MENS || Sizing.KIDS;
 	sizingOptions = Object.values(Sizing);
+	selectedElement: any;
+	updatedElement: any;
+	isInputShown = true;
+	isDropDownVisible = false;
+	toggleDropDown() {
+		this.isDropDownVisible = true;
+	}
 
 	onSubmit() {
 		this.createShoe(this.newShoe.id, this.newShoe.brand, this.newShoe.style,
@@ -63,9 +61,39 @@ export class InventoryPageComponent {
 			});
 	}
 
-	updateShoe(shoe: Shoe): void {
-		this.productService.updateShoe(shoe)
-			.subscribe(() => console.log(`Shoe with id=${shoe.id} updated successfully`));
+	updateShoe(selectedShoe: Shoe, selectedAttribute: any, updatedValue: any) {
+		switch (selectedAttribute) {
+			case 'id':
+				selectedShoe.id = updatedValue;
+				break;
+			case 'brand':
+				selectedShoe.brand = updatedValue;
+				break;
+			case 'style':
+				selectedShoe.style = updatedValue;
+				break;
+			case 'sizing':
+				selectedShoe.sizing = updatedValue;
+				break;
+			case 'color':
+				selectedShoe.color = updatedValue;
+				break;
+			case 'size':
+				selectedShoe.size = updatedValue;
+				break;
+			case 'material':
+				selectedShoe.material = updatedValue;
+				break;
+			case 'price':
+				selectedShoe.price = updatedValue;
+				break;
+			default:
+				break;
+		}
+		this.productService.updateShoe(selectedShoe)
+			.subscribe(() => {
+				console.log('Shoe updated');
+			});
 	}
 
 	deleteShoe(shoe: Shoe): void {
@@ -73,10 +101,16 @@ export class InventoryPageComponent {
 		this.productService.deleteShoe(shoe.id).subscribe();
 	}
 
-
-	isDropDownVisible = false;
-
-	toggleDropDown() {
-		this.isDropDownVisible = true;
+	save(): void {
+		this.productService.save(this.shoes)
+			.subscribe(result => {
+				if (result) {
+					console.log('Shoes saved successfully');
+				} else {
+					console.log('Error saving shoes');
+				}
+			});
+		this.isInputShown = false;
 	}
+
 }

@@ -56,8 +56,19 @@
 						{{shoe.size}} | {{shoe.price}} | {{shoe.color}}
 						<button type="button" class="delete-button-style" title="delete hero"
 							(click)="deleteShoe(shoe)">Delete</button>
-						<button type="button" class="update-button-style" title="update shoe"
-								(click)="updateShoe(shoe)">Update</button>
+						<select class="update-button-style" title="update shoe" [(ngModel)]="selectedElement">
+								    <option value="id">ID</option>
+									<option value="brand">Brand</option>
+									<option value="style">Style</option>
+									<option value="sizing">Sizing</option>
+									<option value="size">Size</option>
+									<option value="price">Price</option>
+									<option value="material">Material</option>
+  									<option value="color">Color</option>
+							Update</select>
+							<input *ngIf="selectedElement && isInputShown" type="text" class="update-input-style" placeholder="Enter updated value" [(ngModel)]="updatedElement">
+						<button type="button" class="save-button-style" title="save shoe"
+								(click)="save()">Save</button>
 					</span>
 			</a>
 		</ul>

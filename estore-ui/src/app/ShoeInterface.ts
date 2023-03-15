@@ -1,13 +1,13 @@
-import { Sizing } from './Sizing';
+import {Sizing} from './Sizing';
 
-export interface Shoe{
-	id: number;
-	style: string;
-	sizing: Sizing;
-	size: number;
-	price: number;
-	brand: string;
-	material: string;
-	color: string;
+export class Shoe{
+	id: number = 0;
+	style: string = '';
+	sizing: Sizing = Sizing.MENS || Sizing.WOMENS || Sizing.KIDS;
+	size: number = 0;
+	price: number = 0;
+	brand: string = '';
+	material: string = '';
+	color: string = '';
 
 }

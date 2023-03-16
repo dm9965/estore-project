@@ -4,9 +4,12 @@
 
 <div class="main-box row">
 	<div class="button-box">
-		<button (click)="toggleDropDown()" class="button-style">Add Shoe</button>
+		<span class="button-box">
+			<button (click)="addToggleDropDown()" class="green-button-style">Add Shoe</button>
+			<button (click)="editToggleDropDown()" class="blue-button-style">Edit Shoe</button>
+		</span>
 	</div>
-	<div *ngIf="isDropDownVisible" [ngModel]="newShoe" class="column">
+	<div *ngIf="isAddDropDownVisible" [ngModel]="newShoe" class="column">
 		<div class="input-column">
 			<span>
 				<label for="new-shoe-id">ID #:</label>
@@ -45,10 +48,55 @@
 				</span>
 			</li>
 		</ul>
-		<button (click)="onSubmit(); isDropDownVisible = !isDropDownVisible" class="button-style" type="button">
+		<button (click)="onAddSubmit(); isAddDropDownVisible = !isAddDropDownVisible" class="green-button-style" type="button">
 			Add
 		</button>
 	</div>
+
+	<div *ngIf="isEditDropDownVisible" [ngModel]="selectedShoe" class="column">
+		<div class="input-column">
+			<span>
+				<label for="selected-shoe-id">ID #:</label>
+				<input [(ngModel)]="selectedShoe.id" class="input" id="selected-shoe-id" placeholder="Enter ID Number"/>
+
+				<label for="selected-shoe-brand"> Brand:</label>
+				<input #shoeBrand [(ngModel)]="selectedShoe.brand" class="input" id="selected-shoe-brand" placeholder="Enter Brand Name"/>
+
+				<label for="selected-shoe-sizing">Style:</label>
+				<input #shoeStyle [(ngModel)]="selectedShoe.style" class="input" id="selected-shoe-style" placeholder="Enter Shoe Style"/>
+
+				<label for="selected-shoe-sizing">Sizing:</label>
+				<select #shoeSizing [ngModel]="selectedShoe.sizing" class="input" id="selected-shoe-sizing">
+					<option *ngFor="let sizing of sizingOptions" [value]="shoeSizing">{{sizing}}</option>
+				</select>
+			</span>
+			<span>
+				<label for="selected-shoe-size">Size:</label>
+				<input #shoeSize [(ngModel)]="selectedShoe.size" class="input" id="selected-shoe-size" placeholder="Enter Shoe Size"/>
+
+				<label for="selected-shoe-price">Price:</label>
+				<input #shoePrice [(ngModel)]="selectedShoe.price" class="input" id="selected-shoe-price" placeholder="Enter Shoe Price"/>
+
+				<label for="selected-shoe-material">Material:</label>
+				<input #shoeMaterial [(ngModel)]="selectedShoe.material" class="input" id="selected-shoe-material" placeholder="Enter Material"/>
+
+				<label for="selected-shoe-color">Color:</label>
+				<input #shoeColor [(ngModel)]="selectedShoe.color" class="input" id="selected-shoe-color" placeholder="Enter Shoe Color"/>
+			</span>
+		</div>
+		<ul class="create-shoe">
+			<li>
+				<span>ID#: {{selectedShoe.id}} | Brand: {{selectedShoe.brand}} |
+					Style: {{selectedShoe.style}} | Gender: {{selectedShoe.sizing}} | Size: {{selectedShoe.size}}
+					| Price: ${{selectedShoe.price}} | Material: {{selectedShoe.material}} | Color: {{selectedShoe.color}}
+				</span>
+			</li>
+		</ul>
+		<button (click)="onEditSubmit(); isEditDropDownVisible = !isEditDropDownVisible" class="blue-button-style" type="button">
+			Submit Edit
+		</button>
+	</div>
+
 	<div class="column-2">
 		<ul class="column-3">
 			<a *ngFor="let shoe of shoes; let index = index; trackBy: trackByIndex;" class="inline">

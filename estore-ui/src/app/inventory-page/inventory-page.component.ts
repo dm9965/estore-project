@@ -13,9 +13,12 @@ export class InventoryPageComponent {
 	public newShoe: Shoe = new Shoe();
 	sizing: Sizing = Sizing.WOMENS || Sizing.MENS || Sizing.KIDS;
 	sizingOptions = Object.values(Sizing);
+	selectedShoe: Shoe = new Shoe;
+	selectedElement: any;
 	updatedElement: any;
 	selectedShoeIndex = -1;
-	isDropDownVisible = false;
+	isAddDropDownVisible = false;
+	isEditDropDownVisible = false;
 
 	constructor(private productService: ProductService) {
 	}
@@ -24,14 +27,23 @@ export class InventoryPageComponent {
 		return index;
 	}
 
-	toggleDropDown() {
-		this.isDropDownVisible = true;
+	addToggleDropDown() {
+		this.isAddDropDownVisible = true;
 	}
 
-	onSubmit() {
+	editToggleDropDown() {
+		this.isEditDropDownVisible = true;
+	}
+
+	onAddSubmit() {
 		this.createShoe(this.newShoe.id, this.newShoe.brand, this.newShoe.style,
 			this.newShoe.sizing, this.newShoe.size, this.newShoe.price, this.newShoe.material, this.newShoe.color);
-		this.isDropDownVisible = !this.isDropDownVisible;
+		this.isAddDropDownVisible = !this.isAddDropDownVisible;
+		this.shoes.sort((shoeA, shoeB) => shoeA.id - shoeB.id);
+	}
+
+	onEditSubmit() {
+		this.isEditDropDownVisible = !this.isEditDropDownVisible;
 		this.shoes.sort((shoeA, shoeB) => shoeA.id - shoeB.id);
 	}
 
@@ -109,6 +121,7 @@ export class InventoryPageComponent {
 	}
 
 	save(): void {
+		this.updateShoe(this.selectedShoe, this.selectedElement, this.updatedElement)
 		this.productService.save(this.shoes)
 			.subscribe(result => {
 				if (result) {

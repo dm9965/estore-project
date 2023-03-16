@@ -118,7 +118,7 @@
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
-.button-style {
+.green-button-style {
 	display: inline-block;
 	outline: none;
 	cursor: pointer;
@@ -138,6 +138,38 @@
 	padding: 17px 48px;
 	color: #fff;
 	background-color: #36c318;
+	height: 55px;
+	width: 20%;
+	margin: 1rem;
+
+	:hover {
+		background-color: #6200ee;
+		transform: scale(1.04);
+	}
+
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.blue-button-style {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	font-size: 14px;
+	line-height: 1;
+	border-radius: 500px;
+	transition-property: background-color, border-color, color, box-shadow, filter;
+	transition-duration: .3s;
+	border: 1px solid transparent;
+	letter-spacing: 2px;
+	max-width: 400rem;
+	min-width: 2rem;
+	text-transform: uppercase;
+	white-space: normal;
+	font-weight: 700;
+	text-align: center;
+	padding: 17px 48px;
+	color: #fff;
+	background-color: #0e81e6;
 	height: 55px;
 	width: 20%;
 	margin: 1rem;

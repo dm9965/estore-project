@@ -1,22 +1,22 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Shoe } from "./ShoeInterface";
-import { MessageService} from "./message.service";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
+import {Shoe} from "./ShoeInterface";
+import {MessageService} from "./message.service";
 import {Sizing} from "./Sizing";
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class ProductService {
 
+	httpOptions = {
+		headers: new HttpHeaders({'Content-Type': 'application/json'})
+	};
 	private shoeURL = 'http://localhost:8080/shoe';  // URL to web api
 
-	httpOptions = {
-		headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-	};
-
-	constructor(public http: HttpClient, private messageService: MessageService) { }
+	constructor(public http: HttpClient, private messageService: MessageService) {
+	}
 
 	/** Get all shoes from the server */
 	getAllShoes(): Observable<Shoe[]> {
@@ -133,23 +133,6 @@ export class ProductService {
 		);
 	}
 
-	/**
-	 * Handle Http operation that failed.
-	 * Let the app continue.
-	 *
-	 * @param operation - name of the operation that failed
-	 * @param result - optional value to return as the observable result
-	 */
-	private handleError<T>(operation = 'operation', result?: T) {
-		return (error: any): Observable<T> => {
-			console.error(error); // log to console instead
-			this.log(`${operation} failed: ${error.message}`);
-
-			// Let the app keep running by returning an empty result.
-			return of(result as T);
-		};
-	}
-
 	public save(shoes: Shoe[]): Observable<boolean> {
 		return this.getAllShoes()
 			.pipe(
@@ -166,6 +149,23 @@ export class ProductService {
 				}),
 				catchError(this.handleError<any>('save'))
 			);
+	}
+
+	/**
+	 * Handle Http operation that failed.
+	 * Let the app continue.
+	 *
+	 * @param operation - name of the operation that failed
+	 * @param result - optional value to return as the observable result
+	 */
+	private handleError<T>(operation = 'operation', result?: T) {
+		return (error: any): Observable<T> => {
+			console.error(error); // log to console instead
+			this.log(`${operation} failed: ${error.message}`);
+
+			// Let the app keep running by returning an empty result.
+			return of(result as T);
+		};
 	}
 
 	/** Log a ProductService message with the MessageService */

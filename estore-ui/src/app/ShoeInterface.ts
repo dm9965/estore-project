@@ -1,6 +1,6 @@
 import {Sizing} from './Sizing';
 
-export class Shoe{
+export class Shoe {
 	id: number = 0;
 	style: string = '';
 	sizing: Sizing = Sizing.MENS || Sizing.WOMENS || Sizing.KIDS;

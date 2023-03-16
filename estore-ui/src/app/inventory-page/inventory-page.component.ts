@@ -4,9 +4,9 @@ import {ProductService} from "../product.service";
 import {Sizing} from "../Sizing";
 
 @Component({
-  selector: 'app-inventory-page',
-  templateUrl: './inventory-page.component.html',
-  styleUrls: ['./inventory-page.component.scss']
+	selector: 'app-inventory-page',
+	templateUrl: './inventory-page.component.html',
+	styleUrls: ['./inventory-page.component.scss']
 })
 export class InventoryPageComponent {
 	shoes: Shoe[] = [];
@@ -17,6 +17,10 @@ export class InventoryPageComponent {
 	updatedElement: any;
 	isInputShown = true;
 	isDropDownVisible = false;
+
+	constructor(private productService: ProductService) {
+	}
+
 	toggleDropDown() {
 		this.isDropDownVisible = true;
 	}
@@ -24,11 +28,9 @@ export class InventoryPageComponent {
 	onSubmit() {
 		this.createShoe(this.newShoe.id, this.newShoe.brand, this.newShoe.style,
 			this.newShoe.sizing, this.newShoe.size, this.newShoe.price, this.newShoe.material, this.newShoe.color);
-			this.isDropDownVisible = !this.isDropDownVisible;
-			this.shoes.sort((shoeA, shoeB) => shoeA.id - shoeB.id);
+		this.isDropDownVisible = !this.isDropDownVisible;
+		this.shoes.sort((shoeA, shoeB) => shoeA.id - shoeB.id);
 	}
-
-	constructor(private productService: ProductService){}
 
 	ngOnInit(): void {
 		this.getAllShoes();
@@ -44,8 +46,10 @@ export class InventoryPageComponent {
 		style = style.trim();
 		material = material.trim();
 		color = color.trim();
-		if (!brand || !style || !material || !color) { return; }
-		this.productService.addShoe({ id, brand, style, sizing, size, price, material, color } as Shoe)
+		if (!brand || !style || !material || !color) {
+			return;
+		}
+		this.productService.addShoe({id, brand, style, sizing, size, price, material, color} as Shoe)
 			.subscribe(shoe => {
 				this.shoes.push(this.newShoe);
 				this.newShoe = new class implements Shoe {

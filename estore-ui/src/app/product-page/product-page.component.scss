@@ -2,12 +2,12 @@
 	margin: 3rem 10rem;
 	height: 70%;
 	min-width: 24px;
-	background-color: rgba(0,0,0,0.1);
+	background-color: rgba(0, 0, 0, 0.1);
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	border-radius: 25px ;
+	border-radius: 25px;
 
 }
 
@@ -42,7 +42,7 @@
 	height: 100%;
 	background-color: whitesmoke;
 	padding-top: 2rem;
-	border-radius: 25px ;
+	border-radius: 25px;
 
 }
 
@@ -88,7 +88,7 @@
 	font-size: 20px;
 	text-decoration: none;
 	margin: 0;
-	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 
 }
 
@@ -117,13 +117,14 @@
 }
 
 .box_shadow {
-	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
 
 .shipping_size img {
 	width: 10px;
 	height: 10px;
 }
+
 .apple-pay {
 	display: inline-block;
 	background-size: 100% 60%;
@@ -137,11 +138,12 @@
 	max-height: 64px;
 	margin-top: 1rem;
 	font-family: Roboto, sans-serif;
-	color: whitesmoke ;
+	color: whitesmoke;
 	font-weight: bolder;
 	font-size: larger;
 
 }
+
 .apple-pay-button-black {
 	background-color: black;
 }
@@ -161,5 +163,5 @@
 	background-color: whitesmoke;
 	font-weight: bold;
 	font-size: larger;
-	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }

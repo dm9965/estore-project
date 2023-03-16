@@ -25,9 +25,9 @@
 }
 
 .form-container {
-		display: flex;
-		justify-content: center;
-		height: 100vh; /* Set the height of the container to the full viewport height */
+	display: flex;
+	justify-content: center;
+	height: 100vh; /* Set the height of the container to the full viewport height */
 }
 
 .login-box {
@@ -37,16 +37,16 @@
 	justify-items: center;
 	width: 60%;
 	height: 45%;
-	background-color: rgba(0,0,0,0.2);
+	background-color: rgba(0, 0, 0, 0.2);
 	padding: 1rem;
-	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 	border-radius: 25px;
 
 }
 
 .input {
-	color: rgba(0,0,0,.87);
-	border-bottom-color: rgba(0,0,0,.42);
+	color: rgba(0, 0, 0, .87);
+	border-bottom-color: rgba(0, 0, 0, .42);
 	font-size: 1rem;
 	font-weight: 400;
 	letter-spacing: .009375em;
@@ -64,14 +64,17 @@
 	height: 56px;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
-	:hover{
-		border-bottom-color: rgba(0,0,0,.87);
+
+	:hover {
+		border-bottom-color: rgba(0, 0, 0, .87);
 		background: #ececec;
 	}
-	:focus{
+
+	:focus {
 		border-color: #6200ee;
 	}
-	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .login-button {
@@ -82,7 +85,7 @@
 	font-size: 14px;
 	line-height: 1;
 	border-radius: 500px;
-	transition-property: background-color,border-color,color,box-shadow,filter;
+	transition-property: background-color, border-color, color, box-shadow, filter;
 	transition-duration: .3s;
 	border: 1px solid transparent;
 	letter-spacing: 2px;
@@ -96,11 +99,13 @@
 	color: #fff;
 	background-color: #1ED760;
 	height: 48px;
-	:hover{
+
+	:hover {
 		transform: scale(1.04);
 		background-color: #21e065;
 	}
-	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .button-container {

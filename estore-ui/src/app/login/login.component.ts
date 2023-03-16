@@ -1,9 +1,9 @@
-import {Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 	@ViewChild('emailInput') emailInput: ElementRef | undefined;
@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
 	emailValid: boolean = true;
 	passwordValid: boolean = true;
 
-	constructor() { }
+	constructor() {
+	}
 
 	ngOnInit() {
 	}

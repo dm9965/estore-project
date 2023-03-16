@@ -28,20 +28,6 @@ export class ProductService {
 			);
 	}
 
-	/** Get shoe by id. Return `undefined` when id not found */
-	getError<Data>(id: number): Observable<Shoe> {
-		const url = `${this.shoeURL}/?id=${id}`;
-		return this.http.get<Shoe[]>(url)
-			.pipe(
-				map(heroes => heroes[0]), // returns a {0|1} element array
-				tap(h => {
-					const outcome = h ? 'fetched' : 'did not find';
-					this.log(`${outcome} shoe id=${id}`);
-				}),
-				catchError(this.handleError<Shoe>(`getShoe id=${id}`))
-			);
-	}
-
 	/** GET singular shoe by id. Will 404 if id not found */
 	getShoeByID(id: number): Observable<Shoe> {
 		const url = `${this.shoeURL}/${id}`;

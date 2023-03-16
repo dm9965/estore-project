@@ -21,7 +21,7 @@ export class ProductService {
 	/** Get all shoes from the server */
 	getAllShoes(): Observable<Shoe[]> {
 		const url = `${this.shoeURL}/all`;
-		return this.http.get<Shoe[]>(this.shoeURL)
+		return this.http.get<Shoe[]>(url)
 			.pipe(
 				tap(_ => this.log('fetched heroes')),
 				catchError(this.handleError<Shoe[]>('getShoes', []))
@@ -97,7 +97,8 @@ export class ProductService {
 			// if not search term, return empty hero array.
 			return of([]);
 		}
-		return this.http.get<Shoe[]>(`${this.shoeURL}/?name=${term}`).pipe(
+		const url = `${this.shoeURL}/?query=${encodeURIComponent(term)}`;
+		return this.http.get<Shoe[]>(url).pipe(
 			tap(x => x.length ?
 				this.log(`found shoes matching "${term}"`) :
 				this.log(`no shoes matching "${term}"`)),
@@ -109,7 +110,8 @@ export class ProductService {
 
 	/** POST: add a new shoe to the server */
 	addShoe(shoe: Shoe): Observable<Shoe> {
-		return this.http.post<Shoe>(this.shoeURL, shoe, this.httpOptions).pipe(
+		const url = `${this.shoeURL}/`;
+		return this.http.post<Shoe>(url, shoe, this.httpOptions).pipe(
 			tap((newShoe: Shoe) => this.log(`added shoe w/ id=${newShoe.id}`)),
 			catchError(this.handleError<Shoe>('addShoe'))
 		);
@@ -125,22 +127,24 @@ export class ProductService {
 		);
 	}
 
-	/** PUT: update the shoe on the server */
+	/** PATCH: update the shoe on the server */
 	updateShoe(shoe: Shoe): Observable<any> {
-		return this.http.put(this.shoeURL, shoe, this.httpOptions).pipe(
+		const url = `${this.shoeURL}/`;
+		return this.http.patch(url, shoe, this.httpOptions).pipe(
 			tap(_ => this.log(`updated hero id=${shoe.id}`)),
 			catchError(this.handleError<any>('updateShoe'))
 		);
 	}
 
 	public save(shoes: Shoe[]): Observable<boolean> {
+		const url = `${this.shoeURL}/`;
 		return this.getAllShoes()
 			.pipe(
 				tap((shoeArray: Shoe[]) => {
 					// Serializes the Java Objects to JSON objects into the file
 					// writeValue will thrown an IOException if there is an issue
 					// with the file or reading from the file
-					return this.http.put(this.shoeURL, shoeArray, this.httpOptions)
+					return this.http.patch(url, shoeArray, this.httpOptions)
 						.pipe(
 							tap(_ => console.log(`saved shoes`)),
 							catchError(this.handleError<any>('save'))

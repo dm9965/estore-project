@@ -13,12 +13,15 @@ export class InventoryPageComponent {
 	public newShoe: Shoe = new Shoe();
 	sizing: Sizing = Sizing.WOMENS || Sizing.MENS || Sizing.KIDS;
 	sizingOptions = Object.values(Sizing);
-	selectedElement: any;
 	updatedElement: any;
-	isInputShown = true;
+	selectedShoeIndex = -1;
 	isDropDownVisible = false;
 
 	constructor(private productService: ProductService) {
+	}
+
+	trackByIndex(index: number, obj: any): any {
+		return index;
 	}
 
 	toggleDropDown() {
@@ -114,7 +117,11 @@ export class InventoryPageComponent {
 					console.log('Error saving shoes');
 				}
 			});
-		this.isInputShown = false;
+		this.selectedShoeIndex = -1;
+	}
+
+	selectIndex(index: number) {
+		this.selectedShoeIndex = index;
 	}
 
 }

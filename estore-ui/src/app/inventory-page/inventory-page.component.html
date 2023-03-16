@@ -51,12 +51,11 @@
 	</div>
 	<div class="column-2">
 		<ul class="column-3">
-			<a *ngFor="let shoe of shoes" class="inline">
-					<span class="inline create-shoe">{{shoe.id}} | {{shoe.brand}} | {{shoe.style}} | {{shoe.sizing}}
-						{{shoe.size}} | {{shoe.price}} | {{shoe.material}} | {{shoe.color}}
-						<button (click)="deleteShoe(shoe)" class="delete-button-style" title="delete hero"
-								type="button">Delete</button>
-						<select [(ngModel)]="selectedElement" class="update-button-style" title="update shoe">
+			<a *ngFor="let shoe of shoes; let index = index; trackBy: trackByIndex;" class="inline">
+					<span class="inline create-shoe">
+						{{shoe.id}} | {{shoe.brand}} | {{shoe.style}} | {{shoe.sizing}} {{shoe.size}} | {{shoe.price}} | {{shoe.material}} | {{shoe.color}}
+						<button (click)="deleteShoe(shoe)" class="delete-button-style" title="Delete Shoe" type="button">Delete</button>
+						<select class="update-button-style" title="Update shoe" (click)="selectIndex(index)">
 							<option value="id">ID</option>
 							<option value="brand">Brand</option>
 							<option value="style">Style</option>
@@ -67,9 +66,8 @@
 							<option value="color">Color</option>
 							Update
 						</select>
-							<input *ngIf="selectedElement && isInputShown" [(ngModel)]="updatedElement" class="update-input-style" placeholder="Enter updated value" type="text">
-						<button (click)="save()" class="save-button-style" title="save shoe"
-								type="button">Save</button>
+						<input *ngIf="selectedShoeIndex == index" class="update-input-style" placeholder="Enter updated value" type="text">
+						<button (click)="save()" class="save-button-style" title="save shoe" type="button"> Save </button>
 					</span>
 			</a>
 		</ul>

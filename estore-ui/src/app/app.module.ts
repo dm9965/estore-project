@@ -20,6 +20,8 @@ import {ProductPageComponent} from './product-page/product-page.component';
 import {LoginComponent} from './login/login.component';
 import {InventoryPageComponent} from './inventory-page/inventory-page.component';
 import {HttpClientModule} from "@angular/common/http";
+import {MatListModule} from "@angular/material/list";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import {HttpClientModule} from "@angular/common/http";
 		FormsModule,
 		MatButtonToggleModule,
 		MatIconModule,
-		HttpClientModule
+		HttpClientModule,
+		MatListModule,
+		MatSelectModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

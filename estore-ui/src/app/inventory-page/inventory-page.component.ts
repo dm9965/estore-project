@@ -10,12 +10,10 @@ import {Sizing} from "../Sizing";
 })
 export class InventoryPageComponent {
 	shoes: Shoe[] = [];
-	public newShoe: Shoe = new Shoe();
-	sizing: Sizing = Sizing.WOMENS || Sizing.MENS || Sizing.KIDS;
+	newShoe: Shoe = new Shoe();
+	shoeSizing: Sizing = Sizing.WOMENS && Sizing.MENS && Sizing.KIDS;
 	sizingOptions = Object.values(Sizing);
 	selectedShoe: Shoe = new Shoe;
-	selectedElement: any;
-	updatedElement: any;
 	selectedShoeIndex = -1;
 	isAddDropDownVisible = false;
 	isEditDropDownVisible = false;
@@ -49,6 +47,7 @@ export class InventoryPageComponent {
 
 	ngOnInit(): void {
 		this.getAllShoes();
+		this.selectedShoe.id = this.selectedShoe.id || 0;
 	}
 
 	getAllShoes(): void {
@@ -74,42 +73,25 @@ export class InventoryPageComponent {
 					material: string = '';
 					price: number = 0;
 					size: number = 0;
-					sizing: Sizing = Sizing.MENS || Sizing.KIDS || Sizing.WOMENS;
+					sizing: Sizing = Sizing.WOMENS && Sizing.MENS && Sizing.KIDS;
 					style: string = '';
 				};
 			});
 	}
 
-	updateShoe(selectedShoe: Shoe, selectedAttribute: any, updatedValue: any) {
-		switch (selectedAttribute) {
-			case 'id':
-				selectedShoe.id = updatedValue;
-				break;
-			case 'brand':
-				selectedShoe.brand = updatedValue;
-				break;
-			case 'style':
-				selectedShoe.style = updatedValue;
-				break;
-			case 'sizing':
-				selectedShoe.sizing = updatedValue;
-				break;
-			case 'color':
-				selectedShoe.color = updatedValue;
-				break;
-			case 'size':
-				selectedShoe.size = updatedValue;
-				break;
-			case 'material':
-				selectedShoe.material = updatedValue;
-				break;
-			case 'price':
-				selectedShoe.price = updatedValue;
-				break;
-			default:
-				break;
+	updateShoe() {
+		const selectedShoeId = this.selectedShoe.id;
+		const selectedShoe = this.shoes.find(shoe => shoe.id === selectedShoeId);
+		if (selectedShoe) {
+			this.selectedShoe.brand = selectedShoe.brand;
+			this.selectedShoe.style = selectedShoe.style;
+			this.selectedShoe.sizing = selectedShoe.sizing;
+			this.selectedShoe.color = selectedShoe.color;
+			this.selectedShoe.size = selectedShoe.size;
+			this.selectedShoe.material = selectedShoe.material;
+			this.selectedShoe.price = selectedShoe.price;
 		}
-		this.productService.updateShoe(selectedShoe)
+		this.productService.updateShoe(this.selectedShoe)
 			.subscribe(() => {
 				console.log('Shoe updated');
 			});
@@ -121,7 +103,6 @@ export class InventoryPageComponent {
 	}
 
 	save(): void {
-		this.updateShoe(this.selectedShoe, this.selectedElement, this.updatedElement)
 		this.productService.save(this.shoes)
 			.subscribe(result => {
 				if (result) {
@@ -136,5 +117,4 @@ export class InventoryPageComponent {
 	selectIndex(index: number) {
 		this.selectedShoeIndex = index;
 	}
-
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CartFileDAO implements CartDAO {
-    private final List<Shoe> shoesInCart = new ArrayList<>();
+    private final ArrayList<Shoe> shoesInCart = new ArrayList<>();
 
     @Override
     public void addToCart(Shoe shoe) throws IOException {
@@ -17,6 +17,11 @@ public class CartFileDAO implements CartDAO {
     @Override
     public void removeFromCart(Shoe shoe) throws IOException {
         shoesInCart.remove(shoe);
+    }
+
+    @Override
+    public ArrayList<Shoe> getCart() throws IOException {
+        return shoesInCart;
     }
 
     @Override

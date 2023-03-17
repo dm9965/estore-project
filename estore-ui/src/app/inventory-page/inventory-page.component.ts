@@ -11,7 +11,9 @@ import {Sizing} from "../Sizing";
 export class InventoryPageComponent {
 	shoes: Shoe[] = [];
 	newShoe: Shoe = new Shoe();
-	shoeSizing: Sizing = Sizing.WOMENS && Sizing.MENS && Sizing.KIDS;
+	mens: Sizing = Sizing.MENS;
+	womens: Sizing = Sizing.WOMENS;
+	kids: Sizing = Sizing.KIDS;
 	sizingOptions = Object.values(Sizing);
 	selectedShoe: Shoe = new Shoe;
 	selectedShoeIndex = -1;
@@ -73,7 +75,7 @@ export class InventoryPageComponent {
 					material: string = '';
 					price: number = 0;
 					size: number = 0;
-					sizing: Sizing = Sizing.WOMENS && Sizing.MENS && Sizing.KIDS;
+					sizing: Sizing = Sizing.WOMENS || Sizing.MENS || Sizing.KIDS;
 					style: string = '';
 				};
 			});

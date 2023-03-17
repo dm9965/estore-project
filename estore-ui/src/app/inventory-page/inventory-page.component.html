@@ -22,8 +22,10 @@
 				<input #shoeStyle [(ngModel)]="newShoe.style" class="input" id="new-shoe-style" placeholder="Enter Shoe Style"/>
 
 				<label for="new-shoe-sizing">Sizing:</label>
-				<select [(ngModel)]="newShoe.sizing" class="input" id="new-shoe-sizing">
-					<option *ngFor="let sizing of sizingOptions" [value]="shoeSizing">{{sizing}}</option>
+				<select [(ngModel)]="newShoe.sizing" class="dropdown-input" id="new-shoe-sizing">
+					<option [value]="mens">{{mens}}</option>
+					<option [value]="womens">{{womens}}</option>
+					<option [value]="kids">{{kids}}</option>
 				</select>
 			</span>
 			<span>
@@ -48,7 +50,7 @@
 				</span>
 			</li>
 		</ul>
-		<button (click)="onAddSubmit(); isAddDropDownVisible = !isAddDropDownVisible" class="green-button-style" type="button">
+		<button (click)="onAddSubmit(); addToggleDropDown()" class="green-button-style" type="button">
 			Add
 		</button>
 	</div>
@@ -65,8 +67,10 @@
 				<label for="selected-shoe-style">Style:</label>
 				<input type="text" [(ngModel)]="selectedShoe.style" class="input" id="selected-shoe-style"/>
 
-				<select [(ngModel)]="selectedShoe.sizing" class="input" id="selected-shoe-sizing">
-					<option *ngFor="let sizing of sizingOptions" [value]="shoeSizing">{{sizing}}</option>
+				<select [(ngModel)]="selectedShoe.sizing" class="dropdown-input" id="selected-shoe-sizing">
+					<option [value]="mens">{{mens}}</option>
+					<option [value]="womens">{{womens}}</option>
+					<option [value]="kids">{{kids}}</option>
 				</select>
 			</span>
 			<span>

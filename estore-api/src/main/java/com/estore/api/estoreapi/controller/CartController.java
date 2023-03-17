@@ -40,27 +40,17 @@ public class CartController {
 
     @DeleteMapping("/")
     public ResponseEntity<ArrayList<Shoe>> removeItem(@RequestBody Shoe shoe) {
-        try {
-            cart.remove(shoe);
-            return new ResponseEntity<>(cart, HttpStatus.OK);
-        }
-        catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        cart.remove(shoe);
+        return new ResponseEntity<>(cart, HttpStatus.OK);
     }
 
     @GetMapping("/")
     public ResponseEntity<Double> getTotal() {
-        try {
-            double total = 0;
-            for (Shoe shoe : cart) {
-                total += shoe.getPrice();
-            }
-            return new ResponseEntity<>(total, HttpStatus.OK);
+        double total = 0;
+        for (Shoe shoe : cart) {
+            total += shoe.getPrice();
         }
-        catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<>(total, HttpStatus.OK);
     }
 
 }

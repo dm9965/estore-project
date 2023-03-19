@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BrowsePageComponent } from './browse-page.component';
+import {BrowsePageComponent} from './browse-page.component';
 
 describe('BrowsePageComponent', () => {
-  let component: BrowsePageComponent;
-  let fixture: ComponentFixture<BrowsePageComponent>;
+	let component: BrowsePageComponent;
+	let fixture: ComponentFixture<BrowsePageComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ BrowsePageComponent ]
-    })
-    .compileComponents();
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [BrowsePageComponent]
+		})
+			.compileComponents();
 
-    fixture = TestBed.createComponent(BrowsePageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(BrowsePageComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

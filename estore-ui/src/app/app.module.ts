@@ -12,27 +12,32 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule} from "@angular/forms";
 import {SearchbarComponent} from './navbar/searchbar/searchbar.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
-import { BrandBarComponent } from './home/brand-bar/brand-bar.component';
-import { FeaturedComponent } from './home/featured/featured.component';
-import { BrowsePageComponent } from './browse-page/browse-page.component';
-import { FilterMenuComponent } from './browse-page/filter-menu/filter-menu.component';
-import { ProductPageComponent } from './product-page/product-page.component';
-import { LoginComponent } from './login/login.component';
+import {BrandBarComponent} from './home/brand-bar/brand-bar.component';
+import {FeaturedComponent} from './home/featured/featured.component';
+import {BrowsePageComponent} from './browse-page/browse-page.component';
+import {FilterMenuComponent} from './browse-page/filter-menu/filter-menu.component';
+import {ProductPageComponent} from './product-page/product-page.component';
+import {LoginComponent} from './login/login.component';
+import {InventoryPageComponent} from './inventory-page/inventory-page.component';
+import {HttpClientModule} from "@angular/common/http";
+import {MatListModule} from "@angular/material/list";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HomeComponent,
-  	NavbarComponent,
-    SearchbarComponent,
-    BrandBarComponent,
-    FeaturedComponent,
-    BrowsePageComponent,
-    FilterMenuComponent,
-    ProductPageComponent,
-    LoginComponent,
+		NavbarComponent,
+		SearchbarComponent,
+		BrandBarComponent,
+		FeaturedComponent,
+		BrowsePageComponent,
+		FilterMenuComponent,
+		ProductPageComponent,
+		LoginComponent,
+		InventoryPageComponent,
+	],
 
-],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -43,7 +48,10 @@ import { LoginComponent } from './login/login.component';
 		MatInputModule,
 		FormsModule,
 		MatButtonToggleModule,
-		MatIconModule
+		MatIconModule,
+		HttpClientModule,
+		MatListModule,
+		MatSelectModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

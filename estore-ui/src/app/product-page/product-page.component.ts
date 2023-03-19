@@ -1,11 +1,9 @@
-import {Component, TemplateRef, ViewChild} from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Shoe } from "../Shoe";
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-product-page',
-  templateUrl: './product-page.component.html',
-  styleUrls: ['./product-page.component.scss']
+	selector: 'app-product-page',
+	templateUrl: './product-page.component.html',
+	styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent {
 	/*@ViewChild('productInfoTemplate', {static: true})

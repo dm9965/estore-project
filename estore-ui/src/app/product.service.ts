@@ -1,42 +1,30 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Shoe } from "./Shoe";
-import { MessageService} from "./message.service";
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable, of} from 'rxjs';
+import {catchError, map, tap} from 'rxjs/operators';
+import {Shoe} from "./ShoeInterface";
+import {MessageService} from "./message.service";
+import {Sizing} from "./Sizing";
 
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class ProductService {
 
-	private shoeURL = 'http://localhost:8080/shoes';  // URL to web api
-
 	httpOptions = {
-		headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
+	private shoeURL = 'http://localhost:8080/shoe';  // URL to web api
 
-	constructor(private http: HttpClient, private messageService: MessageService) { }
+	constructor(public http: HttpClient, private messageService: MessageService) {
+	}
 
 	/** Get all shoes from the server */
-	getShoes(): Observable<Shoe[]> {
-		return this.http.get<Shoe[]>(this.shoeURL)
+	getAllShoes(): Observable<Shoe[]> {
+		const url = `${this.shoeURL}/all`;
+		return this.http.get<Shoe[]>(url)
 			.pipe(
 				tap(_ => this.log('fetched heroes')),
 				catchError(this.handleError<Shoe[]>('getShoes', []))
-			);
-	}
-
-	/** Get shoe by id. Return `undefined` when id not found */
-	getError<Data>(id: number): Observable<Shoe> {
-		const url = `${this.shoeURL}/?id=${id}`;
-		return this.http.get<Shoe[]>(url)
-			.pipe(
-				map(heroes => heroes[0]), // returns a {0|1} element array
-				tap(h => {
-					const outcome = h ? 'fetched' : 'did not find';
-					this.log(`${outcome} shoe id=${id}`);
-				}),
-				catchError(this.handleError<Shoe>(`getShoe id=${id}`))
 			);
 	}
 
@@ -95,7 +83,8 @@ export class ProductService {
 			// if not search term, return empty hero array.
 			return of([]);
 		}
-		return this.http.get<Shoe[]>(`${this.shoeURL}/?name=${term}`).pipe(
+		const url = `${this.shoeURL}/?query=${encodeURIComponent(term)}`;
+		return this.http.get<Shoe[]>(url).pipe(
 			tap(x => x.length ?
 				this.log(`found shoes matching "${term}"`) :
 				this.log(`no shoes matching "${term}"`)),
@@ -107,7 +96,8 @@ export class ProductService {
 
 	/** POST: add a new shoe to the server */
 	addShoe(shoe: Shoe): Observable<Shoe> {
-		return this.http.post<Shoe>(this.shoeURL, shoe, this.httpOptions).pipe(
+		const url = `${this.shoeURL}/`;
+		return this.http.post<Shoe>(url, shoe, this.httpOptions).pipe(
 			tap((newShoe: Shoe) => this.log(`added shoe w/ id=${newShoe.id}`)),
 			catchError(this.handleError<Shoe>('addShoe'))
 		);
@@ -123,12 +113,32 @@ export class ProductService {
 		);
 	}
 
-	/** PUT: update the shoe on the server */
+	/** PATCH: update the shoe on the server */
 	updateShoe(shoe: Shoe): Observable<any> {
-		return this.http.put(this.shoeURL, shoe, this.httpOptions).pipe(
+		const url = `${this.shoeURL}/`;
+		return this.http.patch(url, shoe, this.httpOptions).pipe(
 			tap(_ => this.log(`updated hero id=${shoe.id}`)),
 			catchError(this.handleError<any>('updateShoe'))
 		);
+	}
+
+	public save(shoes: Shoe[]): Observable<boolean> {
+		const url = `${this.shoeURL}/`;
+		return this.getAllShoes()
+			.pipe(
+				tap((shoeArray: Shoe[]) => {
+					// Serializes the Java Objects to JSON objects into the file
+					// writeValue will thrown an IOException if there is an issue
+					// with the file or reading from the file
+					return this.http.patch(url, shoeArray, this.httpOptions)
+						.pipe(
+							tap(_ => console.log(`saved shoes`)),
+							catchError(this.handleError<any>('save'))
+						)
+						.subscribe();
+				}),
+				catchError(this.handleError<any>('save'))
+			);
 	}
 
 	/**

@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class AuthenticationService {
+	constructor() {
+	}
+
 	login(email: string, password: string): boolean {
 		return email === 'youremail@email.com' && password === 'password';
 	}
-  constructor() { }
 }

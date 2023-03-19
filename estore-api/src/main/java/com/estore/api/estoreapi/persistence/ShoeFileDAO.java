@@ -21,7 +21,7 @@ public class ShoeFileDAO implements ShoeDAO {
     // objects and JSON text format written
     // to the file
     private static int nextId;  // The next Id to assign to a new shoe
-    final Map<Integer, Shoe> shoes = new HashMap<>();   // Provides a local cache of the shoe objects
+     Map<Integer, Shoe> shoes = new HashMap<>();   // Provides a local cache of the shoe objects
     // so that we don't need to read from the file
     // each time
     private final ObjectMapper objectMapper;  // Provides conversion between Shoe

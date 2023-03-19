@@ -5,8 +5,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 @JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum Sizing {
-    MALE("MALE"),
-    FEMALE("FEMALE");
+    MENS("Mens"),
+    WOMENS("Womens"),
+    KIDS("Kids");
 
     private final String unit;
 

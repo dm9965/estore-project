@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Shoe {
 
+    public static final String STRING_FORMAT = "Shoe [id=%d, style='%s', sizing=%s, size=%f, price=%.2f, brand='%s', material='%s', color='%s']";
     /**
      * Identifies this shoe within the system, must be unique
      */
@@ -57,19 +58,26 @@ public class Shoe {
     @JsonProperty("color")
     private String color;
 
+    public Shoe() {
+
+    }
+
+    public Shoe(int id, String style, Sizing sizing, int size, double price, String brand, String material, String color) {
+        this.id = id;
+        this.style = style;
+        this.sizing = sizing;
+        this.size = size;
+        this.price = price;
+        this.brand = brand;
+        this.material = material;
+        this.color = color;
+    }
+
     @Override
     public String toString() {
-        return "Shoe{" +
-                "id=" + id +
-                ", style='" + style + '\'' +
-                ", sizing=" + sizing +
-                ", size=" + size +
-                ", price=" + price +
-                ", brand='" + brand + '\'' +
-                ", material='" + material + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+        return String.format(STRING_FORMAT, id, style, sizing, size, price, brand, material, color);
     }
+
 
     public int getId() {
         return id;

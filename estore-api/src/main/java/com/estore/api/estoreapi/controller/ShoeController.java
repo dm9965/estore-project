@@ -16,7 +16,7 @@ public class ShoeController {
 
     private final ShoeDAO shoeDAO;
 
-    ShoeController(ShoeDAO shoeDAO) {
+    public ShoeController(ShoeDAO shoeDAO) {
         this.shoeDAO = shoeDAO;
     }
 
@@ -78,13 +78,13 @@ public class ShoeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> delete(@PathVariable int id) {
+    public ResponseEntity<Shoe> delete(@PathVariable int id) {
         try {
             boolean deleted = shoeDAO.deleteShoeById(id);
             if (deleted) {
-                return new ResponseEntity<>(true, HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
-            return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

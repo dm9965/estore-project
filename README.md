@@ -9,7 +9,7 @@ An online E-store system built in Java 11+Maven and NodeJS+Angular
 - Zach Kroesen
 - Lucas Romero
 - Connor Bastian
-- MEMBER 5
+- Uttam Bhattarai
 
 
 ## Prerequisites for development environment

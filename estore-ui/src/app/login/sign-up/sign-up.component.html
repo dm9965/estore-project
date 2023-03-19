@@ -1,0 +1,19 @@
+
+<h1 class="headerFont">Sign-Up</h1>
+<form class="form-container" (ngSubmit)="onSubmit(signupForm)" #signupForm="ngForm">
+	<div class="login-box">
+	<div>
+		<label class="labelFont" for="username">Username:</label>
+		<input class="input" type="username" name="username" id="username" [(ngModel)]="user.username" required>
+	</div>
+	<div>
+		<label class="labelFont" for="password">Password:</label>
+		<input class="input" type="password" name="password" id="password" [(ngModel)]="user.password" required>
+	</div>
+	<div>
+		<label class="labelFont" for="confirmPassword">Confirm password:</label>
+		<input class="input" type="password" name="confirmPassword" id="confirmPassword" [(ngModel)]="user.confirmPassword" required>
+	</div>
+	<button class="signup-button" type="submit" [disabled]="!signupForm.valid">Sign up</button>
+	</div>
+</form>

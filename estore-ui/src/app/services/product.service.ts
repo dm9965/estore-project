@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
-import {Shoe} from "./ShoeInterface";
+import {Shoe} from "../ShoeInterface";
 import {MessageService} from "./message.service";
-import {Sizing} from "./Sizing";
+import {Sizing} from "../Sizing";
 
 
 @Injectable({providedIn: 'root'})
@@ -32,7 +32,7 @@ export class ProductService {
 	getShoeByID(id: number): Observable<Shoe> {
 		const url = `${this.shoeURL}/${id}`;
 		return this.http.get<Shoe>(url).pipe(
-			tap(_ => this.log(`fetched hero id=${id}`)),
+			tap(_ => this.log(`fetched shoe id=${id}`)),
 			catchError(this.handleError<Shoe>(`getShoe id=${id}`))
 		);
 	}

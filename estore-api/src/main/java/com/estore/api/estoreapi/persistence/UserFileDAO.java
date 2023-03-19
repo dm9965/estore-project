@@ -28,19 +28,10 @@ public class UserFileDAO implements UserDAO{
     }
 
     @Override
-    public User createUser(String email, String password, String username) {
+    public User createUser(String username, String password) {
         return null;
     }
 
-    @Override
-    public User findByEmail(String email) {
-        for (User user : users) {
-            if (user.getEmail().equals(email)) {
-                return user;
-            }
-        }
-        return null;
-    }
 
     @Override
     public User findByUsername(String username) {

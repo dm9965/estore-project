@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Shoe} from "../ShoeInterface";
-import {ProductService} from "../product.service";
+import {ProductService} from "../services/product.service";
 import {Sizing} from "../Sizing";
 
 @Component({

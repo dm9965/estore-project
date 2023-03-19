@@ -1,23 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BrandBarComponent } from './brand-bar.component';
+import {BrandBarComponent} from './brand-bar.component';
 
 describe('BrandBarComponent', () => {
-  let component: BrandBarComponent;
-  let fixture: ComponentFixture<BrandBarComponent>;
+	let component: BrandBarComponent;
+	let fixture: ComponentFixture<BrandBarComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ BrandBarComponent ]
-    })
-    .compileComponents();
+	beforeEach(async () => {
+		await TestBed.configureTestingModule({
+			declarations: [BrandBarComponent]
+		})
+			.compileComponents();
 
-    fixture = TestBed.createComponent(BrandBarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+		fixture = TestBed.createComponent(BrandBarComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+	it('should create', () => {
+		expect(component).toBeTruthy();
+	});
 });

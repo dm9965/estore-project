@@ -3,9 +3,9 @@ package com.estore.api.estoreapi.model;
 public class User {
 
     public static final String STRING_FORMAT = "[Username: '%s', Password: '%s']";
+    private int id;
     private String username;
     private String password;
-
 
     public String getPassword() {
         return password;

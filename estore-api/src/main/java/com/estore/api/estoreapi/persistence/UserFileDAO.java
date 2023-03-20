@@ -23,11 +23,12 @@ public class UserFileDAO implements UserDAO {
     private final String filename;
     final Map<String, User> userMap = new HashMap<>();
 
-    public UserFileDAO(@Value("data/users.json") ObjectMapper objectMapper, String filename) throws IOException {
+    public UserFileDAO(@Value("${dao.users}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();
+        load();  // load the heroes from the file
     }
+
 
     @Override
     public User createUser(User inputUser) throws IOException {
@@ -112,12 +113,18 @@ public class UserFileDAO implements UserDAO {
     // readValue will throw an IOException if there's an issue with the file
     // or reading from the file
     private void load() throws IOException {
+        // Deserializes the JSON objects from the file into an array of shoes
+        // readValue will throw an IOException if there's an issue with the file
+        // or reading from the file
+
         FlatFileOps.ensureDataFileExists(filename);
-        User userMapper = objectMapper.readValue(new File(filename), User.class);
+        User[] users = objectMapper.readValue(new File(filename), User[].class);
 
         // Add each shoe to the tree map and keep track of the greatest id
-        for (User user : userList) {
-            userMap.put(user.getUsername(), userMapper);
+        for (User user : users) {
+            userMap.put(user.getUsername(), user);
         }
+        // Make the next id one greater than the maximum from the file
+        return;
     }
 }

@@ -1,6 +1,6 @@
 <h1 class="headerFont"> Login </h1>
 
-<form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="form-container" novalidate>
+<form class="form-container" #form="ngForm">
 	<div class="login-box">
 		<span>
 			<label class="labelFont" for="username"> Username: </label>
@@ -13,7 +13,7 @@
 			<div *ngIf="!validatePassword()"> Please enter a password</div>
 		</span>
 		<span class="button-container">
-			<button class="login-button" (click)="onSubmit(loginForm)">Login</button>
+			<button class="login-button" (click)="onSubmit(form)">Login</button>
 		</span>
 	</div>
 </form>

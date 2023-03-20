@@ -14,11 +14,16 @@ export class LoginComponent implements OnInit {
 	errorMessage: String = 'Login Error';
 	user: User = new User();
 	ngOnInit() {}
-	constructor(private userService: UserService, private router: Router) {}
+	constructor(private userService: UserService, private router: Router) {
+	}
 
 	onSubmit(form: NgForm) {
 		if (form.valid) {
-			this.userService.login(this.user.getUsername(), this.user.getPassword()).subscribe(
+			this.user = new User();
+			this.user.username = form.value.username;
+			this.user.password = form.value.password;
+
+			this.userService.createUser(this.user).subscribe(
 				(response: any) => {
 					console.log(response);
 					if (response === 'login successful') {
@@ -31,8 +36,9 @@ export class LoginComponent implements OnInit {
 				(error) => {
 					console.log('Error logging in: ', error);
 					this.errorMessage = error;
-					}
-				);
+				}
+			);
+			this.userService.login(this.user);
 		}
 	}
 

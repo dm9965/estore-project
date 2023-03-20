@@ -22,7 +22,6 @@ import {InventoryPageComponent} from './inventory-page/inventory-page.component'
 import {HttpClientModule} from "@angular/common/http";
 import {MatListModule} from "@angular/material/list";
 import {MatSelectModule} from "@angular/material/select";
-import { SignUpComponent } from './login/sign-up/sign-up.component';
 
 @NgModule({
 	declarations: [
@@ -37,7 +36,6 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
 		ProductPageComponent,
 		LoginComponent,
 		InventoryPageComponent,
-  SignUpComponent,
 	],
 
 	imports: [

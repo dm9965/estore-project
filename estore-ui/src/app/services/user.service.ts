@@ -12,12 +12,6 @@ export class UserService {
 	loginURL: string = 'http://localhost:8080/login'
   	constructor(private http: HttpClient) { }
 
-	signup(user: User): Observable<any> {
-		const url = '${this.signupURL}/signup';
-		const body = JSON.stringify(user);
-		return this.http.post(url, body);
-	}
-
 	login(username: String, password: String): Observable<User> {
 		const url = '${this.loginURL}/login';
 		const body = { username, password };

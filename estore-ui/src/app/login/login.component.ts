@@ -1,4 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {User} from "../User";
+import {UserService} from "../services/user.service";
+import {NgForm} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
 	selector: 'app-login',
@@ -6,38 +10,37 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 	styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-	@ViewChild('emailInput') emailInput: ElementRef | undefined;
-	@ViewChild('passwordInput') passwordInput: ElementRef | undefined;
 
-	email: string = '';
-	password: string = '';
-	emailValid: boolean = true;
-	passwordValid: boolean = true;
+	errorMessage: String = 'Login Error';
+	user: User = new User();
+	ngOnInit() {}
+	constructor(private userService: UserService, private router: Router) {}
 
-	constructor() {
-	}
-
-	ngOnInit() {
-	}
-
-	onSubmit() {
-		this.emailValid = this.validateEmail();
-		this.passwordValid = this.validatePassword();
-		if (this.emailValid && this.passwordValid) {
-			// handle successful login
+	onSubmit(form: NgForm) {
+		if (form.valid) {
+			this.userService.login(this.user.getUsername(), this.user.getPassword()).subscribe(
+				(response: any) => {
+					console.log(response);
+					if (response === 'login successful') {
+						this.router.navigate(['/home']).then(r => true);
+					} else {
+						console.log('Error logging in: ', response);
+						this.errorMessage = response;
+					}
+				},
+				(error) => {
+					console.log('Error logging in: ', error);
+					this.errorMessage = error;
+					}
+				);
 		}
 	}
 
-	private validateEmail(): boolean {
-		const emailRegex = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/;
-		// @ts-ignore
-		const email = this.emailInput.nativeElement.value.trim();
-		return emailRegex.test(email);
+	validateUsername(): boolean {
+		return this.user.getUsername() !== null;
 	}
 
-	private validatePassword(): boolean {
-		// @ts-ignore
-		const password = this.passwordInput.nativeElement.value.trim();
-		return password.trim().length > 0;
+	validatePassword(): boolean {
+		return this.user.getPassword() !== null;
 	}
 }

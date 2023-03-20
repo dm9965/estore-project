@@ -9,5 +9,6 @@ export class Shoe {
 	brand: string = '';
 	material: string = '';
 	color: string = '';
+	image: string = ''
 
 }

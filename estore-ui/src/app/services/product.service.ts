@@ -83,12 +83,12 @@ export class ProductService {
 			// if not search term, return empty hero array.
 			return of([]);
 		}
-		const url = `${this.shoeURL}/?query=${encodeURIComponent(term)}`;
+		const url = `${this.shoeURL}/browse/?query=${encodeURIComponent(term)}`;
 		return this.http.get<Shoe[]>(url).pipe(
 			tap(x => x.length ?
 				this.log(`found shoes matching "${term}"`) :
 				this.log(`no shoes matching "${term}"`)),
-			catchError(this.handleError<Shoe[]>('searchHeroes', []))
+			catchError(this.handleError<Shoe[]>('search shoes', []))
 		);
 	}
 

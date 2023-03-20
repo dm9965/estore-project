@@ -28,7 +28,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/sign-up")
+    @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestParam User user) {
         try {
             User newUser = userDAO.createUser(user);
@@ -39,16 +39,17 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<User> login(@RequestBody String username) {
         try {
-            boolean isAdmin = userDAO.isAdmin(username, password);
-            boolean isCustomer = userDAO.isCustomer(username, password);
-            if (isAdmin) {
-                return new ResponseEntity<>("Admin login successful", HttpStatus.OK);
-            } else if (isCustomer) {
-                return new ResponseEntity<>("Customer login successful", HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+            User user = userDAO.findByUsername(username);
+            if (user == null) {
+                User blankUser = new User();
+                blankUser.setUsername(username);
+                User newUser = userDAO.createUser(blankUser);
+                return new ResponseEntity<>(newUser, HttpStatus.OK);
+            }
+            else {
+                return new ResponseEntity<>(user, HttpStatus.OK);
             }
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

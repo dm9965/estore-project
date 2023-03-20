@@ -22,6 +22,7 @@ import {InventoryPageComponent} from './inventory-page/inventory-page.component'
 import {HttpClientModule} from "@angular/common/http";
 import {MatListModule} from "@angular/material/list";
 import {MatSelectModule} from "@angular/material/select";
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
 	declarations: [
@@ -36,6 +37,7 @@ import {MatSelectModule} from "@angular/material/select";
 		ProductPageComponent,
 		LoginComponent,
 		InventoryPageComponent,
+  		ShoppingCartComponent,
 	],
 
 	imports: [

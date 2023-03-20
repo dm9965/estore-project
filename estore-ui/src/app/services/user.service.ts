@@ -8,7 +8,6 @@ import {catchError, map} from "rxjs/operators";
   providedIn: 'root'
 })
 export class UserService {
-	signupURL: string = 'http://localhost:8080/sign-up'
 	loginURL: string = 'http://localhost:8080/login'
   	constructor(private http: HttpClient) { }
 

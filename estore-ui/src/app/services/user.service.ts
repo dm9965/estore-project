@@ -13,9 +13,8 @@ export class UserService {
 	loginURL: string = 'http://localhost:8080/login'
   	constructor(private http: HttpClient) { }
 	login(username: String, password: String): Observable<User> {
-		const url = '${this.loginURL}/login';
-		const body = { username, password };
-		return this.http.post(url, body).pipe(map((response: any) => {
+		const body = { username };
+		return this.http.post(this.loginURL, body).pipe(map((response: any) => {
 			this.user = response;
 			return response;
 		}));

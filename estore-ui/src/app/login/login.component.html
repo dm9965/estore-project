@@ -13,7 +13,7 @@
 			<div *ngIf="!validatePassword()"> Please enter a password</div>
 		</span>
 		<span class="button-container">
-			<button routerLink="/home" class="login-button" type="submit">Login</button>
+			<button class="login-button" (click)="onSubmit(loginForm)">Login</button>
 		</span>
 	</div>
 </form>

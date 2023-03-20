@@ -1,6 +1,5 @@
 package com.estore.api.estoreapi.persistence;
 
-import com.estore.api.estoreapi.model.Shoe;
 import com.estore.api.estoreapi.model.User;
 import com.estore.api.estoreapi.utils.FlatFileOps;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +22,7 @@ public class UserFileDAO implements UserDAO {
     private final ObjectMapper objectMapper;
     private final String filename;
     final Map<String, User> userMap = new HashMap<>();
+
     public UserFileDAO(@Value("data/users.json") ObjectMapper objectMapper, String filename) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
@@ -31,7 +31,7 @@ public class UserFileDAO implements UserDAO {
 
     @Override
     public User createUser(User inputUser) throws IOException {
-        synchronized (userMap){
+        synchronized (userMap) {
             if (userMap.containsKey(inputUser.getUsername())) {
                 throw new FileAlreadyExistsException("Username already exists");
             }
@@ -79,12 +79,12 @@ public class UserFileDAO implements UserDAO {
 
     @Override
     public boolean isAdmin(String username, String password) {
-        return false;
+        return username.toLowerCase().contains("admin");
     }
 
     @Override
     public boolean isCustomer(String username, String password) throws IOException {
-        return false;
+        return !this.isAdmin(username, password);
     }
 
     @Override

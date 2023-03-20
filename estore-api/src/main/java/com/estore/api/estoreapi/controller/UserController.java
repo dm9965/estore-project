@@ -1,11 +1,10 @@
 package com.estore.api.estoreapi.controller;
 
-import com.estore.api.estoreapi.model.Shoe;
 import com.estore.api.estoreapi.model.User;
+import com.estore.api.estoreapi.persistence.UserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.estore.api.estoreapi.persistence.UserDAO;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import java.util.ArrayList;
 @RequestMapping("user")
 public class UserController {
     private final UserDAO userDAO;
+
     public UserController(UserDAO userDao) {
         this.userDAO = userDao;
     }

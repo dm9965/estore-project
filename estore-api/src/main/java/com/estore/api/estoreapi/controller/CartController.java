@@ -1,4 +1,5 @@
 package com.estore.api.estoreapi.controller;
+
 import com.estore.api.estoreapi.model.Shoe;
 import com.estore.api.estoreapi.persistence.CartDAO;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,8 @@ public class CartController {
     public CartController(CartDAO cartDAO) {
         this.cartDAO = cartDAO;
     }
-    @GetMapping ("/")
+
+    @GetMapping("/")
     public ResponseEntity<ArrayList<Shoe>> getAllItems() {
         try {
             cart = cartDAO.getCart();
@@ -42,15 +44,6 @@ public class CartController {
     public ResponseEntity<ArrayList<Shoe>> removeItem(@RequestBody Shoe shoe) {
         cart.remove(shoe);
         return new ResponseEntity<>(cart, HttpStatus.OK);
-    }
-
-    @GetMapping("/")
-    public ResponseEntity<Double> getTotal() {
-        double total = 0;
-        for (Shoe shoe : cart) {
-            total += shoe.getPrice();
-        }
-        return new ResponseEntity<>(total, HttpStatus.OK);
     }
 
 }

@@ -1,6 +1,5 @@
 .headerFont {
 	margin-top: 4rem;
-	padding-top: 3rem;
 	height: 100px;
 	font-size: 70px;
 	font-weight: 900;
@@ -10,6 +9,7 @@
 	-webkit-background-clip: text;
 	display: flex;
 	justify-content: space-around;
+	align-items: center;
 }
 
 .labelFont {
@@ -31,54 +31,27 @@
 	height: 100vh; /* Set the height of the container to the full viewport height */
 }
 
+.items-in-cart-box {
+	border-width: thick;
+	border-color: black;
+	border-radius: 100px;
+}
+
 .login-box {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-end;
+	align-items: center;
 	justify-items: center;
 	width: 60%;
 	height: 45%;
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(200, 200, 200, 0.4);
 	padding: 1rem;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 	border-radius: 25px;
-
 }
 
-.input {
-	color: rgba(0, 0, 0, .87);
-	border-bottom-color: rgba(0, 0, 0, .42);
-	font-size: 1rem;
-	font-weight: 400;
-	letter-spacing: .009375em;
-	text-decoration: inherit;
-	text-transform: inherit;
-	align-self: flex-end;
-	box-sizing: border-box;
-	width: 100%;
-	padding: 1rem;
-	transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
-	border: none;
-	border-bottom: 1px solid;
-	border-radius: 20px;
-	background: rgb(245, 245, 245);
-	height: 56px;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
-
-	:hover {
-		border-bottom-color: rgba(0, 0, 0, .87);
-		background: #ececec;
-	}
-
-	:focus {
-		border-color: #6200ee;
-	}
-
-	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-}
-
-.login-button {
+.checkout-button {
 	margin: 1rem;
 	display: inline-block;
 	outline: none;
@@ -113,5 +86,5 @@
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
-	height: 100vh; /* Set the height of the container to the full viewport height */
+	 /* Set the height of the container to the full viewport height */
 }

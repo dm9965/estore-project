@@ -1,95 +1,84 @@
 package com.estore.api.estoreapi.controller;
-import com.estore.api.estoreapi.persistence.UserDAO;
-import com.estore.api.estoreapi.model.User;
 
+import com.estore.api.estoreapi.model.User;
+import com.estore.api.estoreapi.persistence.UserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("user")
-
-/*
- * Controller for the User
- * 
- * @author Connor Bastian, crb1759@rit.edu
- */
 public class UserController {
-    
     private final UserDAO userDAO;
-    private User user = new User();
-    
-    public UserController(UserDAO userDAO) {
-        this.userDAO = userDAO;
+
+    public UserController(UserDAO userDao) {
+        this.userDAO = userDao;
     }
 
-    @GetMapping ("/")
-    public ResponseEntity<ArrayList<User>> getByEmail(@PathVariable String username) {
+    @GetMapping("/")
+    public ResponseEntity<ArrayList<User>> getUsers(String userInfo) {
         try {
-            user = userDAO.findByEmail(username);
-            if (user.getEmail() == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            ArrayList<User> userList = userDAO.getUsers(userInfo);
+            return new ResponseEntity<>(userList, HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping ("/")
-    public ResponseEntity<ArrayList<User>> getByUsername(@PathVariable String username) {
+    @PostMapping("/create")
+    public ResponseEntity<?> createUser(@RequestParam User user) {
         try {
-            user = userDAO.findByUsername(username);
-            if (user.getUsername() == null) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            User newUser = userDAO.createUser(user);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping ("/")
-    public ResponseEntity<ArrayList<User>> updateUser(@PathVariable User user) {
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody String username) {
         try {
-            userDAO.updateUser(user);
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PostMapping ("/")
-    public ResponseEntity<ArrayList<User>> isAdmin(@PathVariable String username, String password) {
-        try {
-            userDAO.isAdmin(username, password);
-            if (username == "admin") {
-                return true;
-            } 
-            elsif (password == "admin") {
-                return true;
+            User user = userDAO.findByUsername(username);
+            if (user == null) {
+                User blankUser = new User();
+                blankUser.setUsername(username);
+                User newUser = userDAO.createUser(blankUser);
+                return new ResponseEntity<>(newUser, HttpStatus.OK);
             }
             else {
-                return false;
+                return new ResponseEntity<>(user, HttpStatus.OK);
             }
-            return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<ArrayList<User>> deleteUser(@PathVariable User user) {
+    @GetMapping("/{username}")
+    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
         try {
-            userDAO.remove(user);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            User user = userDAO.findByUsername(username);
+            if (user != null) {
+                return new ResponseEntity<>(user, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
+            }
         } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Error getting user", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    
+    }
+
+    @PutMapping("")
+    public ResponseEntity<String> updateUser(@RequestBody User user) {
+        try {
+            userDAO.updateUser(user);
+            return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>("Error updating user", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
+    
+

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
+import {AppComponent} from './main-app/app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -22,6 +22,7 @@ import {InventoryPageComponent} from './inventory-page/inventory-page.component'
 import {HttpClientModule} from "@angular/common/http";
 import {MatListModule} from "@angular/material/list";
 import {MatSelectModule} from "@angular/material/select";
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
 	declarations: [
@@ -36,6 +37,7 @@ import {MatSelectModule} from "@angular/material/select";
 		ProductPageComponent,
 		LoginComponent,
 		InventoryPageComponent,
+  		ShoppingCartComponent,
 	],
 
 	imports: [

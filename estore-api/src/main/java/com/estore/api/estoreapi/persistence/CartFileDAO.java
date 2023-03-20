@@ -24,11 +24,12 @@ public class CartFileDAO implements CartDAO {
     Map<Integer, Cart> cartMap = new HashMap<>();
 
 
-    public CartFileDAO(@Value("data/carts.json") ObjectMapper objectMapper, String filename) throws IOException {
+    public CartFileDAO(@Value("${dao.carts}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();
+        load();  // load the heroes from the file
     }
+
 
     @Override
     public void addToCart(Shoe shoe) throws IOException {
@@ -60,12 +61,12 @@ public class CartFileDAO implements CartDAO {
         // or reading from the file
 
         FlatFileOps.ensureDataFileExists(filename);
-        Cart cart = objectMapper.readValue(new File(filename), Cart.class);
+        Cart[] carts = objectMapper.readValue(new File(filename), Cart[].class);
 
         // Add each shoe to the tree map and keep track of the greatest id
-        for (Shoe shoe : shoesInCart) {
-            cartMap.put(shoe.getId(), cart);
-            if (shoe.getId() > nextId) nextId = shoe.getId();
+        for (Cart cart : carts) {
+            cartMap.put(cart.getId(), cart);
+            if (cart.getId() > nextId) nextId = cart.getId();
         }
         // Make the next id one greater than the maximum from the file
         ++nextId;

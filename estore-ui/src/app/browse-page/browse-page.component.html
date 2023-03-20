@@ -8,7 +8,20 @@
 	<div class="row row--md">
 		<div class="aside col col-md-4 col-lg-5"></div>
 		<ng-container>
-
+			<!-- <div class="col col-md-8 col-lg-7">
+				<div *ngFor="let shoe of shoes$ | async">
+					<div class="card">
+					<div class="card-image">
+							<img [src]="shoe.image" alt="shoe image">
+						</div>
+						<div class="card-body" [(ngModel)]="shoe">
+							<h3 class="card-title">{{shoe.brand}}</h3>
+							<p class="card-text">{{shoe.style}}</p>
+							<p class="card-text">{{shoe.price}}</p>
+						</div>
+					</div>
+				</div>
+			</div> -->
 		</ng-container>
 	</div>
 </div>

@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
-import {Shoe} from "./ShoeInterface";
+import {Shoe} from "../ShoeInterface";
 import {MessageService} from "./message.service";
-import {Sizing} from "./Sizing";
+import {Sizing} from "../Sizing";
 
 
 @Injectable({providedIn: 'root'})
@@ -32,7 +32,7 @@ export class ProductService {
 	getShoeByID(id: number): Observable<Shoe> {
 		const url = `${this.shoeURL}/${id}`;
 		return this.http.get<Shoe>(url).pipe(
-			tap(_ => this.log(`fetched hero id=${id}`)),
+			tap(_ => this.log(`fetched shoe id=${id}`)),
 			catchError(this.handleError<Shoe>(`getShoe id=${id}`))
 		);
 	}
@@ -83,12 +83,12 @@ export class ProductService {
 			// if not search term, return empty hero array.
 			return of([]);
 		}
-		const url = `${this.shoeURL}/?query=${encodeURIComponent(term)}`;
+		const url = `${this.shoeURL}/browse/?query=${encodeURIComponent(term)}`;
 		return this.http.get<Shoe[]>(url).pipe(
 			tap(x => x.length ?
 				this.log(`found shoes matching "${term}"`) :
 				this.log(`no shoes matching "${term}"`)),
-			catchError(this.handleError<Shoe[]>('searchHeroes', []))
+			catchError(this.handleError<Shoe[]>('search shoes', []))
 		);
 	}
 

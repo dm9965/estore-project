@@ -2,17 +2,10 @@ package com.estore.api.estoreapi.model;
 
 public class User {
 
+    public static final String STRING_FORMAT = "[Username: '%s', Password: '%s']";
+    private int id;
     private String username;
-    private String email;
     private String password;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPassword() {
         return password;

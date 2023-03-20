@@ -1,20 +1,19 @@
 <h1 class="headerFont"> Login </h1>
 
-<form (ngSubmit)="onSubmit()" class="form-container" novalidate>
+<form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm" class="form-container" novalidate>
 	<div class="login-box">
 		<span>
-			<label class="labelFont" for="email"> Email: </label>
-			<input #emailInput class="input" id="email" placeholder="Enter email" type='email'/>
-			<div *ngIf="!emailValid" class="invalid-feedback">Please enter a valid email address</div>
+			<label class="labelFont" for="username"> Username: </label>
+			<input #usernameInput class="input" id="username" placeholder="Enter Username" type='text'/>
+			<div *ngIf="!validateUsername()">Please enter a username</div>
 		</span>
 		<span>
 			<label class="labelFont" for="password"> Password: </label>
-			<input #passwordInput class="input" id="password" placeholder="Enter password" type='password'/>
-			<div *ngIf="!passwordValid" class="invalid-feedback">Please enter a password</div>
+			<input #passwordInput class="input" id="password" placeholder="Enter Password" type='password'/>
+			<div *ngIf="!validatePassword()"> Please enter a password</div>
 		</span>
 		<span class="button-container">
 			<button class="login-button" type="submit">Login</button>
-			<button class="login-button" type="submit">Sign-Up</button>
 		</span>
 	</div>
 </form>

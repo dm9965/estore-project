@@ -1,6 +1,8 @@
 package com.estore.api.estoreapi.model;
 
 public class User {
+
+    public static final String STRING_FORMAT = "[Username: '%s', Password: '%s']";
     private String username;
     private String password;
 

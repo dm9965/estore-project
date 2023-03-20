@@ -19,9 +19,9 @@ public class UserController {
     }
 
     @GetMapping("/")
-    public ResponseEntity<ArrayList<User>> getAllUsers() {
+    public ResponseEntity<ArrayList<User>> getUsers(String userInfo) {
         try {
-            ArrayList<User> userList = userDAO.getUsers();
+            ArrayList<User> userList = userDAO.getUsers(userInfo);
             return new ResponseEntity<>(userList, HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -29,10 +29,10 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public ResponseEntity<?> createUser(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<?> createUser(@RequestParam User user) {
         try {
-            User user = userDAO.createUser(username, password);
-            return new ResponseEntity<>(user, HttpStatus.CREATED);
+            User newUser = userDAO.createUser(user);
+            return new ResponseEntity<>(newUser, HttpStatus.CREATED);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

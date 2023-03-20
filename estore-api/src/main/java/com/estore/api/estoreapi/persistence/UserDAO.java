@@ -11,14 +11,15 @@ import java.util.ArrayList;
  */
 public interface UserDAO {
     //Create a User
-    User createUser( String username, String password) throws IOException;
+    User createUser(User user) throws IOException;
     //Find a user based on username
     User findByUsername(String username) throws IOException;
     //Update a user's information
-    void updateUser(User user) throws IOException;
+    User updateUser(User user) throws IOException;
     //Check is user has admin privileges
     boolean isAdmin(String username, String password) throws IOException;
     //Check if user is a customer
     boolean isCustomer(String username, String password) throws IOException;
+    ArrayList<User> getUsers(String userInfo) throws IOException;
     ArrayList<User> getUsers() throws IOException;
 }

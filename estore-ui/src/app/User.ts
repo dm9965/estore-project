@@ -1,12 +1,12 @@
 export class User {
-	username: String = '';
-	password: String = '';
-	confirmPassword: String = ''
+	username: string = '';
+	password: string = '';
+	confirmPassword: string = ''
 	constructor() {}
-	getUsername(): String {
+	getUsername(): string {
 		return this.username
 	}
-	getPassword(): String {
+	getPassword(): string {
 		return this.password
 	}
 	isValid(): boolean {

@@ -9,12 +9,14 @@ import {Shoe} from "../ShoeInterface";
   providedIn: 'root'
 })
 export class UserService {
+	httpOptions = {
+		headers: new HttpHeaders({'Content-Type': 'application/json'})
+	};
 	private user: User = new User;
-	loginURL: string = 'http://localhost:8080/login'
+	loginURL: string = 'http://localhost:8080/user/login'
   	constructor(private http: HttpClient) { }
 	login(username: String, password: String): Observable<User> {
-		const body = { username };
-		return this.http.post(this.loginURL, body).pipe(map((response: any) => {
+		return this.http.post(this.loginURL, username, this.httpOptions).pipe(map((response: any) => {
 			this.user = response;
 			return response;
 		}));

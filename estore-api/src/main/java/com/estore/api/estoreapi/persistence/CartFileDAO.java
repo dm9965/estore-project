@@ -34,9 +34,9 @@ public class CartFileDAO implements CartDAO {
     }
 
     @Override
-    public void removeFromCart(String username, Shoe shoe) throws IOException {
+    public void removeFromCart(String username, int shoeId) throws IOException {
         Cart cart = standardCart(username);
-        cart.getItems().remove(shoe);
+        cart.getItems().removeIf(shoe -> shoe.getId() == shoeId);
     }
 
     @Override

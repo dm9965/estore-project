@@ -40,10 +40,10 @@ public class CartController {
         }
     }
 
-    @DeleteMapping("/{username}")
-    public ResponseEntity<Cart> removeItem(@PathVariable String username, @RequestBody Shoe shoe) {
+    @DeleteMapping("/{username}/{id}")
+    public ResponseEntity<Cart> removeItem(@PathVariable String username, @PathVariable int id) {
         try {
-            cartDAO.removeFromCart(username, shoe);
+            cartDAO.removeFromCart(username, id);
             Cart cart = cartDAO.getCart(username);
             return new ResponseEntity<>(cart, HttpStatus.OK);
         } catch (IOException e) {

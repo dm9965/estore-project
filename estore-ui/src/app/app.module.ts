@@ -23,6 +23,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatListModule} from "@angular/material/list";
 import {MatSelectModule} from "@angular/material/select";
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
 	declarations: [
@@ -40,22 +41,23 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
   		ShoppingCartComponent,
 	],
 
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		BrowserAnimationsModule,
-		MatIconModule,
-		MatToolbarModule,
-		MatButtonModule,
-		MatInputModule,
-		FormsModule,
-		MatButtonToggleModule,
-		MatIconModule,
-		HttpClientModule,
-		MatListModule,
-		MatSelectModule,
-		ReactiveFormsModule
-	],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatInputModule,
+        FormsModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        HttpClientModule,
+        MatListModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        MatGridListModule
+    ],
 	providers: [],
 	bootstrap: [AppComponent]
 })

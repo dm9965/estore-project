@@ -48,4 +48,8 @@ export class UserService {
 	getUser(): User {
 		return this.user;
 	}
+
+	isAdmin(): boolean {
+		return this.user.username.toLowerCase().includes("admin");
+	}
 }

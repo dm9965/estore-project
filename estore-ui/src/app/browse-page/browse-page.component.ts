@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../services/product.service";
-import {Observable} from "rxjs";
 import {Shoe} from "../ShoeInterface";
+import {Router} from "@angular/router";
 
 @Component({
 	selector: 'app-browse-page',
@@ -10,16 +10,20 @@ import {Shoe} from "../ShoeInterface";
 })
 export class BrowsePageComponent implements OnInit {
 	shoes: Shoe[] = [];
+	query: string = "";
 
-	constructor(private productService: ProductService) {
+	constructor(private productService: ProductService, private router: Router) {
+		router.events.subscribe(() => {
+			this.ngOnInit();
+		})
 	}
 
 	ngOnInit(): void {
 		// Get query string from url called 'query'
 		const urlParams = new URLSearchParams(window.location.search);
-		const query = urlParams.get('query')?.toString() || "";
+		this.query = urlParams.get('query')?.toString() || "";
 
-		this.productService.searchShoes(query).subscribe((data) => {
+		this.productService.searchShoes(this.query).subscribe((data) => {
 			this.shoes = data;
 		});
 	}

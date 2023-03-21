@@ -1,25 +1,15 @@
 <div>
-	<h3 class="headerFont"> Products </h3>
+	<h3 class="headerFont"> Browsing {{query}} Shoes</h3>
 </div>
 
-<app-filter-menu></app-filter-menu>
+<!--<app-filter-menu></app-filter-menu>-->
 
-<div class="constrained">
-	<div class="row row--md">
-		<div class="aside col col-md-4 col-lg-5"></div>
-		<div class="col col-md-8 col-lg-7">
-			<div *ngFor="let shoe of shoes">
-				<div class="card">
-					<div class="card-image">
-						<!--						<img [src]="shoe." alt="shoe image">-->
-					</div>
-					<div class="card-body">
-						<h3 class="card-title">{{shoe.brand}}</h3>
-						<p class="card-text">{{shoe.style}}</p>
-						<p class="card-text">{{shoe.price}}</p>
-					</div>
-				</div>
-			</div>
+<mat-grid-list cols="4" rowHeight="200px">
+	<mat-grid-tile *ngFor="let shoe of shoes">
+		<div matGridAvatar><img [src]="'https://dummyimage.com/100x100/000/fff&text='+shoe.style" alt="shoe image"></div>
+		<div>
+			<div matListItemTitle>{{shoe.brand}} {{shoe.style}}</div>
+			<div matListItemLine>{{shoe.material}} <strong>${{shoe.price}}</strong></div>
 		</div>
-	</div>
-</div>
+	</mat-grid-tile>
+</mat-grid-list>

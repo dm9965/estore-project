@@ -3,11 +3,6 @@ package com.estore.api.estoreapi;
 import com.estore.api.estoreapi.controller.ShoeController;
 import com.estore.api.estoreapi.model.Shoe;
 import com.estore.api.estoreapi.persistence.ShoeDAO;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -15,6 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+
 import static com.estore.api.estoreapi.enums.Sizing.MENS;
 
 @Tag("Controller-tier")
@@ -22,7 +22,9 @@ public class ShoeControllerTest {
     private ShoeController shoeController;
     private ShoeDAO mockShoeDAO;
 
-    public ShoeControllerTest(){}
+    public ShoeControllerTest() {
+    }
+
     @BeforeEach
     public void setupShoeController() {
         this.mockShoeDAO = Mockito.mock(ShoeDAO.class);
@@ -157,7 +159,9 @@ public class ShoeControllerTest {
         int shoeId = 1;
         Mockito.when(this.mockShoeDAO.deleteShoeById(shoeId)).thenReturn(false);
         ResponseEntity<Shoe> response = this.shoeController.delete(shoeId);
-        Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());    }
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
     @Test
     public void testDeleteShoeHandleException() throws IOException {
         int shoeId = 99;

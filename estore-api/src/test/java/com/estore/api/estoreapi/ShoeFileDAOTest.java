@@ -34,7 +34,7 @@ public class ShoeFileDAOTest {
         shoe3 = new Shoe(3, "Jordan 3 White Cement", WOMENS, 7, 224.99, "Jordan", "Leather", "White");
 
         this.mockShoeArray = new Shoe[]{shoe1, shoe2, shoe3};
-        ObjectMapper mockObjectMapper = (ObjectMapper) mock(ObjectMapper.class);
+        ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
         when(mockObjectMapper.readValue(any(File.class), eq(Shoe[].class))).thenReturn(this.mockShoeArray);
 
         this.mockShoeFileDAO = new ShoeFileDAO("data/testing.txt", mockObjectMapper);
@@ -65,7 +65,7 @@ public class ShoeFileDAOTest {
 
     @Test
     public void testDeleteShoeById() throws IOException {
-        boolean result = (Boolean) Assertions.assertDoesNotThrow(() -> {
+        boolean result = Assertions.assertDoesNotThrow(() -> {
             return this.mockShoeFileDAO.deleteShoeById(1);
         }, "Unexpected exception thrown");
         Assertions.assertTrue(result);
@@ -75,7 +75,7 @@ public class ShoeFileDAOTest {
     @Test
     public void testCreateShoe() throws Exception {
         Shoe shoe = new Shoe(4, "Chuck Taylor", MENS, 8, 79.99, "Converse", "Canvas", "Black");
-        Shoe result = (Shoe) Assertions.assertDoesNotThrow(() -> {
+        Shoe result = Assertions.assertDoesNotThrow(() -> {
             return this.mockShoeFileDAO.createShoe(shoe);
         }, "Unexpected Exception Thrown");
         Assertions.assertNotNull(result);
@@ -105,7 +105,7 @@ public class ShoeFileDAOTest {
     @Test
     public void testGetShoeNotFound() throws IOException {
         Shoe shoe = this.mockShoeFileDAO.getShoeById(98);
-        Assertions.assertEquals(shoe, (Object) null);
+        Assertions.assertEquals(shoe, null);
     }
 
     @Test
@@ -122,8 +122,8 @@ public class ShoeFileDAOTest {
 
     @Test
     public void testConstructorException() throws IOException {
-        ObjectMapper mockObjectMapper = (ObjectMapper) mock(ObjectMapper.class);
-        ((ObjectMapper) doThrow(new IOException()).when(mockObjectMapper)).readValue(new File("data/doesnt_matter.txt"), Shoe[].class);
+        ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
+        doThrow(new IOException()).when(mockObjectMapper).readValue(new File("data/doesnt_matter.txt"), Shoe[].class);
         Assertions.assertThrows(IOException.class, () -> {
             new ShoeFileDAO("data/doesnt_matter.txt", mockObjectMapper);
         }, "IOException not thrown");

@@ -10,7 +10,7 @@
 		<div>
 			<div matListItemTitle>{{shoe.brand}} {{shoe.style}}</div>
 			<div matListItemLine>{{shoe.material}} <strong>${{shoe.price}}</strong></div>
-			<button [matTooltip]="isLoggedIn() ? '' : 'Must be logged in to add to cart!'" [class.disabled]="!isLoggedIn()" (click)="addToCart(shoe)">
+			<button (click)="addToCart(shoe)" [class.disabled]="!isLoggedIn()" [matTooltip]="isLoggedIn() ? '' : 'Must be logged in to add to cart!'">
 				<mat-icon>add_shopping_cart</mat-icon>
 			</button>
 		</div>

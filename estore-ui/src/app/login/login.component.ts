@@ -20,10 +20,10 @@ export class LoginComponent implements OnInit {
 		password: new FormControl()
 	});
 
-	ngOnInit() {
+	constructor(private userService: UserService, private router: Router) {
 	}
 
-	constructor(private userService: UserService, private router: Router) {
+	ngOnInit() {
 	}
 
 	submit() {

@@ -11,8 +11,8 @@ export class UserService {
 	httpOptions = {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
-	private user: User = new User();
 	loginURL: string = 'http://localhost:8080/user'
+	private user: User = new User();
 
 	constructor(private http: HttpClient) {
 		this.user.username = "Anonymous";
@@ -34,17 +34,6 @@ export class UserService {
 		);
 	}
 
-
-	private handleError<T>(operation = 'operation', result?: T) {
-		return (error: any): Observable<T> => {
-			console.error(error); // log to console instead
-			console.log(`${operation} failed: ${error.message}`);
-
-			// Let the app keep running by returning an empty result.
-			return of(result as T);
-		};
-	}
-
 	getUser(): User {
 		return this.user;
 	}
@@ -55,5 +44,15 @@ export class UserService {
 
 	isLoggedIn(): boolean {
 		return this.user.username !== "Anonymous";
+	}
+
+	private handleError<T>(operation = 'operation', result?: T) {
+		return (error: any): Observable<T> => {
+			console.error(error); // log to console instead
+			console.log(`${operation} failed: ${error.message}`);
+
+			// Let the app keep running by returning an empty result.
+			return of(result as T);
+		};
 	}
 }

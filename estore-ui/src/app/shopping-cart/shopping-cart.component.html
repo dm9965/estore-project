@@ -1,7 +1,7 @@
 <h1 class="headerFont">Shopping Cart</h1>
 <div class="form-container">
 	<ul class="login-box">
-		<li class="items-in-cart-box" *ngFor="let item of items">
+		<li *ngFor="let item of items" class="items-in-cart-box">
 			{{ item.brand }} {{item.style}} {{item.material}} - {{ item.price | currency }}
 			<button (click)="removeItem(item)">Remove</button>
 		</li>

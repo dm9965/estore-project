@@ -2,7 +2,6 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Shoe} from "../ShoeInterface";
 import {HttpClient} from "@angular/common/http";
 import {CartService} from "../services/cart.service";
-import {Router} from "@angular/router";
 
 @Component({
 	selector: 'app-product-page',

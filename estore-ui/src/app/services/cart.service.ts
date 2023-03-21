@@ -48,14 +48,16 @@ export class CartService {
 	removeItem(item: Shoe) {
 		let user = this.userService.getUser();
 		if (user.username == "Anonymous") {
-			return of([]);
+			return of(null);
 		}
 
-		const url = `${this.cartURL}/${this.userService.getUser().username}`;
+		const url = `${this.cartURL}/${this.userService.getUser().username}/${item.id}`;
 		return this.http.delete<Shoe>(url, this.httpOptions).pipe(
 			tap(_ => console.log(`Removed shoe id=${item.id}`)),
 			catchError(this.handleError<Shoe>('Remove Shoe'))
-		);
+		).subscribe(() => {
+			console.log("Removed shoe from cart");
+		});
 	}
 
 	getTotalCost(): Observable<number> {

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ProductService} from "../services/product.service";
 import {Shoe} from "../ShoeInterface";
 import {Router} from "@angular/router";
+import {CartService} from "../services/cart.service";
+import {UserService} from "../services/user.service";
 
 @Component({
 	selector: 'app-browse-page',
@@ -12,7 +14,7 @@ export class BrowsePageComponent implements OnInit {
 	shoes: Shoe[] = [];
 	query: string = "";
 
-	constructor(private productService: ProductService, private router: Router) {
+	constructor(private productService: ProductService, private router: Router, private cartService: CartService, private userService: UserService) {
 		router.events.subscribe(() => {
 			this.ngOnInit();
 		})
@@ -26,5 +28,14 @@ export class BrowsePageComponent implements OnInit {
 		this.productService.searchShoes(this.query).subscribe((data) => {
 			this.shoes = data;
 		});
+	}
+
+	addToCart(shoe: Shoe) {
+		console.log("ADDED TO CART")
+		this.cartService.addItem(shoe);
+	}
+
+	isLoggedIn() {
+		return this.userService.isLoggedIn();
 	}
 }

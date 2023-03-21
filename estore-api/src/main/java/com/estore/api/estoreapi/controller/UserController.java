@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> createUser(@RequestParam User user) {
+    public ResponseEntity<?> createUser(@RequestBody User user) {
         try {
             User newUser = userDAO.createUser(user);
             return new ResponseEntity<>(newUser, HttpStatus.CREATED);

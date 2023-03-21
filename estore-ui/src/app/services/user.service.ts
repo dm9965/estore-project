@@ -52,4 +52,8 @@ export class UserService {
 	isAdmin(): boolean {
 		return this.user.username.toLowerCase().includes("admin");
 	}
+
+	isLoggedIn(): boolean {
+		return this.user.username !== "Anonymous";
+	}
 }

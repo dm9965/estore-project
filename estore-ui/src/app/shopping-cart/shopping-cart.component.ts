@@ -1,27 +1,34 @@
-import { Component } from '@angular/core';
-import {Shoe} from "../ShoeInterface";
+import {Component, OnInit} from '@angular/core';
 import {CartService} from "../services/cart.service";
+import {Shoe} from "../ShoeInterface";
 
 @Component({
-  selector: 'app-shopping-cart',
-  templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+	selector: 'app-shopping-cart',
+	templateUrl: './shopping-cart.component.html',
+	styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent {
-	itemsInCart: Shoe[] = [];
-	totalCost: number = 0;
+export class ShoppingCartComponent implements OnInit {
 
-	constructor(private cartService: CartService) {
-		this.itemsInCart = cartService.getItems();
-		this.totalCost = cartService.getTotalCost(this.itemsInCart);
+	totalPrice: number = 0;
+	items: Shoe[] = [];
+
+	constructor(public cartService: CartService) {
 	}
 
-	removeItem(item: Shoe) {
-		this.cartService.removeItem(item);
+	ngOnInit() {
+		this.cartService.getTotalCost().subscribe((totalPrice) => {
+			this.totalPrice = totalPrice;
+		});
+		this.cartService.getItems().subscribe((items) => {
+			this.items = items;
+		});
 	}
 
-	checkout(){
+	removeItem(shoe: Shoe) {
+		this.cartService.removeItem(shoe);
 
+		// re-render the component
+		this.ngOnInit();
 	}
 
 }

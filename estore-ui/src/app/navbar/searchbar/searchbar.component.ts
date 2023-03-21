@@ -11,16 +11,13 @@ import {Shoe} from "../../ShoeInterface";
 	styleUrls: ['./searchbar.component.scss']
 })
 export class SearchbarComponent {
-	searchTerm: string = '' ;
+	searchTerm: string = '';
 	searchResults$: Observable<Shoe[]> | undefined;
-	constructor(private productService: ProductService, private router: Router) {}
 
-	searchShoes(term: string): void {
-		this.searchResults$ = this.productService.searchShoes(term);
-		this.searchResults$.subscribe((shoes: Shoe[]) => {
-			this.router.navigate(['/browse'], {queryParams: { blue : this.searchResults$ }
-			});
-		});
+	constructor(private productService: ProductService, private router: Router) {
 	}
 
+	searchShoes(term: string): void {
+		this.router.navigate(['/browse'], {queryParams: {query: term}}).then();
+	}
 }

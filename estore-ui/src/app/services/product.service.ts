@@ -80,10 +80,9 @@ export class ProductService {
 	/* GET shoes whose name contains search term */
 	searchShoes(term: string): Observable<Shoe[]> {
 		if (!term.trim()) {
-			// if not search term, return empty hero array.
 			return of([]);
 		}
-		const url = `${this.shoeURL}/browse/?query=${encodeURIComponent(term)}`;
+		const url = `${this.shoeURL}/search/?query=${encodeURIComponent(term)}`;
 		return this.http.get<Shoe[]>(url).pipe(
 			tap(x => x.length ?
 				this.log(`found shoes matching "${term}"`) :

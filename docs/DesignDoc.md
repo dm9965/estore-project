@@ -3,18 +3,14 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics._
-
 ## Team Information
-* Team name: TEAMNAME
+* Team name: Team 7
 * Team members
-  * MEMBER1
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Domenic Mangano
+  * Zach Kroesen
+  * Lucas Romero
+  * Uttam Bhattarai
+  * Connor Bastian
 
 ## Executive Summary
 
@@ -24,41 +20,42 @@ This is a summary of the project.
 > _Provide a very brief statement about the project and the most
 > important user group and user goals._
 
+The purpose of this project is to design the front and backend of a complete website. The website created is a shoe store in which the customer can browse various brands of sneakers and make purchases easily. The website has various features that makes the shopping experience better than competitors.
+
 ### Glossary and Acronyms
-> _Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
 | SPA | Single Page |
+| MVP | Minimal Viable Product |
+| DAO | Data Access Object |
 
 
 ## Requirements
 
-This section describes the features of the application.
-
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
 
 ### Definition of MVP
-> _Provide a simple description of the Minimum Viable Product._
+For the minimal viable product, there must be an authentication method and accessibility functionality. The user can browse the inventory as well as add and remove products from their shopping carts. The owner is not given access to the shopping carts and is given the information of admin to log in and receive admin access. 
 
 ### MVP Features
-> _Provide a list of top-level Epics and/or Stories of the MVP._
+* Log In/Out Application 
+* Username Assumption
+* Add/Remove From Shopping Cart
 
 ### Roadmap of Enhancements
 > _Provide a list of top-level features in the order you plan to consider them._
 
+* Admin Sign-In Process : Admin Authentication and Functionality
+* User Sign-In Process : User Authentication and Functionality
+* Add/Remove for Shopping Cart Process : Users can Add/Remove Items to Shopping Cart
+* Admin Shopping Cart Process : Admin Cannot Access Shopping Carts
+* User Shopping Cart Process : User Can View Items in Shopping Cart
 
 ## Application Domain
 
 This section describes the application domain.
 
 ![Domain Model](domain-model-placeholder.png)
-
-> _Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
 
 
 ## Architecture and Design
@@ -82,11 +79,9 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 
 ### Overview of User Interface
 
-This section describes the web interface flow; this is how the user views and interacts
-with the e-store application.
+This section describes the web interface flow; this is how the user views and interacts with the e-store application.
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
+The user is greeted by the homepage to the website where they can browse or login to retrieve previously stored data. There is a navigation bar, a set of highlighted products and deals as well as a set of highlighted brands. The user can then click on any button and be greeted by the appropriate page. When the user clicks on the navigation bar it will give descriptions of products for the user to choose from and narrow down their options. When the user clicks on a product it will show the name and price as well as all of the other respected details of the product. When the user decides to purchase the product it is placed in the shopping cart where the user can view all of their items. 
 
 
 ### View Tier
@@ -94,6 +89,8 @@ with the e-store application.
 > Describe the types of components in the tier and describe their
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
+
+In the View Tier UI the types of components in the tier refer to the various paths on the website. For example there is separation for the navigation bar, the entire homepage, shopping cart, etc. Their responsibilities are given by their names as each file was specifically named after it's purpose.
 
 > _You must also provide sequence diagrams as is relevant to a particular aspects 
 > of the design that you are describing.  For example, in e-store you might create a 
@@ -107,6 +104,8 @@ with the e-store application.
 > section will follow the same instructions that are given for the View
 > Tier above._
 
+The ViewModel Tier contains all of the DAO's. These are the interfaces for the files as they act as basic functions for every aspect of the website's functionality. For example, the ViewModel tier contains DAO's for the cart, shoe and user.
+
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
 
@@ -115,6 +114,8 @@ with the e-store application.
 > _Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
+
+The model tier stores all the appropriate data required for the website to function properly. The model contains all of the getters and basic functions of the user, shoe and cart files. The way this is structured is to include the MVP features for the branch as well as any additions we saw fit to improve the functionality of the website.
 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
@@ -126,25 +127,19 @@ with the e-store application.
 > addressed with design changes, and describe those suggested design
 > improvements._
 
+Design improvements that we would make if the project were to continue include 
+
 > _With the results from the Static Code Analysis exercise, 
 > discuss the resulting issues/metrics measurements along with your analysis
 > and recommendations for further improvements. Where relevant, include 
 > screenshots from the tool and/or corresponding source code that was flagged._
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
 
 ### Acceptance Testing
-> _Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
+
+All 35 test cases for various files passed and no errors were found. There were a few issues occurring prior to the completion of testing but they were quickly fixed. There are currently some methods that are still under construction that require testing, however they have not reached this point yet.
 
 ### Unit Testing and Code Coverage
-> _Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets. If there are any anomalies, discuss
-> those._
+
+For unit testing, the strategy was to cover every common case as well as the few select edge-cases. This strategy is very effective due to it's spanning possibilities in which there are no scenarios that will go untested. The code coverage went well as all tests passed and no anomalies occurred other than the git repository having a few errors later on.

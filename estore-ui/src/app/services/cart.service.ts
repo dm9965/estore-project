@@ -41,9 +41,9 @@ export class CartService {
 		);
 	}
 
-	getTotalCost(items: Shoe[]): number {
+	getTotalCost(): number {
 		let totalCost = 0;
-		for (const item of items) {
+		for (const item of this.items) {
 			totalCost += item.price;
 		}
 		return totalCost;

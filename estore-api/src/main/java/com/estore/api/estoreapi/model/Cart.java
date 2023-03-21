@@ -8,23 +8,14 @@ import java.util.ArrayList;
  * A class that represents a user's shopping cart
  */
 public class Cart {
+    @JsonProperty("username")
+    private String username;
+
     /**
      * All items in cart
      */
     @JsonProperty("items")
     private ArrayList<Shoe> items;
-
-    /**
-     * Total price of all shoes in the cart
-     */
-    @JsonProperty("id")
-    private int id;
-
-    /**
-     * The total cost of the cart
-     */
-    @JsonProperty("total")
-    private double total;
 
     public ArrayList<Shoe> getItems() {
         return items;
@@ -34,19 +25,11 @@ public class Cart {
         this.items = items;
     }
 
-    public int getId() {
-        return id;
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
-        this.total = total;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

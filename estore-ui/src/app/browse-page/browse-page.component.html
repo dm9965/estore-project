@@ -2,13 +2,15 @@
 	<h3 class="headerFont"> Browsing {{query}} Shoes</h3>
 </div>
 
-<!--<app-filter-menu></app-filter-menu>-->
+<app-filter-menu></app-filter-menu>
 
+<div class="constrained">
 <mat-grid-list cols="4" rowHeight="200px">
 	<mat-grid-tile *ngFor="let shoe of shoes">
 		<div matGridAvatar><img [src]="'https://dummyimage.com/100x100/000/fff&text='+shoe.style" alt="shoe image"></div>
 		<div>
 			<div matListItemTitle>{{shoe.brand}} {{shoe.style}}</div>
+			<div matListItemLine>{{shoe.sizing}}</div>
 			<div matListItemLine>{{shoe.material}} <strong>${{shoe.price}}</strong></div>
 			<button (click)="addToCart(shoe)" [class.disabled]="!isLoggedIn()" [matTooltip]="isLoggedIn() ? '' : 'Must be logged in to add to cart!'">
 				<mat-icon>add_shopping_cart</mat-icon>
@@ -16,3 +18,4 @@
 		</div>
 	</mat-grid-tile>
 </mat-grid-list>
+</div>

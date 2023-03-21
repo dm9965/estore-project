@@ -5,106 +5,53 @@
 <div class="main-box row">
 	<div class="button-box">
 		<span class="button-box">
-			<button (click)="addToggleDropDown()" class="green-button-style">Add Shoe</button>
-			<button (click)="editToggleDropDown()" class="blue-button-style">Edit Shoe</button>
+			<button (click)="openEditor()" class="green-button-style">Add Shoe</button>
 		</span>
 	</div>
-	<div *ngIf="isAddDropDownVisible" class="column">
+	<div *ngIf="editorMode != 'HIDDEN'" class="column">
 		<div class="input-column">
 			<span>
 				<label for="new-shoe-id">ID #:</label>
-				<input [(ngModel)]="newShoe.id" class="input" id="new-shoe-id" placeholder="Enter ID Number"/>
+				<input [(ngModel)]="shoeInEditor.id" class="input" id="new-shoe-id" placeholder="Enter ID Number"/>
 
 				<label for="new-shoe-brand"> Brand:</label>
-				<input #shoeBrand [(ngModel)]="newShoe.brand" class="input" id="new-shoe-brand" placeholder="Enter Brand Name"/>
+				<input [(ngModel)]="shoeInEditor.brand" class="input" id="new-shoe-brand" placeholder="Enter Brand Name"/>
 
 				<label for="new-shoe-style">Style:</label>
-				<input #shoeStyle [(ngModel)]="newShoe.style" class="input" id="new-shoe-style" placeholder="Enter Shoe Style"/>
+				<input [(ngModel)]="shoeInEditor.style" class="input" id="new-shoe-style" placeholder="Enter Shoe Style"/>
 
 				<label for="new-shoe-sizing">Sizing:</label>
-				<select [(ngModel)]="newShoe.sizing" class="dropdown-input" id="new-shoe-sizing">
-					<option [value]="mens">{{mens}}</option>
-					<option [value]="womens">{{womens}}</option>
-					<option [value]="kids">{{kids}}</option>
+				<select [(ngModel)]="shoeInEditor.sizing" class="dropdown-input" id="new-shoe-sizing">
+					<option value="Mens">Mens</option>
+					<option value="Womens">Womens</option>
+					<option value="Kids">Kids</option>
 				</select>
 			</span>
 			<span>
 				<label for="new-shoe-size">Size:</label>
-				<input #shoeSize [(ngModel)]="newShoe.size" class="input" id="new-shoe-size" placeholder="Enter Shoe Size"/>
+				<input [(ngModel)]="shoeInEditor.size" class="input" id="new-shoe-size" placeholder="Enter Shoe Size"/>
 
 				<label for="new-shoe-price">Price:</label>
-				<input #shoePrice [(ngModel)]="newShoe.price" class="input" id="new-shoe-price" placeholder="Enter Shoe Price"/>
+				<input [(ngModel)]="shoeInEditor.price" class="input" id="new-shoe-price" placeholder="Enter Shoe Price"/>
 
 				<label for="new-shoe-material">Material:</label>
-				<input #shoeMaterial [(ngModel)]="newShoe.material" class="input" id="new-shoe-material" placeholder="Enter Material"/>
+				<input [(ngModel)]="shoeInEditor.material" class="input" id="new-shoe-material" placeholder="Enter Material"/>
 
 				<label for="new-shoe-color">Color:</label>
-				<input #shoeColor [(ngModel)]="newShoe.color" class="input" id="new-shoe-color" placeholder="Enter Shoe Color"/>
+				<input [(ngModel)]="shoeInEditor.color" class="input" id="new-shoe-color" placeholder="Enter Shoe Color"/>
 			</span>
 		</div>
 		<ul class="create-shoe">
-			<li>
-				<span>ID#: {{newShoe.id}} | Brand: {{newShoe.brand}} |
-					Style: {{newShoe.style}} | Gender: {{newShoe.sizing}} | Size: {{newShoe.size}}
-					| Price: ${{newShoe.price}} | Material: {{newShoe.material}} | Color: {{newShoe.color}}
-				</span>
-			</li>
+			<button (click)="submitEditor()" class="green-button-style">Save</button>
 		</ul>
-		<button (click)="onAddSubmit(); addToggleDropDown()" class="green-button-style" type="button">
-			Add
-		</button>
-	</div>
-
-	<div *ngIf="isEditDropDownVisible" class="column">
-		<div class="input-column">
-			<span>
-				<label for="selected-shoe-id">ID #:</label>
-				<input type="text" [(ngModel)]="selectedShoe.id" (ngModelChange)="updateShoe()" class="input" id="selected-shoe-id" />
-
-				<label for="selected-shoe-brand"> Brand:</label>
-				<input type="text" [(ngModel)]="selectedShoe.brand" class="input" id="selected-shoe-brand" />
-
-				<label for="selected-shoe-style">Style:</label>
-				<input type="text" [(ngModel)]="selectedShoe.style" class="input" id="selected-shoe-style"/>
-
-				<select [(ngModel)]="selectedShoe.sizing" class="dropdown-input" id="selected-shoe-sizing">
-					<option [value]="mens">{{mens}}</option>
-					<option [value]="womens">{{womens}}</option>
-					<option [value]="kids">{{kids}}</option>
-				</select>
-			</span>
-			<span>
-				<label for="selected-shoe-size">Size:</label>
-				<input type="text" [(ngModel)]="selectedShoe.size" class="input" id="selected-shoe-size" />
-
-				<label for="selected-shoe-price">Price:</label>
-				<input type="text" [(ngModel)]="selectedShoe.price" class="input" id="selected-shoe-price" />
-
-				<label for="selected-shoe-material">Material:</label>
-				<input type="text" [(ngModel)]="selectedShoe.material" class="input" id="selected-shoe-material" />
-
-				<label for="selected-shoe-color">Color:</label>
-				<input type="text" [(ngModel)]="selectedShoe.color" class="input" id="selected-shoe-color" />
-			</span>
-		</div>
-		<ul class="create-shoe">
-			<li>
-				<span>ID#: {{selectedShoe.id}} | Brand: {{selectedShoe.brand}} |
-					Style: {{selectedShoe.style}} | Gender: {{selectedShoe.sizing}} | Size: {{selectedShoe.size}}
-					| Price: ${{selectedShoe.price}} | Material: {{selectedShoe.material}} | Color: {{selectedShoe.color}}
-				</span>
-			</li>
-		</ul>
-		<button (click)="onEditSubmit(); updateShoe(); editToggleDropDown()" class="blue-button-style" type="button">
-			Submit Edit
-		</button>
 	</div>
 
 	<div class="column-2">
 		<ul class="column-3">
-			<a *ngFor="let shoe of shoes; let index = index; trackBy: trackByIndex; " class="inline">
+			<a *ngFor="let shoe of shoes;" class="inline">
 					<span class="inline create-shoe">
 						{{shoe.id}} | {{shoe.brand}} | {{shoe.style}} | {{shoe.sizing}} {{shoe.size}} | {{shoe.price}} | {{shoe.material}} | {{shoe.color}}
+						<button (click)="openEditor(shoe)" class="update-button-style" title="Edit Shoe" type="button">Edit</button>
 						<button (click)="deleteShoe(shoe)" class="delete-button-style" title="Delete Shoe" type="button">Delete</button>
 					</span>
 			</a>

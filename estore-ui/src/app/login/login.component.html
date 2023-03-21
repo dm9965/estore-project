@@ -1,19 +1,21 @@
 <h1 class="headerFont"> Login </h1>
 
-<form class="form-container" #form="ngForm">
+<form class="form-container" [formGroup]="form" (ngSubmit)="submit()">
 	<div class="login-box">
+		<div *ngIf="errorMessage">{{errorMessage}}</div>
+
 		<span>
 			<label class="labelFont" for="username"> Username: </label>
-			<input #usernameInput class="input" id="username" placeholder="Enter Username" type='text'/>
-			<div *ngIf="!validateUsername()">Please enter a username</div>
+			<input class="input" id="username" placeholder="Enter Username" type='text' formControlName="username"/>
+			<!--			<div *ngIf="!validUsername()">Please enter a username</div>-->
 		</span>
 		<span>
 			<label class="labelFont" for="password"> Password: </label>
-			<input #passwordInput class="input" id="password" placeholder="Enter Password" type='password'/>
-			<div *ngIf="!validatePassword()"> Please enter a password</div>
+			<input class="input" id="password" placeholder="Enter Password" type='password' formControlName="password"/>
+			<!--			<div *ngIf="!validPassword()"> Please enter a password</div>-->
 		</span>
 		<span class="button-container">
-			<button class="login-button" (click)="onSubmit(form)">Login</button>
+			<button type="button" class="login-button" (click)="submit()">Login</button>
 		</span>
 	</div>
 </form>

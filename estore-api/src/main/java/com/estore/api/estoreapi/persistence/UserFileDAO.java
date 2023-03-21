@@ -117,7 +117,7 @@ public class UserFileDAO implements UserDAO {
         // readValue will throw an IOException if there's an issue with the file
         // or reading from the file
 
-        FlatFileOps.ensureDataFileExists(filename);
+        FlatFileOps.ensureDataFileExists(filename, "[{\"username\": \"admin\", \"password\": \"admin\"}]");
         User[] users = objectMapper.readValue(new File(filename), User[].class);
 
         // Add each shoe to the tree map and keep track of the greatest id

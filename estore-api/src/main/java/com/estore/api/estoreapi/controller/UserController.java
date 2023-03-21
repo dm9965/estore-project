@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("user")
@@ -39,18 +40,18 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody String username) {
+    public ResponseEntity<User> login(@RequestBody User fieldedUser) {
         try {
-            User user = userDAO.findByUsername(username);
+            User user = userDAO.findByUsername(fieldedUser.getUsername());
             if (user == null) {
-                User blankUser = new User();
-                blankUser.setUsername(username);
-                User newUser = userDAO.createUser(blankUser);
-                return new ResponseEntity<>(newUser, HttpStatus.OK);
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-            else {
-                return new ResponseEntity<>(user, HttpStatus.OK);
+
+            if (!Objects.equals(user.getPassword(), fieldedUser.getPassword())) {
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
             }
+
+            return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

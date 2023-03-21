@@ -9,7 +9,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {HomeComponent} from './home/home.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {MatInputModule} from "@angular/material/input";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SearchbarComponent} from './navbar/searchbar/searchbar.component';
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {BrandBarComponent} from './home/brand-bar/brand-bar.component';
@@ -53,7 +53,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 		MatIconModule,
 		HttpClientModule,
 		MatListModule,
-		MatSelectModule
+		MatSelectModule,
+		ReactiveFormsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

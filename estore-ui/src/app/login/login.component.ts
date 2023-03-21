@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../User";
 import {UserService} from "../services/user.service";
-import {NgForm} from "@angular/forms";
 import {Router} from "@angular/router";
+import {FormControl, FormGroup} from "@angular/forms";
+import {catchError} from "rxjs/operators";
+import {of} from "rxjs";
 
 @Component({
 	selector: 'app-login',
@@ -11,42 +13,42 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-	errorMessage: String = 'Login Error';
-	user: User = new User();
-	ngOnInit() {}
+	errorMessage: string | null = null;
+
+	form = new FormGroup({
+		username: new FormControl(),
+		password: new FormControl()
+	});
+
+	ngOnInit() {
+	}
+
 	constructor(private userService: UserService, private router: Router) {
 	}
 
-	onSubmit(form: NgForm) {
-		if (form.valid) {
-			this.user = new User();
-			this.user.username = form.value.username;
-			this.user.password = form.value.password;
+	submit() {
+		if (this.form.valid) {
+			let user = new User();
+			user.username = this.form.value.username;
+			user.password = this.form.value.password;
 
-			this.userService.createUser(this.user).subscribe(
-				(response: any) => {
-					console.log(response);
-					if (response === 'login successful') {
-						this.router.navigate(['/home']).then(r => true);
+			// Login the user if valid credentials, else show error message if observable sends error
+			this.userService.login(user).pipe(
+				catchError((error): any => {
+					let message = error.message.toString();
+					if (message.includes("404")) {
+						this.errorMessage = "Invalid username!";
+					} else if (message.includes("401")) {
+						this.errorMessage = "Invalid password!";
 					} else {
-						console.log('Error logging in: ', response);
-						this.errorMessage = response;
+						this.errorMessage = "An error occurred!";
 					}
-				},
-				(error) => {
-					console.log('Error logging in: ', error);
-					this.errorMessage = error;
-				}
-			);
-			this.userService.login(this.user);
+					return of(null);
+				})
+			).subscribe(
+				(user) => {
+					if (user) this.router.navigate(['/home']).then();
+				});
 		}
-	}
-
-	validateUsername(): boolean {
-		return this.user.getUsername() !== null;
-	}
-
-	validatePassword(): boolean {
-		return this.user.getPassword() !== null;
 	}
 }

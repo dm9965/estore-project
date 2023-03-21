@@ -13,16 +13,18 @@ export class UserService {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
 	private user: User = new User;
-	loginURL: string = 'http://localhost:8080/user/login'
+	loginURL: string = 'http://localhost:8080/user'
 
 	constructor(private http: HttpClient) {
 	}
 
 	login(user: User): Observable<User> {
 		console.log(user)
-		return this.http.post<User>(this.loginURL, user, this.httpOptions).pipe(
-			tap((user) => console.log(`created new user w/ username ${this.user.username}`)),
-			catchError(this.handleError<User>('login'))
+		return this.http.post<User>(this.loginURL+"/login", user, this.httpOptions).pipe(
+			tap((user) => {
+				console.log(`[user service] logged in with ${this.user.username}`);
+				this.user = user;
+			})
 		);
 	}
 

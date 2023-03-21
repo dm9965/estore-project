@@ -9,7 +9,6 @@ import {Shoe} from "../ShoeInterface";
 	styleUrls: ['./browse-page.component.scss']
 })
 export class BrowsePageComponent implements OnInit {
-	shoe: Shoe = new Shoe();
 	shoes: Shoe[] = [];
 
 	constructor(private productService: ProductService) {

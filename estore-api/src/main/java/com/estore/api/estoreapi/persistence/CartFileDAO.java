@@ -16,43 +16,46 @@ import java.util.logging.Logger;
 
 @Component
 public class CartFileDAO implements CartDAO {
-    private final ArrayList<Shoe> shoesInCart = new ArrayList<>();
-    public static int nextId;
     private static final Logger LOG = Logger.getLogger(CartFileDAO.class.getName());
     private final ObjectMapper objectMapper;
     private final String filename;
-    Map<Integer, Cart> cartMap = new HashMap<>();
-
+    Map<String, Cart> cartMap = new HashMap<>();
 
     public CartFileDAO(@Value("${dao.carts}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
-        load();  // load the heroes from the file
-    }
-
-
-    @Override
-    public void addToCart(Shoe shoe) throws IOException {
-        shoesInCart.add(shoe);
+        load();
     }
 
     @Override
-    public void removeFromCart(Shoe shoe) throws IOException {
-        shoesInCart.remove(shoe);
+    public void addToCart(String username, Shoe shoe) throws IOException {
+        Cart cart = standardCart(username);
+        cart.getItems().add(shoe);
     }
 
     @Override
-    public ArrayList<Shoe> getCart() throws IOException {
-        return shoesInCart;
+    public void removeFromCart(String username, Shoe shoe) throws IOException {
+        Cart cart = standardCart(username);
+        cart.getItems().remove(shoe);
     }
 
     @Override
-    public double getTotal() {
-        double total = 0;
-        for (Shoe shoe : shoesInCart) {
-            total += shoe.getPrice();
+    public Cart getCart(String username) throws IOException {
+        return standardCart(username);
+    }
+
+    private Cart standardCart(String username) throws IOException {
+        Cart cart = cartMap.get(username);
+
+        if (cart == null) {
+            cart = new Cart();
+            cart.setUsername(username);
+            cart.setItems(new ArrayList<>());
+            cartMap.put(username, cart);
         }
-        return total;
+
+        save();
+        return cart;
     }
 
     private boolean load() throws IOException {
@@ -63,13 +66,15 @@ public class CartFileDAO implements CartDAO {
         FlatFileOps.ensureDataFileExists(filename);
         Cart[] carts = objectMapper.readValue(new File(filename), Cart[].class);
 
-        // Add each shoe to the tree map and keep track of the greatest id
         for (Cart cart : carts) {
-            cartMap.put(cart.getId(), cart);
-            if (cart.getId() > nextId) nextId = cart.getId();
+            cartMap.put(cart.getUsername(), cart);
         }
-        // Make the next id one greater than the maximum from the file
-        ++nextId;
+
+        return true;
+    }
+
+    private boolean save() throws IOException {
+        objectMapper.writeValue(new File(filename), cartMap.values().toArray());
         return true;
     }
 }

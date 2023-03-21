@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class FlatFileOps {
 
-    public static void ensureDataFileExists(String fullPath) throws IOException {
+    public static void ensureDataFileExists(String fullPath, String starterJson) throws IOException {
         String[] pathSplit = fullPath.split("/");
         if (pathSplit.length > 1) {
             String directories = String.join("/", Arrays.copyOf(pathSplit, pathSplit.length - 1));
@@ -18,9 +18,13 @@ public class FlatFileOps {
         try {
             Path filePath = Paths.get(fullPath);
             Files.createFile(filePath);
-            Files.writeString(filePath, "[]");
+            Files.writeString(filePath, starterJson);
         } catch (FileAlreadyExistsException ignored) {
         }
+    }
+
+    public static void ensureDataFileExists(String fullPath) throws IOException {
+        ensureDataFileExists(fullPath, "[]");
     }
 
 }

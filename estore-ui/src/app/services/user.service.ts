@@ -1,29 +1,28 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../User";
 import {Observable, of} from "rxjs";
-import {Shoe} from "../ShoeInterface";
 import {catchError, tap} from "rxjs/operators";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class UserService {
 	httpOptions = {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
-	private user: User = new User;
+	private user: User = new User();
 	loginURL: string = 'http://localhost:8080/user'
 
 	constructor(private http: HttpClient) {
+		this.user.username = "Anonymous";
 	}
 
-	login(user: User): Observable<User> {
-		console.log(user)
-		return this.http.post<User>(this.loginURL+"/login", user, this.httpOptions).pipe(
-			tap((user) => {
-				console.log(`[user service] logged in with ${this.user.username}`);
-				this.user = user;
+	login(attemptedUser: User): Observable<User> {
+		return this.http.post<User>(this.loginURL + "/login", attemptedUser, this.httpOptions).pipe(
+			tap((actualUser) => {
+				console.log(`[user service] logged in with`, actualUser);
+				this.user = actualUser;
 			})
 		);
 	}

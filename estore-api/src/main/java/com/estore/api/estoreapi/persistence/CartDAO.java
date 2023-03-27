@@ -13,4 +13,8 @@ public interface CartDAO {
     void removeFromCart(String username, int shoeId) throws IOException;
 
     Cart getCart(String username) throws IOException;
+
+    void clearCart(String username) throws IOException;
+
+    double checkout(String username) throws IOException;
 }

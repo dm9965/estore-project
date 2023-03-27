@@ -83,4 +83,18 @@ export class CartService {
 			return of(result as T);
 		};
 	}
+
+	clearCart() {
+		let user = this.userService.getUser();
+		if (user.username == "Anonymous") {
+			return of(null);
+		}
+
+		const url = `${this.cartURL}/${user.username}`;
+		return this.http.delete<Shoe[]>(url, this.httpOptions)
+			.pipe(
+				tap(_ => console.log('Cart cleared')),
+				catchError(this.handleError<any>('clearCart'))
+			);
+	}
 }

@@ -2,7 +2,6 @@ package com.estore.api.estoreapi.persistence;
 
 import com.estore.api.estoreapi.model.Shoe;
 
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -50,6 +49,7 @@ public interface ShoeDAO {
      * @throws FileAlreadyExistsException if the given id conflicts with one within the DAO
      */
     Shoe createShoe(Shoe newShoe) throws IOException, FileAlreadyExistsException;
+
     /**
      * Updates the given shoe object within the DAO, given the shoe object to update
      * with it's corresponding id

@@ -1,13 +1,13 @@
 <h1 class="headerFont">Shopping Cart</h1>
 <div class="form-container">
 	<ul class="login-box">
-		<li class="items-in-cart-box" *ngFor="let item of itemsInCart">
-			{{ item.brand }} - {{ item.price | currency }}
+		<li *ngFor="let item of items" class="items-in-cart-box">
+			{{ item.brand }} {{item.style}} {{item.material}} - {{ item.price | currency }}
 			<button (click)="removeItem(item)">Remove</button>
 		</li>
-		<p class="labelFont">Total cost: {{ totalCost | currency }}</p>
+		<p class="labelFont">Total cost: {{ totalPrice | currency }}</p>
 		<span class="button-container">
-			<button class="checkout-button" type="submit">Checkout</button>
+			<button routerLink="/checkout" class="checkout-button" type="submit">Checkout</button>
 		</span>
 	</ul>
 </div>

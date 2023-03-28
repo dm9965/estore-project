@@ -5,11 +5,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class EstoreApiApplicationTests {
-	/*
-	 * Purpose of testing our product
-	 */
-	@Test
-	void contextLoads() {
-	}
+    /*
+     * Purpose of testing our product
+     */
+    @Test
+    void contextLoads() {
+    }
 
 }

@@ -3,8 +3,9 @@ export enum Sizing {
 	WOMENS = 'Womens',
 	KIDS = 'Kids'
 }
-	export function toString(sizing: Sizing): string {
-	switch(sizing) {
+
+export function toString(sizing: Sizing): string {
+	switch (sizing) {
 		case Sizing.MENS:
 			return 'Men\'s';
 		case Sizing.WOMENS:

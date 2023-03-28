@@ -1,6 +1,7 @@
 package com.estore.api.estoreapi.persistence;
 
 import com.estore.api.estoreapi.model.Cart;
+import com.estore.api.estoreapi.model.Order;
 import com.estore.api.estoreapi.model.Shoe;
 import com.estore.api.estoreapi.utils.FlatFileOps;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,10 +20,15 @@ public class CartFileDAO implements CartDAO {
     private static final Logger LOG = Logger.getLogger(CartFileDAO.class.getName());
     private final ObjectMapper objectMapper;
     private final String filename;
+
+    private final String orderName;
     Map<String, Cart> cartMap = new HashMap<>();
 
-    public CartFileDAO(@Value("${dao.carts}") String filename, ObjectMapper objectMapper) throws IOException {
+    public CartFileDAO(@Value("${dao.carts}") String filename,
+                       @Value("{dao.orders}") String orderName,
+                       ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
+        this.orderName = orderName;
         this.objectMapper = objectMapper;
         load();
     }
@@ -34,14 +40,33 @@ public class CartFileDAO implements CartDAO {
     }
 
     @Override
-    public void removeFromCart(String username, Shoe shoe) throws IOException {
+    public void removeFromCart(String username, int shoeId) throws IOException {
         Cart cart = standardCart(username);
-        cart.getItems().remove(shoe);
+        cart.getItems().removeIf(shoe -> shoe.getId() == shoeId);
     }
 
     @Override
     public Cart getCart(String username) throws IOException {
         return standardCart(username);
+    }
+
+    @Override
+    public void clearCart(String username) throws IOException {
+        Cart cart = getCart(username);
+        cart.getItems().clear();
+    }
+
+    @Override
+    public double checkout(String username) throws IOException {
+        double totalCost = 0;
+        Cart cart = getCart(username);
+        for (Shoe shoe: cart.getItems()) {
+            totalCost += shoe.getPrice();
+        }
+        Order order = new Order(username, cart.getItems(), totalCost);
+        saveOrder(order);
+        clearCart(username);
+        return totalCost;
     }
 
     private Cart standardCart(String username) throws IOException {
@@ -76,5 +101,9 @@ public class CartFileDAO implements CartDAO {
     private boolean save() throws IOException {
         objectMapper.writeValue(new File(filename), cartMap.values().toArray());
         return true;
+    }
+
+    private void saveOrder(Order order) throws IOException {
+        objectMapper.writeValue(new File(orderName), cartMap.values().toArray());
     }
 }

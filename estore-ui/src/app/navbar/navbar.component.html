@@ -1,21 +1,21 @@
 <mat-toolbar class="navbar-wrap navbar-style light-shadow">
 	<mat-toolbar-row class="navbar-style">
 
-		<a class="logo-spacing" href="/home">{{"7Shoes"}}</a>
+		<a class="logo-spacing" routerLink="/home">{{"7Shoes"}}</a>
 
-		<a href="/#new-arrivals" mat-button>New Arrivals</a>
-		<a href="/#mens" mat-button>Mens</a>
-		<a href="/#womens" mat-button>Womens</a>
-		<a href="/#kids" mat-button>Kids</a>
-		<a routerLink="/inventory" mat-button>Inventory</a>
+		<a [queryParams]="{query: 'New'}" mat-button routerLink="/browse">New Arrivals</a>
+		<a [queryParams]="{query: 'Mens'}" mat-button routerLink="/browse">Mens</a>
+		<a [queryParams]="{query: 'Womens'}" mat-button routerLink="/browse">Womens</a>
+		<a [queryParams]="{query: 'Kids'}" mat-button routerLink="/browse">Kids</a>
+		<a *ngIf="isAdmin()" mat-button routerLink="/inventory">Inventory</a>
 
 		<app-searchbar></app-searchbar>
 
-		<a routerLink="./home" mat-icon-button>
+		<a mat-icon-button routerLink="./home">
 			<mat-icon>home</mat-icon>
 		</a>
 
-		<a routerLink="/cart" mat-icon-button>
+		<a mat-icon-button routerLink="/cart">
 			<mat-icon>shopping_cart</mat-icon>
 		</a>
 

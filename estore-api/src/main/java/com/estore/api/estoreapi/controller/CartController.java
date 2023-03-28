@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOError;
 import java.io.IOException;
 
 @RestController
@@ -40,14 +41,35 @@ public class CartController {
         }
     }
 
-    @DeleteMapping("/{username}")
-    public ResponseEntity<Cart> removeItem(@PathVariable String username, @RequestBody Shoe shoe) {
+    @DeleteMapping("/{username}/{id}")
+    public ResponseEntity<Cart> removeItem(@PathVariable String username, @PathVariable int id) {
         try {
-            cartDAO.removeFromCart(username, shoe);
+            cartDAO.removeFromCart(username, id);
             Cart cart = cartDAO.getCart(username);
             return new ResponseEntity<>(cart, HttpStatus.OK);
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/{username}/{id}")
+    public ResponseEntity<String> clearCart(@PathVariable String username) {
+        try {
+            cartDAO.clearCart(username);
+            return new ResponseEntity<>("Cart successfully cleared.", HttpStatus.OK);
+        }
+        catch (IOException e) {
+            return new ResponseEntity<>("Error occurred while clearing cart", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/{username}/checkout")
+    public ResponseEntity<String> checkout(@PathVariable String username) {
+        try {
+            double totalCost = cartDAO.checkout(username);
+            return new ResponseEntity<>("Checkout completed successfully. Total cost: " + totalCost, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>("Failed to checkout: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -22,7 +22,10 @@ import {InventoryPageComponent} from './inventory-page/inventory-page.component'
 import {HttpClientModule} from "@angular/common/http";
 import {MatListModule} from "@angular/material/list";
 import {MatSelectModule} from "@angular/material/select";
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { CheckoutComponent } from './shopping-cart/checkout/checkout.component';
 
 @NgModule({
 	declarations: [
@@ -37,7 +40,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 		ProductPageComponent,
 		LoginComponent,
 		InventoryPageComponent,
-  		ShoppingCartComponent,
+		ShoppingCartComponent,
+  CheckoutComponent,
 	],
 
 	imports: [
@@ -54,7 +58,9 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 		HttpClientModule,
 		MatListModule,
 		MatSelectModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		MatGridListModule,
+		MatTooltipModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

@@ -11,4 +11,8 @@ export class NavbarComponent {
 	constructor(public userService: UserService) {
 	}
 
+	isAdmin() {
+		return this.userService.isAdmin();
+	}
+
 }

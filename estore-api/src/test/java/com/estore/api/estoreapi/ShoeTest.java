@@ -1,11 +1,12 @@
 package com.estore.api.estoreapi;
-import static com.estore.api.estoreapi.enums.Sizing.MENS;
-import static com.estore.api.estoreapi.enums.Sizing.WOMENS;
+
 import com.estore.api.estoreapi.enums.Sizing;
 import com.estore.api.estoreapi.model.Shoe;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import static com.estore.api.estoreapi.enums.Sizing.WOMENS;
 
 
 @Tag("Model-tier")

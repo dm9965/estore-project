@@ -17,11 +17,11 @@ import java.util.logging.Logger;
 
 @Component
 public class UserFileDAO implements UserDAO {
-    ArrayList<User> userList = new ArrayList<>();
     private static final Logger LOG = Logger.getLogger(CartFileDAO.class.getName());
+    final Map<String, User> userMap = new HashMap<>();
     private final ObjectMapper objectMapper;
     private final String filename;
-    final Map<String, User> userMap = new HashMap<>();
+    ArrayList<User> userList = new ArrayList<>();
 
     public UserFileDAO(@Value("${dao.users}") String filename, ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
@@ -125,6 +125,5 @@ public class UserFileDAO implements UserDAO {
             userMap.put(user.getUsername(), user);
         }
         // Make the next id one greater than the maximum from the file
-        return;
     }
 }

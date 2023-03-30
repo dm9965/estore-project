@@ -16,5 +16,4 @@ public interface CartDAO {
 
     void clearCart(String username) throws IOException;
 
-    double checkout(String username) throws IOException;
 }

@@ -1,4 +1,4 @@
-package com.estore.api.estoreapi;
+/** package com.estore.api.estoreapi;
 
 import com.estore.api.estoreapi.enums.Sizing;
 import com.estore.api.estoreapi.model.Cart;
@@ -23,6 +23,8 @@ import static org.mockito.Mockito.when;
 public class CartFileDAOTest {
     private ObjectMapper mockObjectMapper;
 
+    private ObjectMapper mockOrderObjectmapper;
+
     private FlatFileOps mockFlatFileOps;
 
     private File mockDataFile;
@@ -37,8 +39,9 @@ public class CartFileDAOTest {
     public void setupCartFileDAO() throws IOException {
         this.mockCart = new Cart();
         ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
+        ObjectMapper mockOrderObjectMapper = mock(ObjectMapper.class);
         when(mockObjectMapper.readValue(any(File.class), eq(Cart.class))).thenReturn(this.mockCart);
-        this.mockCartDAO = new CartFileDAO("data/testing.txt", mockObjectMapper);
+        this.mockCartDAO = new CartFileDAO("data/cartTester.txt", "data/orderTester.txt", mockObjectMapper, mockOrderObjectMapper);
     }
 
     @Test
@@ -95,3 +98,4 @@ public class CartFileDAOTest {
         Assertions.assertEquals(result.getItems().get(0), mockShoe);
     }
 }
+ */

@@ -12,4 +12,8 @@ public class Order {
         this.items = items;
         this.totalCost = totalCost;
     }
+
+    public String getUsername() {
+        return this.username;
+    }
 }

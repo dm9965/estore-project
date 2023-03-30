@@ -1,20 +1,21 @@
 import {Shoe} from "./ShoeInterface";
 import {CartService} from "./services/cart.service";
 import {Observable} from "rxjs";
+import {User} from "./User";
 
 export class Order {
-	username: string = '';
+	user: User = new User();
 	items: Shoe[] = [];
 	totalCost: number = 0;
 
-	constructor(username: string, items: Shoe[], totalCost: number) {
-		this.username = username;
+	constructor(user: User, items: Shoe[], totalCost: number) {
+		this.user = user;
 		this.items = items;
 		this.totalCost = totalCost;
 	}
 
 	getUsername(): string {
-		return this.username
+		return this.user.getUsername()
 	}
 	getItems(): Shoe[] {
 		return this.items;

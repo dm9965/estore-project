@@ -12,6 +12,7 @@ import {UserService} from "../services/user.service";
 })
 export class BrowsePageComponent implements OnInit {
 	shoes: Shoe[] = [];
+	shoe: Shoe = new Shoe();
 	query: string = "";
 
 	constructor(private productService: ProductService, private router: Router, private cartService: CartService, private userService: UserService) {
@@ -37,5 +38,9 @@ export class BrowsePageComponent implements OnInit {
 
 	isLoggedIn() {
 		return this.userService.isLoggedIn();
+	}
+
+	goToProductPage(): void {
+		this.router.navigateByUrl(`/product-page/${this.shoe.id}`);
 	}
 }

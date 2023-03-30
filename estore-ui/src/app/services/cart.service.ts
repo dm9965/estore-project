@@ -75,11 +75,6 @@ export class CartService {
 		);
 	}
 
-	getUsername(): string {
-		let user = this.userService.getUser();
-		return user.getUsername();
-	}
-
 	private handleError<T>(operation = 'operation', result?: T) {
 		return (error: any): Observable<T> => {
 			console.error(error); // log to console instead
@@ -88,18 +83,18 @@ export class CartService {
 			return of(result as T);
 		};
 	}
-
 	clearCart() {
 		let user = this.userService.getUser();
 		if (user.username == "Anonymous") {
-			return of(null);
+			return of([]);
 		}
-
-		const url = `${this.cartURL}/${user.username}`;
-		return this.http.delete<Shoe[]>(url, this.httpOptions)
-			.pipe(
-				tap(_ => console.log('Cart cleared')),
-				catchError(this.handleError<any>('clearCart failed'))
-			);
+		const url = `${this.cartURL}/${this.userService.getUser().username}/clear`;
+		return this.http.delete<Shoe[]>(url, this.httpOptions).pipe(
+			tap(_ => console.log(`Cleared cart`)),
+			catchError(this.handleError<Shoe[]>('clearCart'))
+		).subscribe(() => {
+			console.log("Cart cleared");
+		});
 	}
+
 }

@@ -1,7 +1,9 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Shoe} from "../ShoeInterface";
-import {HttpClient} from "@angular/common/http";
 import {CartService} from "../services/cart.service";
+import {ProductService} from "../services/product.service";
+import {Observable} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
 	selector: 'app-product-page',
@@ -9,21 +11,26 @@ import {CartService} from "../services/cart.service";
 	styleUrls: ['./product-page.component.scss']
 })
 export class ProductPageComponent implements OnInit {
-	@ViewChild('productInfoTemplate', {static: true})
-	productInfoTemplate!: TemplateRef<any>;
-	availableShoes: Shoe[] = [];
-	private shoeURL = 'http://localhost:8080/shoes';
 
-	constructor(private http: HttpClient, private cartService: CartService) {
-	}
+	shoe: Shoe = new Shoe();
+	query: string = "";
+
+	constructor(
+		public productService: ProductService,
+		public cartService: CartService,
+		public route: ActivatedRoute
+	) {}
 
 	addToCart(item: Shoe) {
 		this.cartService.addItem(item);
 	}
 
-	ngOnInit() {
-		this.http.get<Shoe[]>(this.shoeURL).subscribe(data => {
-			this.availableShoes = data;
+	ngOnInit(): void {
+		this.route.paramMap.subscribe(params => {
+			const shoeId = Number(params.get('id'));
+			this.productService.getShoeByID(shoeId).subscribe((data) => {
+				this.shoe = data;
+			});
 		});
 	}
 }

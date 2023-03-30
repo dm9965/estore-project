@@ -34,6 +34,7 @@ export class CheckoutComponent {
 			card.cardSecurityCode = this.checkoutForm.value.cardSecurityCode;
 		}
 		this.checkoutService.checkout();
+		this.cartService.clearCart();
 
 	}
 }

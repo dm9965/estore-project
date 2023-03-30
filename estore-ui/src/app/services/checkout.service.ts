@@ -13,20 +13,27 @@ import {UserService} from "./user.service";
 })
 export class CheckoutService {
 
-	private checkoutURL = 'http://localhost:8080/checkout'
+	private checkoutURL = 'http://localhost:8080/orders'
 
 	httpOptions = {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
-  	constructor(public httpClient: HttpClient, public userService: UserService) { }
+  	constructor(public httpClient: HttpClient, public userService: UserService, public cartService: CartService) { }
 
 	checkout(): Observable<Order> {
-		const url = `${this.checkoutURL}/${this.userService.getUser().username}`;
+		const url = `${this.checkoutURL}`;
+		const cartData = {
+			username: this.userService.getUser().username,
+			items: this.cartService.getItems(),
+			totalCost: this.cartService.getTotalCost()
+		};
+		this.cartService.clearCart();
 		console.log ("checkout service log")
-		return this.httpClient.post<Order>(url, this.httpOptions).pipe(
+		return this.httpClient.post<Order>(url, cartData, this.httpOptions).pipe(
 			tap(_ => console.log(`Order placed`)),
 			map(obj => (obj as any).items),
 			catchError(this.handleError<Order>('Error in order placement'))
+
 		);
 	}
 	private handleError<T>(operation = 'operation', result?: T) {
@@ -37,5 +44,7 @@ export class CheckoutService {
 			return of(result as T);
 		};
 	}
+
+
 
 }

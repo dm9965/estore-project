@@ -7,10 +7,10 @@
 	</div>
 
 	<div class="buttons">
-		<div class="shoe-info box_shadow">
-			<h1 class="product-name" id="productName"> Product Name </h1>
-			<h2 class="product-sizing" id=sizing> Product Sizing </h2>
-			<h3 class="product-price" id=price> Product Price </h3>
+		<div class="shoe-info box_shadow" [(ngModel)]="this.shoe">
+			<h1 class="product-name" id="productName" > {{shoe.style}} </h1>
+			<h2 class="product-sizing" id=sizing> {{shoe.sizing}} </h2>
+			<h3 class="product-price" id=price> {{shoe.price}} </h3>
 			<ul class="button-grid">
 				<li><a class="button" href="#">6.5</a></li>
 				<li><a class="button" href="#">7.0</a></li>
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 
-		<button class="add-to-cart box_shadow">
+		<button class="add-to-cart box_shadow" (click)="addToCart(this.shoe)">
 			Add to Cart
 		</button>
 		<button class="apple-pay apple-pay-button-black box_shadow">

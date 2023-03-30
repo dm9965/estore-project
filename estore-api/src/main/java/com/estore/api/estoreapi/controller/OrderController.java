@@ -37,8 +37,9 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("/{username}/checkout")
+    @PostMapping("/checkout/{username}")
     public ResponseEntity<String> checkout(@PathVariable String username) {
+        System.out.println("Console log for checkout method");
         try {
             Order order = orderDAO.checkout(username);
             return new ResponseEntity<>("Checkout completed successfully. Total cost: " + order, HttpStatus.OK);

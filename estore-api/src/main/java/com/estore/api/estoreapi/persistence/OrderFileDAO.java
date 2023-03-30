@@ -33,7 +33,7 @@ public class OrderFileDAO implements OrderDAO {
     }
     @Override
     public Order getOrder(String username) throws IOException {
-        return null;
+        return orderMap.get(username);
     }
     @Override
     public List<Order> getAllOrders() throws IOException {
@@ -66,6 +66,7 @@ public class OrderFileDAO implements OrderDAO {
     }
 
     private void saveOrder(Order order) throws IOException {
+        orderMap.put(order.getUsername(), order);
         orderObjectMapper.writeValue(new File(filename), orderMap.values().toArray());
     }
 }

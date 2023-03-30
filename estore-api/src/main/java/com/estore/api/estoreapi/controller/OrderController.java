@@ -11,11 +11,22 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("order")
+@RequestMapping("checkout")
 public class OrderController {
     private final OrderDAO orderDAO;
     public OrderController(OrderDAO orderDAO) {
         this.orderDAO = orderDAO;
+    }
+
+    @PostMapping("/{username}")
+    public ResponseEntity<String> checkout(@PathVariable String username) {
+        System.out.println("Console log for checkout method");
+        try {
+            Order order = orderDAO.checkout(username);
+            return new ResponseEntity<>("Checkout completed successfully. Total cost: " + order, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>("Failed to checkout: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/{username}")
@@ -37,14 +48,5 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("/checkout/{username}")
-    public ResponseEntity<String> checkout(@PathVariable String username) {
-        System.out.println("Console log for checkout method");
-        try {
-            Order order = orderDAO.checkout(username);
-            return new ResponseEntity<>("Checkout completed successfully. Total cost: " + order, HttpStatus.OK);
-        } catch (IOException e) {
-            return new ResponseEntity<>("Failed to checkout: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+
 }

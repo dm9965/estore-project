@@ -3,9 +3,7 @@ import { FormControl, FormGroup} from "@angular/forms";
 import {CheckoutService} from "../../services/checkout.service";
 import {Router} from "@angular/router";
 import {CartService} from "../../services/cart.service";
-import {User} from "../../User";
 import {Creditcard} from "../../creditcard";
-import {catchError} from "rxjs/operators";
 
 @Component({
   selector: 'app-checkout',
@@ -35,5 +33,7 @@ export class CheckoutComponent {
 			card.cardExpiration = this.checkoutForm.value.cardExpiration;
 			card.cardSecurityCode = this.checkoutForm.value.cardSecurityCode;
 		}
+		this.checkoutService.checkout();
+
 	}
 }

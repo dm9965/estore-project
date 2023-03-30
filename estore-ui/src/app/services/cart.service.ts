@@ -75,6 +75,11 @@ export class CartService {
 		);
 	}
 
+	getUsername(): string {
+		let user = this.userService.getUser();
+		return user.getUsername();
+	}
+
 	private handleError<T>(operation = 'operation', result?: T) {
 		return (error: any): Observable<T> => {
 			console.error(error); // log to console instead
@@ -94,7 +99,7 @@ export class CartService {
 		return this.http.delete<Shoe[]>(url, this.httpOptions)
 			.pipe(
 				tap(_ => console.log('Cart cleared')),
-				catchError(this.handleError<any>('clearCart'))
+				catchError(this.handleError<any>('clearCart failed'))
 			);
 	}
 }

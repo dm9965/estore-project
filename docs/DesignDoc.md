@@ -55,7 +55,7 @@ For the minimal viable product, there must be an authentication method and acces
 
 This section describes the application domain.
 
-![Domain Model](docs/Domain-Analysis-Model.png)
+![Domain Model](Domain-Analysis-Model.png)
 
 
 ## Architecture and Design

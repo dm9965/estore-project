@@ -20,21 +20,18 @@ export class CheckoutService {
 	};
   	constructor(public httpClient: HttpClient, public userService: UserService, public cartService: CartService) { }
 
-	checkout(): Observable<Order> {
+	checkout() {
 		const url = `${this.checkoutURL}`;
 		const cartData = {
 			username: this.userService.getUser().username,
 			items: this.cartService.getItems(),
 			totalCost: this.cartService.getTotalCost()
 		};
-		this.cartService.clearCart();
-		console.log ("checkout service log")
 		return this.httpClient.post<Order>(url, cartData, this.httpOptions).pipe(
-			tap(_ => console.log(`Order placed`)),
-			map(obj => (obj as any).items),
 			catchError(this.handleError<Order>('Error in order placement'))
-
-		);
+		).subscribe( () => {
+			console.log("Checkout successful");
+		});
 	}
 	private handleError<T>(operation = 'operation', result?: T) {
 		return (error: any): Observable<T> => {
@@ -44,7 +41,4 @@ export class CheckoutService {
 			return of(result as T);
 		};
 	}
-
-
-
 }

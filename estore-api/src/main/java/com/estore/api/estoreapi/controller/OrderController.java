@@ -11,14 +11,14 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("checkout")
+@RequestMapping("orders")
 public class OrderController {
     private final OrderDAO orderDAO;
     public OrderController(OrderDAO orderDAO) {
         this.orderDAO = orderDAO;
     }
 
-    @PostMapping("/{username}")
+    @PostMapping("/orders/{username}")
     public ResponseEntity<String> checkout(@PathVariable String username) {
         System.out.println("Console log for checkout method");
         try {

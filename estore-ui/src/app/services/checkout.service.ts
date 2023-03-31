@@ -3,10 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CartService} from "./cart.service";
 import {Observable, of} from "rxjs";
 import {Order} from "../Order";
-import {Shoe} from "../ShoeInterface";
-import {catchError, map, tap} from "rxjs/operators";
+import {catchError} from "rxjs/operators";
 import {UserService} from "./user.service";
-
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +19,12 @@ export class CheckoutService {
   	constructor(public httpClient: HttpClient, public userService: UserService, public cartService: CartService) { }
 
 	checkout() {
-		const url = `${this.checkoutURL}`;
+		const url = `${this.checkoutURL}/${this.userService.getUser().username}`;
 		const cartData = {
-			username: this.userService.getUser().username,
 			items: this.cartService.getItems(),
-			totalCost: this.cartService.getTotalCost()
-		};
+			total: this.cartService.getTotalCost()
+		}
+		// checkout method creates new order and empties the cart
 		return this.httpClient.post<Order>(url, cartData, this.httpOptions).pipe(
 			catchError(this.handleError<Order>('Error in order placement'))
 		).subscribe( () => {

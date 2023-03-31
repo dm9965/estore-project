@@ -88,7 +88,7 @@ export class CartService {
 		if (user.username == "Anonymous") {
 			return of([]);
 		}
-		const url = `${this.cartURL}/${this.userService.getUser().username}/clear`;
+		const url = `${this.cartURL}/${this.userService.getUser().username}`;
 		return this.http.delete<Shoe[]>(url, this.httpOptions).pipe(
 			tap(_ => console.log(`Cleared cart`)),
 			catchError(this.handleError<Shoe[]>('clearCart'))

@@ -49,7 +49,9 @@ public class CartFileDAO implements CartDAO {
     @Override
     public void clearCart(String username) throws IOException {
         Cart cart = getCart(username);
-        cart.getItems().clear();
+        for (Shoe shoe : cart.getItems()){
+            removeFromCart(username, shoe.getId());
+        }
     }
 
     private Cart standardCart(String username) throws IOException {

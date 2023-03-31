@@ -23,9 +23,8 @@ public class OrderFileDAO implements OrderDAO {
 
     Map<String, Order> orderMap = new HashMap<>();
 
-    public OrderFileDAO(@Value("{data/orders.json}") String filename,
-                       ObjectMapper orderObjectMapper,
-                        CartDAO cartDAO)throws IOException {
+    public OrderFileDAO(@Value("${dao.orders}") String filename,
+                       ObjectMapper orderObjectMapper, CartDAO cartDAO)throws IOException {
         this.cartDAO = cartDAO;
         this.filename = filename;
         this.orderObjectMapper = orderObjectMapper;
@@ -48,6 +47,7 @@ public class OrderFileDAO implements OrderDAO {
             totalCost += shoe.getPrice();
         }
         Order order = new Order(username, cart.getItems(), totalCost);
+        orderMap.put(order.getUsername(), order);
         saveOrder(order);
         cartDAO.clearCart(username);
         return order;
@@ -66,7 +66,6 @@ public class OrderFileDAO implements OrderDAO {
     }
 
     private void saveOrder(Order order) throws IOException {
-        orderMap.put(order.getUsername(), order);
         orderObjectMapper.writeValue(new File(filename), orderMap.values().toArray());
     }
 }

@@ -24,11 +24,17 @@ export class ShoppingCartComponent implements OnInit {
 		});
 	}
 
-	removeItem(shoe: Shoe) {
+	async removeItem(shoe: Shoe) {
 		this.cartService.removeItem(shoe);
+
+		await this.delay(150);
 
 		// re-render the component
 		this.ngOnInit();
+	}
+
+	private delay(ms: number) {
+		return new Promise(resolve => setTimeout(resolve, ms));
 	}
 
 }

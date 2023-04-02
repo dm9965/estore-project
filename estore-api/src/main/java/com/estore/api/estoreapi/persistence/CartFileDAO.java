@@ -1,7 +1,6 @@
 package com.estore.api.estoreapi.persistence;
 
 import com.estore.api.estoreapi.model.Cart;
-import com.estore.api.estoreapi.model.Order;
 import com.estore.api.estoreapi.model.Shoe;
 import com.estore.api.estoreapi.utils.FlatFileOps;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +22,7 @@ public class CartFileDAO implements CartDAO {
     Map<String, Cart> cartMap = new HashMap<>();
 
     public CartFileDAO(@Value("${dao.carts}") String filename,
-                       ObjectMapper objectMapper)throws IOException {
+                       ObjectMapper objectMapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectMapper;
         load();
@@ -33,12 +32,14 @@ public class CartFileDAO implements CartDAO {
     public void addToCart(String username, Shoe shoe) throws IOException {
         Cart cart = standardCart(username);
         cart.getItems().add(shoe);
+        save();
     }
 
     @Override
     public void removeFromCart(String username, int shoeId) throws IOException {
         Cart cart = standardCart(username);
         cart.getItems().removeIf(shoe -> shoe.getId() == shoeId);
+        save();
     }
 
     @Override
@@ -49,9 +50,8 @@ public class CartFileDAO implements CartDAO {
     @Override
     public void clearCart(String username) throws IOException {
         Cart cart = getCart(username);
-        for (Shoe shoe : cart.getItems()){
-            removeFromCart(username, shoe.getId());
-        }
+        cart.getItems().clear();
+        save();
     }
 
     private Cart standardCart(String username) throws IOException {

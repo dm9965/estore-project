@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+
 @Component
 public class OrderFileDAO implements OrderDAO {
     private static final Logger LOG = Logger.getLogger(OrderFileDAO.class.getName());
@@ -24,16 +25,18 @@ public class OrderFileDAO implements OrderDAO {
     Map<String, Order> orderMap = new HashMap<>();
 
     public OrderFileDAO(@Value("${dao.orders}") String filename,
-                       ObjectMapper orderObjectMapper, CartDAO cartDAO)throws IOException {
+                        ObjectMapper orderObjectMapper, CartDAO cartDAO) throws IOException {
         this.cartDAO = cartDAO;
         this.filename = filename;
         this.orderObjectMapper = orderObjectMapper;
         load();
     }
+
     @Override
     public Order getOrder(String username) throws IOException {
         return orderMap.get(username);
     }
+
     @Override
     public List<Order> getAllOrders() throws IOException {
         return null;
@@ -43,7 +46,7 @@ public class OrderFileDAO implements OrderDAO {
     public Order checkout(String username) throws IOException {
         double totalCost = 0;
         Cart cart = cartDAO.getCart(username);
-        for (Shoe shoe: cart.getItems()) {
+        for (Shoe shoe : cart.getItems()) {
             totalCost += shoe.getPrice();
         }
         Order order = new Order(username, cart.getItems(), totalCost);

@@ -25,7 +25,9 @@ import {MatSelectModule} from "@angular/material/select";
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import { CheckoutComponent } from './shopping-cart/checkout/checkout.component';
+import {CheckoutComponent} from './shopping-cart/checkout/checkout.component';
+import {ToastrModule} from 'ngx-toastr';
+
 
 @NgModule({
 	declarations: [
@@ -41,7 +43,7 @@ import { CheckoutComponent } from './shopping-cart/checkout/checkout.component';
 		LoginComponent,
 		InventoryPageComponent,
 		ShoppingCartComponent,
-  CheckoutComponent,
+		CheckoutComponent,
 	],
 
 	imports: [
@@ -60,7 +62,10 @@ import { CheckoutComponent } from './shopping-cart/checkout/checkout.component';
 		MatSelectModule,
 		ReactiveFormsModule,
 		MatGridListModule,
-		MatTooltipModule
+		MatTooltipModule,
+		ToastrModule.forRoot({
+			positionClass: 'toast-bottom-right',
+		})
 	],
 	providers: [],
 	bootstrap: [AppComponent]

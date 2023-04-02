@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../User";
 import {Observable, of} from "rxjs";
 import {catchError, tap} from "rxjs/operators";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
 	providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
 	loginURL: string = 'http://localhost:8080/user'
 	private user: User = new User();
 
-	constructor(private http: HttpClient) {
+	constructor(private http: HttpClient, private toastr: ToastrService) {
 		console.log("Started user script");
 		if (this.getCookie("username")) {
 			this.user.username = this.getCookie("username") || "";
@@ -29,11 +30,15 @@ export class UserService {
 				console.log(`[user service] logged in with`, actualUser);
 				this.user = actualUser;
 				this.setCookie("username", actualUser.username);
+				this.toastr.success(`Logged in successfully as ${actualUser.username}`);
 			})
 		);
 	}
 
 	logout(): void {
+		if (!this.isLoggedIn()) {
+			this.toastr.success(`Logged out successfully`);
+		}
 		this.user = new User();
 		this.user.username = "Anonymous";
 		this.setCookie("username", "");

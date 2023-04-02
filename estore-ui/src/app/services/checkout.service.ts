@@ -5,6 +5,7 @@ import {Observable, of} from "rxjs";
 import {Order} from "../Order";
 import {catchError} from "rxjs/operators";
 import {UserService} from "./user.service";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
 	providedIn: 'root'
@@ -17,7 +18,7 @@ export class CheckoutService {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
 
-	constructor(public httpClient: HttpClient, public userService: UserService, public cartService: CartService) {
+	constructor(public httpClient: HttpClient, public userService: UserService, public cartService: CartService, private toastr: ToastrService) {
 	}
 
 	checkout() {
@@ -31,6 +32,7 @@ export class CheckoutService {
 			catchError(this.handleError<Order>('Error in order placement'))
 		).subscribe(order => {
 			console.log(`Checkout successful: ${order.totalCost}`);
+			this.toastr.success(`Checkout successful! Total cost: ${order.totalCost}`);
 		});
 	}
 

@@ -4,6 +4,7 @@ import {Shoe} from "../ShoeInterface";
 import {Observable, of} from "rxjs";
 import {catchError, map, tap} from "rxjs/operators";
 import {UserService} from "./user.service";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
 	providedIn: 'root'
@@ -14,7 +15,7 @@ export class CartService {
 	};
 	private cartURL = 'http://localhost:8080/cart';  // URL to web api
 
-	constructor(public http: HttpClient, public userService: UserService) {
+	constructor(public http: HttpClient, public userService: UserService, private toastr: ToastrService) {
 	}
 
 	getItems(): Observable<Shoe[]> {
@@ -42,6 +43,7 @@ export class CartService {
 			catchError(this.handleError<Shoe>('addShoe'))
 		).subscribe(() => {
 			console.log("Added shoe to cart");
+			this.toastr.success(`Added shoe to cart!`);
 		});
 	}
 
@@ -57,6 +59,7 @@ export class CartService {
 			catchError(this.handleError<Shoe>('Remove Shoe'))
 		).subscribe(() => {
 			console.log("Removed shoe from cart");
+			this.toastr.success(`Removed shoe to cart!`);
 		});
 	}
 
@@ -83,6 +86,7 @@ export class CartService {
 			return of(result as T);
 		};
 	}
+
 	clearCart() {
 		let user = this.userService.getUser();
 		if (user.username == "Anonymous") {

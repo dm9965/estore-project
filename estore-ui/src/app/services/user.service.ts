@@ -36,7 +36,7 @@ export class UserService {
 	}
 
 	logout(): void {
-		if (!this.isLoggedIn()) {
+		if (this.isLoggedIn()) {
 			this.toastr.success(`Logged out successfully`);
 		}
 		this.user = new User();

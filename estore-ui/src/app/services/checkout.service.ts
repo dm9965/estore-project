@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CartService} from "./cart.service";
 import {Observable, of} from "rxjs";
@@ -7,7 +7,7 @@ import {catchError} from "rxjs/operators";
 import {UserService} from "./user.service";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class CheckoutService {
 
@@ -16,7 +16,9 @@ export class CheckoutService {
 	httpOptions = {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
-  	constructor(public httpClient: HttpClient, public userService: UserService, public cartService: CartService) { }
+
+	constructor(public httpClient: HttpClient, public userService: UserService, public cartService: CartService) {
+	}
 
 	checkout() {
 		const url = `${this.checkoutURL}/${this.userService.getUser().username}`;
@@ -27,10 +29,11 @@ export class CheckoutService {
 		// checkout method creates new order and empties the cart
 		return this.httpClient.post<Order>(url, cartData, this.httpOptions).pipe(
 			catchError(this.handleError<Order>('Error in order placement'))
-		).subscribe( () => {
-			console.log("Checkout successful");
+		).subscribe(order => {
+			console.log(`Checkout successful: ${order.totalCost}`);
 		});
 	}
+
 	private handleError<T>(operation = 'operation', result?: T) {
 		return (error: any): Observable<T> => {
 			console.error(error); // log to console instead

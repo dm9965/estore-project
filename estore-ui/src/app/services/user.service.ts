@@ -45,10 +45,19 @@ export class UserService {
 	}
 
 	createUser(user: User): Observable<User> {
-		return this.http.post<User>(this.loginURL, user, this.httpOptions).pipe(
-			tap((user) => console.log(`created new user w/ username ${this.user.username}`)),
-			catchError(this.handleError<User>('createUser'))
-		);
+		return new Observable<User>((observer) => {
+			this.http.post<User>(this.loginURL + "/create", user, this.httpOptions).subscribe(
+				(user) => {
+					console.log(`created new user w/ username ${user.username}`);
+					observer.next(user);
+					observer.complete();
+				},
+				(error) => {
+					console.error('Error creating user', error);
+					observer.error(error);
+				}
+			);
+		});
 	}
 
 	getUser(): User {

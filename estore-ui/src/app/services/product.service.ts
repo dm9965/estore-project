@@ -23,7 +23,7 @@ export class ProductService {
 		const url = `${this.shoeURL}/all`;
 		return this.http.get<Shoe[]>(url)
 			.pipe(
-				tap(_ => this.log('fetched heroes')),
+				tap(_ => this.log('fetched shoes')),
 				catchError(this.handleError<Shoe[]>('getShoes', []))
 			);
 	}

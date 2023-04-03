@@ -8,6 +8,7 @@
 		<a [queryParams]="{query: 'Womens'}" mat-button routerLink="/browse">Womens</a>
 		<a [queryParams]="{query: 'Kids'}" mat-button routerLink="/browse">Kids</a>
 		<a *ngIf="isAdmin()" mat-button routerLink="/inventory">Inventory</a>
+		<a *ngIf="isAdmin()" mat-button routerLink="/orders">Orders</a>
 
 		<app-searchbar></app-searchbar>
 

@@ -3,9 +3,10 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CartService} from "./cart.service";
 import {Observable, of} from "rxjs";
 import {Order} from "../Order";
-import {catchError} from "rxjs/operators";
+import {catchError, tap} from "rxjs/operators";
 import {UserService} from "./user.service";
 import {ToastrService} from "ngx-toastr";
+import {Shoe} from "../ShoeInterface";
 
 @Injectable({
 	providedIn: 'root'
@@ -19,6 +20,22 @@ export class CheckoutService {
 	};
 
 	constructor(public httpClient: HttpClient, public userService: UserService, public cartService: CartService, private toastr: ToastrService) {
+	}
+
+	getAllOrders(): Observable<Order[]> {
+		const url = `${this.checkoutURL}/all`;
+		return this.httpClient.get<Order[]>(url).pipe(
+			tap(_ => console.log('Orders successfully pulled')),
+			catchError(this.handleError<Order[]>('getAllOrders', []))
+		);
+	}
+
+	getOrderItems(): Observable<Order> {
+		const url = `${this.checkoutURL}/${this.userService.getUser().username}`;
+		return this.httpClient.get<Order>(url).pipe(
+			tap(_ => console.log('Pulled items for customer order')),
+			catchError(this.handleError<Order>('get order items'))
+		);
 	}
 
 	checkout() {

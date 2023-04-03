@@ -1,0 +1,20 @@
+<div class="headerFont">
+	Orders
+</div>
+<div class="flex-box">
+	<div class="column-2">
+		<ul class="column-3">
+			<a *ngFor="let order of orders" class="inline">
+				<span class="inline create-shoe">
+					{{order.username}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+					<ul>
+						<li *ngFor="let item of order.items">
+							{{item.brand}} {{item.style}} - ${{item.price}}
+						</li>
+					</ul>
+					&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp; ${{order.totalCost}}
+				</span>
+			</a>
+		</ul>
+	</div>
+</div>

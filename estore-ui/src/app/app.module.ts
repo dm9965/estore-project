@@ -30,6 +30,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {MatRadioModule} from "@angular/material/radio";
 import { AllshoesComponent } from './home/allshoes/allshoes.component';
 import { SignupComponent } from './login/signup/signup.component';
+import { OrdersComponent } from './orders/orders.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { SignupComponent } from './login/signup/signup.component';
 		CheckoutComponent,
   AllshoesComponent,
   SignupComponent,
+  OrdersComponent,
 	],
 
     imports: [

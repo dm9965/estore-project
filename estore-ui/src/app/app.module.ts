@@ -28,6 +28,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {CheckoutComponent} from './shopping-cart/checkout/checkout.component';
 import {ToastrModule} from 'ngx-toastr';
 import {MatRadioModule} from "@angular/material/radio";
+import { AllshoesComponent } from './home/allshoes/allshoes.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import {MatRadioModule} from "@angular/material/radio";
 		InventoryPageComponent,
 		ShoppingCartComponent,
 		CheckoutComponent,
+  AllshoesComponent,
 	],
 
     imports: [

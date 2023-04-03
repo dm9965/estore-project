@@ -7,47 +7,99 @@
 				</div>
 				<div class="filter-menu" tabindex="-1">
 					<ul class="ul-style filter-menu">
+						<div class="ul-style filter-menu">
 						<li class="filter-menu-item">
-							<button class="filter-title" id="gender1"> Gender
+							<button (click)="toggleGenderList()" class="filter-title" id="gender1"> Gender
 								<span>&nbsp;</span>
 								<span class="Icon">
 									<span class="Icon">&#43;</span>
 								</span>
 							</button>
 						</li>
+							<ul class="filter-options" *ngIf="showGenderOptions">
+								<mat-radio-button>Mens</mat-radio-button>
+								<mat-radio-button>Womens</mat-radio-button>
+								<mat-radio-button>Kids</mat-radio-button>
+							</ul>
+						</div>
+						<div class="ul-style filter-menu">
 						<li class="filter-menu-item">
-							<button class="filter-title" id="Brand"> Brand
+							<button (click)="toggleBrandList()" class="filter-title" id="Brand"> Brand
 								<span>&nbsp;&nbsp;&nbsp;</span>
 								<span class="Icon">
 									<span class="Icon">&#43;</span>
 								</span>
 							</button>
 						</li>
+							<ul class="filter-options" *ngIf="showBrandOptions">
+								<mat-radio-button>Nike</mat-radio-button>
+								<mat-radio-button>Adidas</mat-radio-button>
+								<mat-radio-button>Jordan</mat-radio-button>
+								<mat-radio-button>New Balance</mat-radio-button>
+								<mat-radio-button>Ugg</mat-radio-button>
+							</ul>
+						</div>
+						<div class="ul-style filter-menu">
 						<li class="filter-menu-item">
-							<button class="filter-title" id="Size1"> Size
+							<button (click)="toggleSizingList()" class="filter-title" id="Size1"> Size
 								<span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 								<span class="Icon">
 									<span class="Icon">&#43;</span>
 								</span>
 							</button>
 						</li>
+							<mat-grid-list class="filter-options" *ngIf="showSizingOptions">
+								<mat-radio-button>6.5</mat-radio-button>
+								<mat-radio-button>7</mat-radio-button>
+								<mat-radio-button>7.5</mat-radio-button>
+								<mat-radio-button>8</mat-radio-button>
+								<mat-radio-button>8.5</mat-radio-button>
+								<mat-radio-button>9</mat-radio-button>
+								<mat-radio-button>9.5</mat-radio-button>
+								<mat-radio-button>10</mat-radio-button>
+								<mat-radio-button>10.5</mat-radio-button>
+								<mat-radio-button>11</mat-radio-button>
+								<mat-radio-button>11.5</mat-radio-button>
+								<mat-radio-button>12</mat-radio-button>
+							</mat-grid-list>
+						</div>
+						<div class="ul-style filter-menu">
 						<li class="filter-menu-item">
-							<button class="filter-title" id="Color1"> Color
+							<button (click)="toggleColorList()" class="filter-title" id="Color1"> Color
 								<span> &nbsp;&nbsp;&nbsp; </span>
 								<span class="Icon">
 									<span class="Icon">&#43;</span>
 								</span>
 							</button>
 						</li>
+							<ul class="filter-options" *ngIf="showColorOptions">
+								<mat-radio-button>White</mat-radio-button>
+								<mat-radio-button>Black</mat-radio-button>
+								<mat-radio-button>Red</mat-radio-button>
+								<mat-radio-button>Blue</mat-radio-button>
+								<mat-radio-button>Brown</mat-radio-button>
+								<mat-radio-button>Grey</mat-radio-button>
+								<mat-radio-button>Green</mat-radio-button>
+							</ul>
+						</div>
+						<div class="ul-style filter-menu">
 						<li class="filter-menu-item">
-							<button class="filter-title" id="Price"> Price
+							<button (click)="togglePriceList()" class="filter-title" id="Price"> Price
 								<span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>
 								<span class="Icon">
 									<span class="expand-sign Icon">&#43;</span>
 								</span>
 							</button>
 						</li>
-
+								<ul class="filter-options" *ngIf="showPriceOptions">
+									<mat-radio-button>$0 - $49.99</mat-radio-button>
+									<mat-radio-button>$50 - $99.99</mat-radio-button>
+									<mat-radio-button>$100 - $149.99</mat-radio-button>
+									<mat-radio-button>$150 - $199.99</mat-radio-button>
+									<mat-radio-button>$200 - $249.99</mat-radio-button>
+									<mat-radio-button>$250+ </mat-radio-button>
+								</ul>
+						</div>
 					</ul>
 				</div>
 			</nav>

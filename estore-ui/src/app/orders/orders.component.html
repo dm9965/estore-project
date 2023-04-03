@@ -7,11 +7,11 @@
 			<a *ngFor="let order of orders" class="inline">
 				<span class="inline create-shoe">
 					{{order.username}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
-					<ul>
+					<ol>
 						<li *ngFor="let item of order.items">
 							{{item.brand}} {{item.style}} - ${{item.price}}
 						</li>
-					</ul>
+					</ol>
 					&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp; ${{order.totalCost}}
 				</span>
 			</a>

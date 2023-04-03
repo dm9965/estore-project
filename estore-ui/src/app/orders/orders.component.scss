@@ -33,6 +33,7 @@
 	justify-content: flex-start;
 	width: 100%;
 	font-size: 20px;
+	margin-bottom: 1rem;
 }
 
 .blue-button-style {
@@ -66,7 +67,9 @@
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
-
+.list-items {
+	margin-top: 2rem;
+}
 
 .headerFont {
 	align-items: center;

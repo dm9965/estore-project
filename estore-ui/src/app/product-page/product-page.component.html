@@ -7,8 +7,8 @@
 	</div>
 
 	<div class="buttons">
-		<div class="shoe-info box_shadow" [(ngModel)]="this.shoe">
-			<h1 class="product-name" id="productName" > {{shoe.style}} </h1>
+		<div [(ngModel)]="this.shoe" class="shoe-info box_shadow">
+			<h1 class="product-name" id="productName"> {{shoe.style}} </h1>
 			<h2 class="product-sizing" id=sizing> {{shoe.sizing}} </h2>
 			<h3 class="product-price" id=price> {{shoe.price}} </h3>
 			<ul class="button-grid">
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 
-		<button class="add-to-cart box_shadow" (click)="addToCart(this.shoe)">
+		<button (click)="addToCart(this.shoe)" class="add-to-cart box_shadow">
 			Add to Cart
 		</button>
 		<button class="apple-pay apple-pay-button-black box_shadow">

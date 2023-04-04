@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Shoe} from "../ShoeInterface";
 import {CartService} from "../services/cart.service";
 import {ProductService} from "../services/product.service";
-import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -19,7 +18,8 @@ export class ProductPageComponent implements OnInit {
 		public productService: ProductService,
 		public cartService: CartService,
 		public route: ActivatedRoute
-	) {}
+	) {
+	}
 
 	addToCart(item: Shoe) {
 		this.cartService.addItem(item);

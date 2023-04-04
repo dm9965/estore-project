@@ -28,9 +28,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {CheckoutComponent} from './shopping-cart/checkout/checkout.component';
 import {ToastrModule} from 'ngx-toastr';
 import {MatRadioModule} from "@angular/material/radio";
-import { AllshoesComponent } from './home/allshoes/allshoes.component';
-import { SignupComponent } from './login/signup/signup.component';
-import { OrdersComponent } from './orders/orders.component';
+import {AllshoesComponent} from './home/allshoes/allshoes.component';
+import {SignupComponent} from './login/signup/signup.component';
+import {OrdersComponent} from './orders/orders.component';
 
 
 @NgModule({
@@ -48,33 +48,33 @@ import { OrdersComponent } from './orders/orders.component';
 		InventoryPageComponent,
 		ShoppingCartComponent,
 		CheckoutComponent,
-  AllshoesComponent,
-  SignupComponent,
-  OrdersComponent,
+		AllshoesComponent,
+		SignupComponent,
+		OrdersComponent,
 	],
 
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatButtonModule,
-        MatInputModule,
-        FormsModule,
-        MatButtonToggleModule,
-        MatIconModule,
-        HttpClientModule,
-        MatListModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        MatGridListModule,
-        MatTooltipModule,
-        ToastrModule.forRoot({
-            positionClass: 'toast-bottom-right',
-        }),
-        MatRadioModule
-    ],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		MatIconModule,
+		MatToolbarModule,
+		MatButtonModule,
+		MatInputModule,
+		FormsModule,
+		MatButtonToggleModule,
+		MatIconModule,
+		HttpClientModule,
+		MatListModule,
+		MatSelectModule,
+		ReactiveFormsModule,
+		MatGridListModule,
+		MatTooltipModule,
+		ToastrModule.forRoot({
+			positionClass: 'toast-bottom-right',
+		}),
+		MatRadioModule
+	],
 	providers: [],
 	bootstrap: [AppComponent]
 })

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../User";
 import {Observable, of} from "rxjs";
-import {catchError, tap} from "rxjs/operators";
+import {tap} from "rxjs/operators";
 import {ToastrService} from "ngx-toastr";
 
 @Injectable({

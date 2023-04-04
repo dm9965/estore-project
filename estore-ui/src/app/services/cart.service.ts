@@ -78,15 +78,6 @@ export class CartService {
 		);
 	}
 
-	private handleError<T>(operation = 'operation', result?: T) {
-		return (error: any): Observable<T> => {
-			console.error(error); // log to console instead
-			console.log(`${operation} failed: ${error.message}`);
-			// Let the app keep running by returning an empty result.
-			return of(result as T);
-		};
-	}
-
 	clearCart() {
 		let user = this.userService.getUser();
 		if (user.username == "Anonymous") {
@@ -99,6 +90,15 @@ export class CartService {
 		).subscribe(() => {
 			console.log("Cart cleared");
 		});
+	}
+
+	private handleError<T>(operation = 'operation', result?: T) {
+		return (error: any): Observable<T> => {
+			console.error(error); // log to console instead
+			console.log(`${operation} failed: ${error.message}`);
+			// Let the app keep running by returning an empty result.
+			return of(result as T);
+		};
 	}
 
 }

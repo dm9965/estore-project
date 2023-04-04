@@ -16,11 +16,11 @@
 								</span>
 								</button>
 							</li>
-							<mat-radio-group class="filter-options" *ngIf="showGenderOptions">
+							<mat-radio-group *ngIf="showGenderOptions" class="filter-options">
 								<mat-radio-button (click)="applyFilter('sizing', 'Mens')"> Mens</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('sizing', 'Womens')"> Womens</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('sizing', 'Kids')"> Kids</mat-radio-button>
-								<mat-radio-button style="display: none" checked></mat-radio-button>
+								<mat-radio-button checked style="display: none"></mat-radio-button>
 							</mat-radio-group>
 						</div>
 						<div class="ul-style filter-menu">
@@ -32,13 +32,13 @@
 								</span>
 								</button>
 							</li>
-							<mat-radio-group class="filter-options" *ngIf="showBrandOptions">
+							<mat-radio-group *ngIf="showBrandOptions" class="filter-options">
 								<mat-radio-button (click)="applyFilter('brand', 'Nike')">Nike</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('brand', 'Adidas')">Adidas</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('brand', 'Jordan')">Jordan</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('brand', 'New Balance')">New Balance</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('brand', 'Ugg')">Ugg</mat-radio-button>
-								<mat-radio-button style="display: none" checked></mat-radio-button>
+								<mat-radio-button checked style="display: none"></mat-radio-button>
 							</mat-radio-group>
 						</div>
 						<div class="ul-style filter-menu">
@@ -50,7 +50,7 @@
 								</span>
 								</button>
 							</li>
-							<mat-grid-list class="filter-options" *ngIf="showSizingOptions" cols="3">
+							<mat-grid-list *ngIf="showSizingOptions" class="filter-options" cols="3">
 								<mat-radio-button (click)="applyFilter('size', '6')">6.5</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('size', '7')">7</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('size', '7.5')">7.5</mat-radio-button>
@@ -63,7 +63,7 @@
 								<mat-radio-button (click)="applyFilter('size', '11')">11</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('size', '11.5')">11.5</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('size', '12')">12</mat-radio-button>
-								<mat-radio-button style="display: none" checked></mat-radio-button>
+								<mat-radio-button checked style="display: none"></mat-radio-button>
 							</mat-grid-list>
 						</div>
 						<div class="ul-style filter-menu">
@@ -75,7 +75,7 @@
 								</span>
 								</button>
 							</li>
-							<mat-radio-group class="filter-options" *ngIf="showColorOptions">
+							<mat-radio-group *ngIf="showColorOptions" class="filter-options">
 								<mat-radio-button (click)="applyFilter('color', 'White')">White</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('color', 'Black')">Black</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('color', 'Red')">Red</mat-radio-button>
@@ -83,7 +83,7 @@
 								<mat-radio-button (click)="applyFilter('color', 'Brown')">Brown</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('color', 'Grey')">Grey</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('color', 'Green')">Green</mat-radio-button>
-								<mat-radio-button style="display: none" checked></mat-radio-button>
+								<mat-radio-button checked style="display: none"></mat-radio-button>
 							</mat-radio-group>
 						</div>
 						<div class="ul-style filter-menu">
@@ -95,18 +95,18 @@
 								</span>
 								</button>
 							</li>
-							<mat-radio-group class="filter-options" *ngIf="showPriceOptions">
+							<mat-radio-group *ngIf="showPriceOptions" class="filter-options">
 								<mat-radio-button (click)="applyFilter('price', '0-49.99')">$0 - $49.99</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('price', '50-99.99')">$50 - $99.99</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('price', '100-149.99')">$100 - $149.99</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('price', '150-199.99')">$150 - $199.99</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('price', '200-249.99')">$200 - $249.99</mat-radio-button>
 								<mat-radio-button (click)="applyFilter('price', '250-9999999')">$250+</mat-radio-button>
-								<mat-radio-button style="display: none" checked></mat-radio-button>
+								<mat-radio-button checked style="display: none"></mat-radio-button>
 							</mat-radio-group>
 						</div>
 						<ul class="create-shoe">
-							<button class="green-button-style" (click)="applyFilter(null, '')">Reset Filtering</button>
+							<button (click)="applyFilter(null, '')" class="green-button-style">Reset Filtering</button>
 						</ul>
 					</ul>
 				</div>

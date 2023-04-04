@@ -6,18 +6,16 @@ import {Order} from "../Order";
 import {catchError, tap} from "rxjs/operators";
 import {UserService} from "./user.service";
 import {ToastrService} from "ngx-toastr";
-import {Shoe} from "../ShoeInterface";
 
 @Injectable({
 	providedIn: 'root'
 })
 export class CheckoutService {
 
-	private checkoutURL = 'http://localhost:8080/orders'
-
 	httpOptions = {
 		headers: new HttpHeaders({'Content-Type': 'application/json'})
 	};
+	private checkoutURL = 'http://localhost:8080/orders'
 
 	constructor(public httpClient: HttpClient, public userService: UserService, public cartService: CartService, private toastr: ToastrService) {
 	}

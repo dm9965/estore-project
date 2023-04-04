@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
@@ -7,9 +7,9 @@ import {catchError} from "rxjs/operators";
 import {of} from "rxjs";
 
 @Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+	selector: 'app-signup',
+	templateUrl: './signup.component.html',
+	styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
 	errorMessage: string | null = null;

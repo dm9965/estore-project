@@ -21,7 +21,7 @@ export class CheckoutService {
 	}
 
 	getAllOrders(): Observable<Order[]> {
-		const url = `${this.checkoutURL}/all`;
+		const url = `${this.checkoutURL}/`;
 		return this.httpClient.get<Order[]>(url).pipe(
 			tap(_ => console.log('Orders successfully pulled')),
 			catchError(this.handleError<Order[]>('getAllOrders', []))

@@ -12,7 +12,8 @@ import {UserService} from "../services/user.service";
 })
 export class BrowsePageComponent implements OnInit {
 	shoes: Shoe[] = [];
-	shoe: Shoe = new Shoe();
+	shoesOriginal: Shoe[] = [];
+	filteredProperties: { [key: string]: any } = {};
 	query: string = "";
 
 	constructor(private productService: ProductService, private router: Router, private cartService: CartService, private userService: UserService) {
@@ -29,12 +30,14 @@ export class BrowsePageComponent implements OnInit {
 		if (this.productService.searchShoes("All")) {
 			this.productService.getAllShoes().subscribe((data) => {
 				this.shoes = data;
+				this.shoesOriginal = data;
+			});
+		} else {
+			this.productService.searchShoes(this.query).subscribe((data) => {
+				this.shoes = data;
+				this.shoesOriginal = data;
 			});
 		}
-
-		this.productService.searchShoes(this.query).subscribe((data) => {
-			this.shoes = data;
-		});
 	}
 
 	addToCart(shoe: Shoe) {
@@ -46,7 +49,35 @@ export class BrowsePageComponent implements OnInit {
 		return this.userService.isLoggedIn();
 	}
 
-	goToProductPage(): void {
-		this.router.navigateByUrl(`/product-page/${this.shoe.id}`);
+	ingestFilter(filter: { property: keyof Shoe, value: string }) {
+		this.applyFilter(filter.property, filter.value);
+	}
+
+	applyFilter(property: keyof Shoe | null, value: string) {
+		if (property == null) {
+			this.shoes = this.shoesOriginal;
+			this.filteredProperties = {};
+			return;
+		}
+
+		this.filteredProperties[property] = value;
+		this.shoes = this.shoesOriginal.filter((shoe) => {
+			for (const key in this.filteredProperties) {
+				// special checking for price
+				if (key == "price") {
+					let low = this.filteredProperties[key].split("-")[0];
+					let high = this.filteredProperties[key].split("-")[1];
+					if (shoe[key as keyof Shoe] > high || shoe[key as keyof Shoe] < low) {
+						return false;
+					}
+					continue;
+				}
+
+				if (shoe[key as keyof Shoe] != this.filteredProperties[key]) {
+					return false;
+				}
+			}
+			return true;
+		});
 	}
 }

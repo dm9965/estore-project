@@ -5,6 +5,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {Shoe} from "../ShoeInterface";
 import {MessageService} from "./message.service";
 import {Sizing} from "../Sizing";
+import {ToastrService} from "ngx-toastr";
 
 
 @Injectable({providedIn: 'root'})
@@ -15,7 +16,7 @@ export class ProductService {
 	};
 	private shoeURL = 'http://localhost:8080/shoe';  // URL to web api
 
-	constructor(public http: HttpClient, private messageService: MessageService) {
+	constructor(public http: HttpClient, private messageService: MessageService, private toastr: ToastrService) {
 	}
 
 	/** Get all shoes from the server */
@@ -150,7 +151,7 @@ export class ProductService {
 	private handleError<T>(operation = 'operation', result?: T) {
 		return (error: any): Observable<T> => {
 			console.error(error); // log to console instead
-			this.log(`${operation} failed: ${error.message}`);
+			this.toastr.error(`${operation} failed: ${error.message}, consult developers`);
 
 			// Let the app keep running by returning an empty result.
 			return of(result as T);

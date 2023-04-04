@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Shoe} from "../ShoeInterface";
 import {ProductService} from "../services/product.service";
+import {catchError} from "rxjs/operators";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
 	selector: 'app-inventory-page',
@@ -12,7 +14,7 @@ export class InventoryPageComponent implements OnInit {
 	editorMode: "HIDDEN" | "NEW" | "UPDATING" = "HIDDEN";
 	shoeInEditor: Shoe = new Shoe();
 
-	constructor(private productService: ProductService) {
+	constructor(private productService: ProductService, private toastr: ToastrService) {
 	}
 
 	trackByIndex(index: number, obj: any): any {

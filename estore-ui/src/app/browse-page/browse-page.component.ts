@@ -27,7 +27,7 @@ export class BrowsePageComponent implements OnInit {
 		const urlParams = new URLSearchParams(window.location.search);
 		this.query = urlParams.get('query')?.toString() || "";
 
-		if (this.query != "") {
+		if (this.query != "" && this.query != "All") {
 			this.productService.searchShoes(this.query).subscribe((data) => {
 				this.shoes = data;
 				this.shoesOriginal = data;

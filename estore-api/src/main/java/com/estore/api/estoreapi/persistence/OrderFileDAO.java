@@ -20,9 +20,8 @@ public class OrderFileDAO implements OrderDAO {
     private static final Logger LOG = Logger.getLogger(OrderFileDAO.class.getName());
     private final ObjectMapper orderObjectMapper;
     private final String filename;
-    private CartDAO cartDAO;
-
     Map<String, Order> orderMap = new HashMap<>();
+    private final CartDAO cartDAO;
 
     public OrderFileDAO(@Value("${dao.orders}") String filename,
                         ObjectMapper orderObjectMapper, CartDAO cartDAO) throws IOException {

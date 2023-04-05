@@ -3,19 +3,19 @@
 </div>
 <div class="flex-box">
 	<div class="column-2">
-		<ul class="column-3">
-			<a *ngFor="let order of orders" class="inline">
-				<span class="inline create-shoe">
-					{{order.username}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
-					<ol>
-						<li *ngFor="let item of order.items">
-							order info
+				<table>
+					<thead>
+						<th>Username</th>
+						<th> Order Details</th>
+						<th>Total</th>
+					</thead>
+					<tbody *ngFor="let order of orders">
+						<td>{{order.username}}</td>
+						<td *ngFor="let item of order.items" class="flex-column">
 							{{item.brand}} {{item.style}} - ${{item.price}}
-						</li>
-					</ol>
-					&nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp; ${{order.totalCost}}
-				</span>
-			</a>
-		</ul>
+						</td>
+						<td> ${{order.totalCost}}</td>
+					</tbody>
+				</table>
 	</div>
 </div>

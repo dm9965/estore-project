@@ -1,5 +1,5 @@
 .div-design {
-	margin: 3rem 10rem;
+	margin: 2rem;
 	height: 70%;
 	min-width: 24px;
 	background-color: rgba(0, 0, 0, 0.1);
@@ -36,14 +36,14 @@
 }
 
 .shoe-info {
+
 	display: flex;
 	flex-direction: column;
-	position: center;
 	height: 100%;
 	background-color: whitesmoke;
 	padding-top: 2rem;
 	border-radius: 25px;
-
+	align-items: center;
 }
 
 .product-name {
@@ -55,8 +55,8 @@
 .product-sizing {
 	margin-left: 2.7rem;
 	float: left;
-	font-weight: normal;
-	font-size: medium;
+	font-weight: bolder;
+	font-size: 20px;
 }
 
 .product-price {
@@ -64,6 +64,8 @@
 	float: left;
 	font: 1rem/1.5 Roboto, Arial, sans-serif;
 	line-height: 1;
+	font-size: 20px;
+	font-weight: bolder;
 }
 
 .button-grid {
@@ -112,7 +114,7 @@
 	color: whitesmoke;
 	justify-content: center;
 	align-items: center;
-	margin-left: 2.3rem;
+
 
 }
 
@@ -132,8 +134,9 @@
 	background-position: 50% 50%;
 	border-radius: 25px;
 	padding: 0;
+
 	box-sizing: border-box;
-	min-width: 200px;
+	width: 80%;
 	min-height: 40px;
 	max-height: 64px;
 	margin-top: 1rem;
@@ -150,18 +153,32 @@
 
 .add-to-cart {
 	display: inline-block;
+	color: white;
 	background-size: 100% 60%;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
 	border-radius: 25px;
 	padding: 0;
 	box-sizing: border-box;
-	min-width: 200px;
+	width: 80%;
 	min-height: 40px;
 	max-height: 64px;
 	margin-top: 1rem;
-	background-color: whitesmoke;
+	background: linear-gradient(to left, #32217b, #3c77ff);
 	font-weight: bold;
 	font-size: larger;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.flex-center {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 9rem;
+}
+
+.image-size {
+	max-width: 100%;
+	max-height: 100%;
+	border-radius: 25px ;
 }

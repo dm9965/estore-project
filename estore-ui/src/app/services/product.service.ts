@@ -31,50 +31,10 @@ export class ProductService {
 
 	/** GET singular shoe by id. Will 404 if id not found */
 	getShoeByID(id: number): Observable<Shoe> {
-		const url = `${this.shoeURL}/${id}`;
+		const url = `${this.shoeURL}/id/${id}`;
 		return this.http.get<Shoe>(url).pipe(
 			tap(_ => this.log(`fetched shoe id=${id}`)),
 			catchError(this.handleError<Shoe>(`getShoe id=${id}`))
-		);
-	}
-
-	getShoeBySizing(sizing: Sizing): Observable<Shoe> {
-		const url = `${this.shoeURL}/${sizing}`;
-		return this.http.get<Shoe>(url).pipe(
-			tap(_ => this.log(`fetched hero id=${sizing}`)),
-			catchError(this.handleError<Shoe>(`getShoe sizing=${sizing}`))
-		);
-	}
-
-	getShoeBySize(size: number): Observable<Shoe> {
-		const url = `${this.shoeURL}/${size}`;
-		return this.http.get<Shoe>(url).pipe(
-			tap(_ => this.log(`fetched hero id=${size}`)),
-			catchError(this.handleError<Shoe>(`getShoe size=${size}`))
-		);
-	}
-
-	getShoeByColor(color: string): Observable<Shoe> {
-		const url = `${this.shoeURL}/${color}`;
-		return this.http.get<Shoe>(url).pipe(
-			tap(_ => this.log(`fetched hero color=${color}`)),
-			catchError(this.handleError<Shoe>(`getShoe color=${color}`))
-		);
-	}
-
-	getShoeByBrand(brand: string): Observable<Shoe> {
-		const url = `${this.shoeURL}/${brand}`;
-		return this.http.get<Shoe>(url).pipe(
-			tap(_ => this.log(`fetched hero id=${brand}`)),
-			catchError(this.handleError<Shoe>(`getShoe brand=${brand}`))
-		);
-	}
-
-	getShoeByPrice(price: number): Observable<Shoe> {
-		const url = `${this.shoeURL}/${price}`;
-		return this.http.get<Shoe>(url).pipe(
-			tap(_ => this.log(`fetched hero price=${price}`)),
-			catchError(this.handleError<Shoe>(`getShoe price=${price}`))
 		);
 	}
 

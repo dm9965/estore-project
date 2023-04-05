@@ -38,6 +38,7 @@ public class OrderFileDAO implements OrderDAO {
 
     @Override
     public List<Order> getAllOrders() throws IOException {
+        load();
         return List.copyOf(orderMap.values());
     }
 

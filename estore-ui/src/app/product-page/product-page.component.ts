@@ -26,11 +26,10 @@ export class ProductPageComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.route.paramMap.subscribe(params => {
-			const shoeId = Number(params.get('id'));
+		console.log("ng OnInit")
+			const shoeId = Number(this.route.snapshot.paramMap.get('id'));
 			this.productService.getShoeByID(shoeId).subscribe((data) => {
 				this.shoe = data;
 			});
-		});
 	}
 }

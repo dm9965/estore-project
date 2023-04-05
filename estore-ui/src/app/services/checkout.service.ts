@@ -6,6 +6,7 @@ import {Order} from "../Order";
 import {catchError, tap} from "rxjs/operators";
 import {UserService} from "./user.service";
 import {ToastrService} from "ngx-toastr";
+import {Shoe} from "../ShoeInterface";
 
 @Injectable({
 	providedIn: 'root'
@@ -28,11 +29,11 @@ export class CheckoutService {
 		);
 	}
 
-	getOrderItems(): Observable<Order> {
+	getOrderItems(): Observable<Shoe[]> {
 		const url = `${this.checkoutURL}/${this.userService.getUser().username}`;
-		return this.httpClient.get<Order>(url).pipe(
+		return this.httpClient.get<Shoe[]>(url).pipe(
 			tap(_ => console.log('Pulled items for customer order')),
-			catchError(this.handleError<Order>('get order items'))
+			catchError(this.handleError<Shoe[]>('get order items'))
 		);
 	}
 

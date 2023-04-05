@@ -12,7 +12,7 @@
 				<div matListItemTitle>{{shoe.brand}} {{shoe.style}}</div>
 				<div matListItemLine>{{shoe.sizing}}</div>
 				<div matListItemLine><strong>${{shoe.price}}</strong></div>
-<!--				<button matListItemLine routerLink="/product">{{"View Details"}}</button>-->
+				<button matListItemLine routerLink="/product/{{shoe.id}}">View Details</button>
 				<button (click)="addToCart(shoe)" [class.disabled]="!isLoggedIn()" [matTooltip]="isLoggedIn() ? '' : 'Must be logged in to add to cart!'">
 					<mat-icon>add_shopping_cart</mat-icon>
 				</button>

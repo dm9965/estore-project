@@ -40,7 +40,8 @@ export class BrowsePageComponent implements OnInit {
 		}
 	}
 
-	addToCart(shoe: Shoe) {
+	addToCart(event: Event, shoe: Shoe) {
+		event.stopPropagation();
 		console.log("ADDED TO CART")
 		this.cartService.addItem(shoe);
 	}
@@ -79,5 +80,9 @@ export class BrowsePageComponent implements OnInit {
 			}
 			return true;
 		});
+	}
+
+	routeTo(shoeId: number) {
+		this.router.navigate(["/product", shoeId]).then();
 	}
 }

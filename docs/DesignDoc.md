@@ -55,9 +55,9 @@ For the minimal viable product, there must be an authentication method and acces
 * Add/Remove for Shopping Cart Process : Users can Add/Remove Items to Shopping Cart
 * Admin Shopping Cart Process : Admin Cannot Access Shopping Carts
 * User Shopping Cart Process : User Can View Items in Shopping Cart
+* User Checkout Functionality : User can View Items in Shopping Cart and Checkout with said Items
 * Toastr Pop-Ups : User gets a Toastr Pop-Up whenever an Action is Complete
 * Product Display : Each Item in the Inventory is Equipped with a Dummy Image
-* User Checkout Functionality : User can View Items in Shopping Cart and Checkout with said Items
 
 ## Application Domain
 
@@ -89,7 +89,7 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 
 This section describes the web interface flow; this is how the user views and interacts with the e-store application.
 
-The user is greeted by the homepage to the website where they can browse or login to retrieve previously stored data. There is a navigation bar, a set of highlighted products and deals as well as a set of highlighted brands. The user can then click on any button and be greeted by the appropriate page. When the user clicks on the navigation bar it will give descriptions of products for the user to choose from and narrow down their options. When the user clicks on a product it will show the name and price as well as all of the other respected details of the product. If the user wishes, they can filter products by any attribute of the sneaker they desire from size, price, gender, etc. When the user decides to purchase the product it is placed in the shopping cart where the user can view all of their items and further check out to be handled by the admin.
+The user is greeted by the homepage to the website where they can browse or login to retrieve previously stored data. There is a navigation bar, a set of highlighted products and deals as well as a set of highlighted brands. The user can then click on any button and be greeted by the appropriate page. When the user clicks on the navigation bar it will give descriptions of products for the user to choose from and if the user decides to type it will narrow down their options. When the user clicks on a product it will show the name and price as well as all of the other respected details of the product. If the user wishes, they can filter products by any attribute of the sneaker they desire from size, price, gender, etc using the buttons on the left side of the website. When the user decides to purchase the product it is placed in the shopping cart where the user can view all of their items and remove them or further check out to be handled by the admin.
 
 
 ### View Tier
@@ -115,7 +115,7 @@ In the View Tier UI the types of components in the tier refer to the various pat
 > section will follow the same instructions that are given for the View
 > Tier above._
 
-The ViewModel Tier contains all of the DAO's. These are the interfaces for the files as they act as basic functions for every aspect of the website's functionality. For example, the ViewModel tier contains DAO's for the cart, shoe and user.
+The ViewModel Tier contains all of the DAO's. These are the interfaces for the files as they act as basic functions for every aspect of the website's functionality. For example, the ViewModel tier contains DAO's for the cart, shoe and user. Once again, the names of the file represent the responsiblity of the functions.
 
 > _At appropriate places as part of this narrative provide one or more
 > static models (UML class diagrams) with some details such as critical attributes and methods._
@@ -138,7 +138,7 @@ The model tier stores all the appropriate data required for the website to funct
 > addressed with design changes, and describe those suggested design
 > improvements._
 
-Design improvements that we would make if the project were to continue include advertisement bars to produce more revenue and a method for displaying new releases/news on sneakers using another applications data. There are no functioning errors within the program, everything works as designed.
+Design improvements that we would make if the project were to continue include advertisement bars to produce more revenue and a method for displaying new releases/news on sneakers using another applications data. There are no functioning errors within the program's MVP attributes and personal 10% feature, everything works as designed.
 
 > _With the results from the Static Code Analysis exercise, 
 > discuss the resulting issues/metrics measurements along with your analysis

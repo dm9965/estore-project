@@ -3,6 +3,7 @@ import {Shoe} from "../ShoeInterface";
 import {CartService} from "../services/cart.service";
 import {ProductService} from "../services/product.service";
 import {ActivatedRoute} from "@angular/router";
+import {UserService} from "../services/user.service";
 
 @Component({
 	selector: 'app-product-page',
@@ -17,7 +18,8 @@ export class ProductPageComponent implements OnInit {
 	constructor(
 		public productService: ProductService,
 		public cartService: CartService,
-		public route: ActivatedRoute
+		public route: ActivatedRoute,
+		private userService: UserService
 	) {
 	}
 
@@ -27,9 +29,13 @@ export class ProductPageComponent implements OnInit {
 
 	ngOnInit(): void {
 		console.log("ng OnInit")
-			const shoeId = Number(this.route.snapshot.paramMap.get('id'));
-			this.productService.getShoeByID(shoeId).subscribe((data) => {
-				this.shoe = data;
-			});
+		const shoeId = Number(this.route.snapshot.paramMap.get('id'));
+		this.productService.getShoeByID(shoeId).subscribe((data) => {
+			this.shoe = data;
+		});
+	}
+
+	isLoggedIn() {
+		return this.userService.isLoggedIn();
 	}
 }

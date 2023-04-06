@@ -10,7 +10,7 @@
 			<h3 class="product-price" id=material> {{shoe.color}} {{shoe.material}} </h3>
 			<h3 class="product-price" id=price> ${{shoe.price}} </h3>
 			<div class="flex-center">
-			<button (click)="addToCart(shoe)" class="add-to-cart box_shadow">
+			<button (click)="addToCart(shoe)" class="add-to-cart box_shadow" [class.disabled]="!isLoggedIn()" [matTooltip]="isLoggedIn() ? '' : 'Must be logged in to add to cart!'">
 				Add to Cart
 			</button>
 			<button class="apple-pay apple-pay-button-black box_shadow">

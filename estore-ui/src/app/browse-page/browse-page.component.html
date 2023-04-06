@@ -6,7 +6,7 @@
 
 <div class="constrained">
 	<mat-grid-list cols="4" rowHeight="200px">
-		<mat-grid-tile *ngFor="let shoe of shoes" (click)="routeTo(shoe.id)" class="clickable box">
+		<mat-grid-tile (click)="routeTo(shoe.id)" *ngFor="let shoe of shoes" class="clickable box">
 			<div matGridAvatar><img [src]="'https://dummyimage.com/100x100/000/fff&text='+shoe.style" alt="shoe image"></div>
 			<div>
 				<div matListItemTitle>{{shoe.brand}} {{shoe.style}}</div>

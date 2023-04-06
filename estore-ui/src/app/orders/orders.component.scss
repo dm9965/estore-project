@@ -91,7 +91,7 @@
 table {
 	width: 100%;
 	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0,0,0,0.1);
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 	text-align: center;
 	font-weight: 500;
 	font-size: 20px;
@@ -102,7 +102,7 @@ table {
 th,
 td {
 	padding: 15px;
-	background-color: rgba(255,255,255,0.2);
+	background-color: rgba(255, 255, 255, 0.2);
 	color: #050000;
 }
 
@@ -121,6 +121,7 @@ thead {
 	display: flex;
 	flex-direction: column;
 }
+
 .flex-center {
 	display: flex;
 	justify-content: center;

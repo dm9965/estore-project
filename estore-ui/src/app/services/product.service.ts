@@ -4,7 +4,6 @@ import {Observable, of} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
 import {Shoe} from "../ShoeInterface";
 import {MessageService} from "./message.service";
-import {Sizing} from "../Sizing";
 import {ToastrService} from "ngx-toastr";
 
 

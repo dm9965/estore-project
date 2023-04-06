@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Shoe} from "../ShoeInterface";
 import {ProductService} from "../services/product.service";
-import {catchError} from "rxjs/operators";
 import {ToastrService} from "ngx-toastr";
 
 @Component({

@@ -35,12 +35,17 @@ The purpose of this project is to design the front and backend of a complete web
 
 
 ### Definition of MVP
-For the minimal viable product, there must be an authentication method and accessibility functionality. The user can browse the inventory as well as add and remove products from their shopping carts. The owner is not given access to the shopping carts and is given the information of admin to log in and receive admin access. 
+For the minimal viable product, there must be an authentication method and accessibility functionality. The user can browse the inventory as well as add and remove products from their shopping carts. With the items in said shopping cart, the user can then checkout and receive an order confirmation which the owner can view. The owner is not given access to the shopping carts and is given the information of admin to log in and receive admin access. 
 
 ### MVP Features
 * Log In/Out Application 
 * Username Assumption
 * Add/Remove From Shopping Cart
+* Customer can See a List of Products
+* Customer can Search for a Product
+* Customer can Check Out with Their Items
+* E-Store Admin can Add/Remove Items in the Inventory
+* 10% Feature : Detailed Order Analysis, Detailed Product Sorting Algorithim
 
 ### Roadmap of Enhancements
 > _Provide a list of top-level features in the order you plan to consider them._
@@ -50,6 +55,9 @@ For the minimal viable product, there must be an authentication method and acces
 * Add/Remove for Shopping Cart Process : Users can Add/Remove Items to Shopping Cart
 * Admin Shopping Cart Process : Admin Cannot Access Shopping Carts
 * User Shopping Cart Process : User Can View Items in Shopping Cart
+* Toastr Pop-Ups : User gets a Toastr Pop-Up whenever an Action is Complete
+* Product Display : Each Item in the Inventory is Equipped with a Dummy Image
+* User Checkout Functionality : User can View Items in Shopping Cart and Checkout with said Items
 
 ## Application Domain
 
@@ -81,7 +89,7 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 
 This section describes the web interface flow; this is how the user views and interacts with the e-store application.
 
-The user is greeted by the homepage to the website where they can browse or login to retrieve previously stored data. There is a navigation bar, a set of highlighted products and deals as well as a set of highlighted brands. The user can then click on any button and be greeted by the appropriate page. When the user clicks on the navigation bar it will give descriptions of products for the user to choose from and narrow down their options. When the user clicks on a product it will show the name and price as well as all of the other respected details of the product. When the user decides to purchase the product it is placed in the shopping cart where the user can view all of their items. 
+The user is greeted by the homepage to the website where they can browse or login to retrieve previously stored data. There is a navigation bar, a set of highlighted products and deals as well as a set of highlighted brands. The user can then click on any button and be greeted by the appropriate page. When the user clicks on the navigation bar it will give descriptions of products for the user to choose from and narrow down their options. When the user clicks on a product it will show the name and price as well as all of the other respected details of the product. If the user wishes, they can filter products by any attribute of the sneaker they desire from size, price, gender, etc. When the user decides to purchase the product it is placed in the shopping cart where the user can view all of their items and further check out to be handled by the admin.
 
 
 ### View Tier
@@ -98,6 +106,9 @@ In the View Tier UI the types of components in the tier refer to the various pat
 > Be sure to include an relevant HTTP reuqests from the client-side to the server-side 
 > to help illustrate the end-to-end flow._
 
+### Sequence Diagram
+
+![Sequence Diagram](SequenceDiagram.png)
 
 ### ViewModel Tier
 > _Provide a summary of this tier of your architecture. This
@@ -127,7 +138,7 @@ The model tier stores all the appropriate data required for the website to funct
 > addressed with design changes, and describe those suggested design
 > improvements._
 
-Design improvements that we would make if the project were to continue include 
+Design improvements that we would make if the project were to continue include advertisement bars to produce more revenue and a method for displaying new releases/news on sneakers using another applications data. There are no functioning errors within the program, everything works as designed.
 
 > _With the results from the Static Code Analysis exercise, 
 > discuss the resulting issues/metrics measurements along with your analysis
@@ -138,8 +149,8 @@ Design improvements that we would make if the project were to continue include
 
 ### Acceptance Testing
 
-All 35 test cases for various files passed and no errors were found. There were a few issues occurring prior to the completion of testing but they were quickly fixed. There are currently some methods that are still under construction that require testing, however they have not reached this point yet.
+All 45 test cases for various files passed and no errors were found. There were a few issues occurring prior to the completion of testing but they were quickly fixed. There are no methods still under construction, everything is complete from the MVP to the 10% feature.
 
 ### Unit Testing and Code Coverage
 
-For unit testing, the strategy was to cover every common case as well as the few select edge-cases. This strategy is very effective due to it's spanning possibilities in which there are no scenarios that will go untested. The code coverage went well as all tests passed and no anomalies occurred other than the git repository having a few errors later on.
+For unit testing, the strategy was to cover every common case as well as the few select edge-cases. This strategy is very effective due to it's spanning possibilities in which there are no scenarios that will go untested. The code coverage went well as all tests passed and no anomalies occurred other than the git repository having a few errors later on that were quickly resolved.

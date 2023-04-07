@@ -20,6 +20,6 @@ export class Order {
 	}
 
 	getTotalCost(): number {
-		return this.totalCost;
+		return this.totalCost
 	}
 }

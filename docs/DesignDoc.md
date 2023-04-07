@@ -1,6 +1,6 @@
 PROJECT Design Documentation
 
-Team Information
+## Team Information
 ¬¬¬
 •	Team name: TEAM 7
 •	Team members
@@ -10,7 +10,7 @@ o	Connor Bastian
 o	Uttam Bhattarai
 o	Lucas Romero
 
-Executive Summary
+### Executive Summary
 
 The 7Shoes shoe store has been built using Angular/TypeScript for the front-end and Java for the back-end. The use of Angular/TypeScript provides a dynamic and responsive user interface, while Java allows for robust and scalable back-end processing. This combination of technologies enables this e-store to provide a seamless shopping experience for customers, with easy navigation, fast load times, and secure transactions. The Java backend supports features such as inventory management, order processing, and customer data management.
 
@@ -62,7 +62,7 @@ Provide a high-level overview of the domain for this application. You can discus
 Current Domain Analysis from Sprint 2:
 
   
-Architecture and Design
+## Architecture and Design
 
 This section describes the application architecture.
 
@@ -80,7 +80,7 @@ The View is the client-side SPA built with Angular utilizing HTML, CSS and TypeS
 
 Both the View-Model and Model are built using Java and Spring Framework. Details of the components within these tiers are supplied below.
 
-Overview of User Interface
+### Overview of User Interface
 
 The e-store's UI was designed so that it is extremely easy for the user to both find exactly what their looking for, add it to their cart, and checkout, but also be able to poke around the website for things they might not have known they were interested in, such as specific brands in the brand bar that spans the top of the page under the navigation bar, or the featured products that include white sneakers, women’s sneakers, and the legendary Stan Smith tennis shoe. The search function is easy to find and use, and is available on every page as it is included in the navigation bar that is pinned to the top of the app. Because we’re more focused on streetwear style, a while brick background throughout gives off a cool and modern aesthetic along with softly edged buttons and a largely monochromatic color palette.
 
@@ -94,7 +94,7 @@ You must provide at least 2 sequence diagrams as is relevant to a particular asp
 [Sprint 4]
 To adequately show your system, you will need to present the class diagrams where relevant in your design. Some additional tips: Class diagrams only apply to the View-Model and Model Tier. A single class diagram of the entire system will not be effective. You may start with one but will be need to break it down into smaller sections to account for requirements of each of the Tier static models below. Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important.
 
-View Model Tier
+## View Model Tier
 [Sprint 4]
 Provide a summary of this tier of your architecture. This section will follow the same instructions that are given for the View Tier above.
 
@@ -102,7 +102,7 @@ At appropriate places as part of this narrative provide one or more updated and 
 
 [Replace with your View-Model Tier class diagram 1, etc.] (model-placeholder.png)
 
-Model Tier
+## Model Tier
 [Sprint 2, 3 & 4] 
 Provide a summary of this tier of your architecture. This section will follow the same instructions that are given for the View Tier above.
 
@@ -153,11 +153,11 @@ Identify 3-4 areas within your code that have been flagged by the Static Code An
 Discuss future refactoring and other design improvements your team would explore if the team had additional time.
 
 
-###Testing
+### Testing
 
 This section will provide information about the testing performed and the results of the testing.
 
-##Acceptance Testing
+## Acceptance Testing
 [Sprint 2 & 4]
 Report on the number of user stories that have passed all their acceptance criteria tests, the number that have some acceptance criteria tests failing, and the number of user stories that have not had any testing yet. Highlight the issues found during acceptance testing and if there are any concerns.
 
@@ -169,7 +169,7 @@ All user stories that were in the Sprint 2 backlog were completed in a satisfact
 
 
 
-##Unit Testing and Code Coverage
+## Unit Testing and Code Coverage
 [Sprint 4]
 Discuss your unit testing strategy. Report on the code coverage achieved from unit testing of the code base. Discuss the team's coverage targets, why you selected those values, and how well your code coverage met your targets.
 

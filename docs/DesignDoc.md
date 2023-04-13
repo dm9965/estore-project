@@ -80,25 +80,8 @@ Provide a high-level overview of the domain for this application. You can discus
 
 The domain of this web application is very simple. A user can browse products in the inventory after creating an account. This account consists of a password and username and more information later on. After this is complete the user can then search for items and purchase them using the product filtering methods as well as the shopping cart. When the user is ready to check out, a prompt is provided to input their payment details and your shoes are placed in a newly created order. These orders, as well as the inventory, are managed by the admin of the website. One MVP feature of the admin is that they cannot access the user shopping carts due to privacy issues.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Current Domain Analysis from Sprint 2:
+<img width="468" alt="image" src="https://user-images.githubusercontent.com/111752403/231780025-d373b62d-fdf4-4648-a6d3-d03b5ae4b1b1.png">
 
 
 ## Architecture and Design
@@ -260,4 +243,6 @@ Create Inventory Management Page
 [Sprint 4]
 
 Our unit testing strategy consisted of covering all MVP functionality early on in the process before deep diving into more advanced features. With this strategy, our product did not have many errors to correct after testing. The team’s coverage targets was around 70-100% of coverage. These values were selected due to our drive to create an error free product to give the user the best experience when purchasing shoes. The code coverage was close to our minimum value, as 68% was covered. This is still a large portion of the web store and covers the most valuable functions within it.
+
+<img width="473" alt="image" src="https://user-images.githubusercontent.com/111752403/231779863-d123df05-1a06-4789-bfcf-87088402a6af.png">
 

@@ -157,6 +157,22 @@ To adequately show your system, you will need to present the class diagrams wher
 
 The ViewModel Tier contains all of the DAO's. These are the interfaces for the files as they act as basic functions for every aspect of the website's functionality. For example, the ViewModel tier contains DAO's for the cart, shoe and user. For example, within the CartDAO file, the function clearCart() was in place to flush the cart if the user decided to or after the user put an order in place. Once again, the names of the file represent the responsibility of the functions.
 
+### Shoe ViewModel
+
+<img width="376" alt="SHOE VIEWMODEL" src="https://user-images.githubusercontent.com/111752403/231779349-b38e0580-55fe-4229-8983-29bd65926127.png">
+
+### User ViewModel
+
+<img width="379" alt="USER VIEWMODEL" src="https://user-images.githubusercontent.com/111752403/231779454-194e8329-9cdb-40a3-947a-4fa281d72ff6.png">
+
+### Cart ViewModel
+
+<img width="385" alt="CART VIEWMODEL" src="https://user-images.githubusercontent.com/111752403/231779515-f52c1183-1bae-43f4-b215-6e42b51eb4b4.png">
+
+### Order ViewModel
+
+<img width="392" alt="ORDER VIEWMODEL" src="https://user-images.githubusercontent.com/111752403/231779563-f8e8a069-35d6-4d18-ac3b-53f0e66e3095.png">
+
 At appropriate places as part of this narrative provide one or more updated and properly labeled static models (UML class diagrams) with some details such as critical attributes and methods.
 
 [Replace with your View-Model Tier class diagram 1, etc.](model-placeholder.png)
@@ -169,21 +185,21 @@ The model tier stores all the appropriate data required for the website to funct
 
 ### Shoe Model:
 
-<img width="747" alt="full shoe model" src="https://user-images.githubusercontent.com/111752403/231776936-779f3678-e95d-47d5-9537-e647f56012cd.png">
+<img width="295" alt="shoe model" src="https://user-images.githubusercontent.com/111752403/231779282-8dce428a-8ae6-4607-8ebe-9ff3fc4df45c.png">
 
 
 ### User Model:
 
-![full user model](https://user-images.githubusercontent.com/111752403/231776901-3bd1fa65-f662-4d37-9765-34214a044105.png)
+<img width="291" alt="user model" src="https://user-images.githubusercontent.com/111752403/231779096-dabbe29b-69ca-4589-9c9b-63e460342aad.png">
 
 
 ### Cart Model:
 
-![full cart model](https://user-images.githubusercontent.com/111752403/231776626-72c1fc8f-2316-4745-8435-9c7fabeb5b28.png)
+<img width="293" alt="cart model" src="https://user-images.githubusercontent.com/111752403/231779155-b244e56f-4dd7-42c0-8adb-483cd270a610.png">
 
 ### Order Model:
 
-<img width="961" alt="Full Order Model" src="https://user-images.githubusercontent.com/111752403/231777360-a71aebb6-3eaa-4f90-881d-401d6e99435a.png">
+<img width="301" alt="order model" src="https://user-images.githubusercontent.com/111752403/231779230-815a7b40-da71-4d38-8a8c-a9b57dc3e309.png">
 
 ## OO Design Principles
 

@@ -9,60 +9,65 @@ import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
-import org.mockito.Mockito;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 @Tag("Persistence-tier")
 public class CartFileDAOTest {
     ObjectMapper mockObjectMapper;
 
     Cart mockCart;
 
-    Shoe mockShoe = new Shoe (1, "Yeezy", Sizing.MENS, 12, 229.99, "Adidas", "Mesh", "Grey");
+    Shoe mockShoe = new Shoe(1, "Yeezy", Sizing.MENS, 12, 229.99, "Adidas", "Mesh", "Grey");
 
-   CartFileDAO mockCartDAO;
+    CartFileDAO mockCartDAO;
 
-    public CartFileDAOTest(){}
+    public CartFileDAOTest() {
+    }
 
     @BeforeEach
     public void setupCartFileDAO() throws IOException {
         this.mockCart = new Cart();
-        ArrayList<Shoe> itemsInMockCart = new ArrayList<>();
-        itemsInMockCart.add(mockShoe);
-        mockCart.setItems(itemsInMockCart);
-        mockCart.setUsername("dom");
+
+        Cart[] mockCartList = new Cart[]{};
+
         this.mockObjectMapper = mock(ObjectMapper.class);
-        when(mockObjectMapper.readValue(any(File.class), eq(Cart.class))).thenReturn(this.mockCart);
+        when(mockObjectMapper.readValue(any(File.class), eq(Cart[].class))).thenReturn(mockCartList);
         this.mockCartDAO = new CartFileDAO("data/cart-testing.txt", mockObjectMapper);
     }
 
     @Test
     public void testAddToCart() throws IOException {
+        setupCartFileDAO();
+
         mockCartDAO.addToCart("dom", mockShoe);
         Cart cart = mockCartDAO.getCart("dom");
         ArrayList<Shoe> expectedItems = new ArrayList<>();
+
         expectedItems.add(mockShoe);
+
         Assertions.assertEquals(expectedItems, cart.getItems());
     }
 
 
     @Test
-    public void testGetCart() throws Exception {
+    public void testSetCart() throws Exception {
+        setupCartFileDAO();
+
         String username = "user1";
         ArrayList<Shoe> items = new ArrayList<>();
         items.add(mockShoe);
-        Cart cart = new Cart();
-        cart.setUsername(username);
-        cart.setItems(items);
 
-        Cart result = mockCartDAO.getCart(username);
+        Cart result = new Cart();
+        result.setUsername(username);
+        result.setItems(items);
 
         Assertions.assertEquals(result.getUsername(), username);
         Assertions.assertEquals(result.getItems().size(), 1);

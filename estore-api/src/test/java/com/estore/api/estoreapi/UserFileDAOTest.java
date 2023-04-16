@@ -14,6 +14,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.util.ArrayList;
 
 import static org.mockito.Mockito.*;
+
 @Tag("Persistence-Tier")
 public class UserFileDAOTest {
 
@@ -23,13 +24,14 @@ public class UserFileDAOTest {
 
     User[] mockUserArray;
 
-    public UserFileDAOTest(){}
+    public UserFileDAOTest() {
+    }
 
     User user1;
     User user2;
 
     @BeforeEach
-    public void setUp() throws IOException {
+    public void setupUserFileDAO() throws IOException {
         this.user1 = new User();
         user1.setUsername("user1");
         user1.setPassword("user1");
@@ -38,17 +40,17 @@ public class UserFileDAOTest {
         user2.setUsername("user2");
         user2.setPassword("user2");
 
-        this.mockUserArray = new User[] {user1, user2};
+        this.mockUserArray = new User[]{user1, user2};
         this.objectMapper = mock(ObjectMapper.class);
         when(objectMapper.readValue(any(File.class), eq(User[].class))).thenReturn(this.mockUserArray);
 
         this.userFileDAO = new UserFileDAO("data/testing.txt", objectMapper);
-
-
     }
 
     @Test
     public void testCreateUser() throws IOException {
+        setupUserFileDAO();
+
         User user = new User();
         user.setUsername("testUser1");
         user.setPassword("testUserPassword");
@@ -59,6 +61,8 @@ public class UserFileDAOTest {
 
     @Test
     public void testCreateUserAlreadyExists() throws IOException {
+        setupUserFileDAO();
+
         User user = new User();
         user.setUsername("testUser");
         user.setPassword("testPassword");
@@ -68,6 +72,8 @@ public class UserFileDAOTest {
 
     @Test
     public void testFindByUsername() throws IOException {
+        setupUserFileDAO();
+
         User user = new User();
         user.setUsername("testUser");
         user.setPassword("testPassword");
@@ -79,6 +85,8 @@ public class UserFileDAOTest {
 
     @Test
     public void testUpdateUser() throws IOException {
+        setupUserFileDAO();
+
         User user = new User();
         user.setUsername("testUser");
         user.setPassword("testPassword");
@@ -91,27 +99,39 @@ public class UserFileDAOTest {
     }
 
     @Test
-    public void testIsAdmin() {
+    public void testIsAdmin() throws IOException {
+        setupUserFileDAO();
+
         Assertions.assertTrue(userFileDAO.isAdmin("admin", "password"));
         Assertions.assertFalse(userFileDAO.isAdmin("user", "password"));
     }
 
     @Test
     public void testIsCustomer() throws IOException {
+        setupUserFileDAO();
+
         Assertions.assertTrue(userFileDAO.isCustomer("user", "password"));
         Assertions.assertFalse(userFileDAO.isCustomer("admin", "password"));
     }
 
     @Test
     public void testGetUsers() throws IOException {
+        setupUserFileDAO();
+
         User user1 = new User();
         user1.setUsername("user1");
         user1.setPassword("user1");
         User user2 = new User();
         user2.setUsername("user2");
         user2.setPassword("user2");
-        userFileDAO.createUser(user1);
-        userFileDAO.createUser(user2);
+
+        try {
+            userFileDAO.createUser(user1);
+            userFileDAO.createUser(user2);
+            Assertions.fail("User already exists");
+        } catch (FileAlreadyExistsException ignored) {
+        }
+
         ArrayList<User> users = new ArrayList<>(userFileDAO.getUsers());
         Assertions.assertEquals(2, users.size());
         Assertions.assertTrue(users.contains(user1));
@@ -120,15 +140,16 @@ public class UserFileDAOTest {
 
     @Test
     public void testGetUsersWithInfo() throws IOException {
+        setupUserFileDAO();
+
         User user1 = new User();
         user1.setUsername("user1");
         user1.setPassword("user1");
         User user2 = new User();
         user2.setUsername("user2");
         user2.setPassword("user2");
-        userFileDAO.createUser(user1);
-        userFileDAO.createUser(user2);
-        ArrayList<User> users = userFileDAO.getUsers("testuser1");
+
+        ArrayList<User> users = userFileDAO.getUsers("user1");
         Assertions.assertEquals(1, users.size());
         Assertions.assertTrue(users.contains(user1));
         Assertions.assertFalse(users.contains(user2));

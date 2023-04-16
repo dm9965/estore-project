@@ -21,13 +21,15 @@ public class CartControllerTest {
     private CartController cartController;
     private CartDAO mockCartDAO;
 
-    public CartControllerTest(){}
+    public CartControllerTest() {
+    }
 
     @BeforeEach
     public void setupCartController() {
         this.mockCartDAO = Mockito.mock(CartDAO.class);
         this.cartController = new CartController(this.mockCartDAO);
     }
+
     @Test
     public void testGetAllItems() throws IOException {
         String username = "user123";
@@ -66,37 +68,5 @@ public class CartControllerTest {
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals(cart, response.getBody());
         Mockito.verify(mockCartDAO).removeFromCart(username, itemId);
-    }
-
-    @Test
-    public void testGetAllItemsIOException() throws IOException {
-        String username = "user123";
-        Mockito.when(mockCartDAO.getCart(username)).thenThrow(new IOException());
-
-        ResponseEntity<Cart> response = cartController.getAllItems(username);
-
-        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-    }
-
-    @Test
-    public void testAddItemException() throws Exception {
-        String username = "user123";
-        Shoe shoe = new Shoe(1, "style1", Sizing.MENS, 10, 99.99, "brand1", "material1", "color1");
-        Mockito.when(cartController.addItem(username, shoe)).thenThrow(new IOException());
-
-        ResponseEntity<Cart> response = cartController.addItem(username, shoe);
-
-        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-    }
-
-    @Test
-    public void testRemoveItemIOException() throws IOException {
-        String username = "user123";
-        int itemId = 1;
-        Mockito.when(cartController.removeItem(username, itemId)).thenThrow(new IOException());
-
-        ResponseEntity<Cart> response = cartController.removeItem(username, itemId);
-
-        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 }

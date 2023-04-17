@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Tag;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
@@ -26,6 +27,7 @@ public class CartFileDAOTest {
     Cart mockCart;
 
     Shoe mockShoe = new Shoe(1, "Yeezy", Sizing.MENS, 12, 229.99, "Adidas", "Mesh", "Grey");
+    Shoe mockShoe2 = new Shoe(2, "Yeezy", Sizing.MENS, 12, 229.99, "Adidas", "Mesh", "Grey");
 
     CartFileDAO mockCartDAO;
 
@@ -73,5 +75,32 @@ public class CartFileDAOTest {
         Assertions.assertEquals(result.getItems().size(), 1);
         Assertions.assertEquals(result.getItems().get(0), mockShoe);
     }
+
+    @Test
+    public void testRemoveFromCart() throws IOException {
+        setupCartFileDAO();
+        ArrayList<Shoe> shoeList = new ArrayList<>();
+        shoeList.add(mockShoe);
+        shoeList.add(mockShoe2);
+        mockCart.setItems(shoeList);
+        mockCartDAO.removeFromCart("dom", 1);
+        mockCartDAO.removeFromCart("dom", 2);
+        Cart cart = mockCartDAO.getCart("dom");
+        Assertions.assertEquals(Collections.emptyList(), cart.getItems());
+    }
+
+    @Test
+    public void testClearCart() throws IOException {
+        setupCartFileDAO();
+        ArrayList<Shoe> shoeList = new ArrayList<>();
+        shoeList.add(mockShoe);
+        shoeList.add(mockShoe2);
+        mockCart.setItems(shoeList);
+        mockCartDAO.clearCart("dom");
+        Cart cart = mockCartDAO.getCart("dom");
+        Assertions.assertEquals(Collections.emptyList(), cart.getItems());
+    }
+
+
 }
 

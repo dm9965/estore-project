@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public class OrderFileDAO implements OrderDAO {
         for (Shoe shoe : cart.getItems()) {
             totalCost += shoe.getPrice();
         }
-        Order order = new Order(username, cart.getItems(), totalCost);
+        Order order = new Order(username, new ArrayList<>(cart.getItems()), totalCost);
         orderMap.put(order.getUsername(), order);
         saveOrder(order);
         cartDAO.clearCart(username);

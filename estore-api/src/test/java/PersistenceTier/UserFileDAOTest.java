@@ -1,12 +1,12 @@
-package com.estore.api.estoreapi;
+package PersistenceTier;
 
 import com.estore.api.estoreapi.model.User;
 import com.estore.api.estoreapi.persistence.UserFileDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.estore.api.estoreapi;
+package ControllerTier;
 
 import com.estore.api.estoreapi.controller.ShoeController;
 import com.estore.api.estoreapi.model.Shoe;

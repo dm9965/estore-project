@@ -21,6 +21,10 @@ public class Order {
         this.totalCost = totalCost;
     }
 
+    public Order(String username) {
+        this.username = username;
+    }
+
     public String getUsername() {
         return this.username;
     }

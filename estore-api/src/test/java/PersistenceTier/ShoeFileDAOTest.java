@@ -1,4 +1,4 @@
-package com.estore.api.estoreapi;
+package PersistenceTier;
 
 import com.estore.api.estoreapi.model.Shoe;
 import com.estore.api.estoreapi.persistence.ShoeFileDAO;

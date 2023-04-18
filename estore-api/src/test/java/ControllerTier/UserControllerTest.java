@@ -1,4 +1,4 @@
-package com.estore.api.estoreapi;
+package ControllerTier;
 import com.estore.api.estoreapi.controller.UserController;
 import com.estore.api.estoreapi.persistence.UserDAO;
 import org.junit.jupiter.api.Assertions;

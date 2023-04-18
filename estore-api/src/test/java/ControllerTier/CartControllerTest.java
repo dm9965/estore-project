@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import java.io.IOException;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @Tag("Controller-Tier")
 public class CartControllerTest {
@@ -41,7 +41,14 @@ public class CartControllerTest {
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals(cart, response.getBody());
     }
-
+    @Test
+    public void testGetAllItemsIOException() throws IOException {
+        CartDAO mockCartDAO = mock(CartDAO.class);
+        when(mockCartDAO.getCart(anyString())).thenThrow(IOException.class);
+        CartController cartController = new CartController(mockCartDAO);
+        ResponseEntity<Cart> responseEntity = cartController.getAllItems("username");
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+    }
     @Test
     public void testAddItem() throws Exception {
         String username = "user123";
@@ -57,6 +64,15 @@ public class CartControllerTest {
     }
 
     @Test
+    public void testAddItemIOException() throws IOException {
+        CartDAO mockCartDAO = mock(CartDAO.class);
+        doThrow(IOException.class).when(mockCartDAO).addToCart(anyString(), any(Shoe.class));
+        CartController cartController = new CartController(mockCartDAO);
+        ResponseEntity<Cart> responseEntity = cartController.addItem("username", new Shoe());
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+    }
+
+    @Test
     public void testRemoveItem() throws IOException {
         String username = "user123";
         int itemId = 1;
@@ -68,5 +84,13 @@ public class CartControllerTest {
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals(cart, response.getBody());
         Mockito.verify(mockCartDAO).removeFromCart(username, itemId);
+    }
+    @Test
+    public void testRemoveItemIOException() throws  IOException{
+        CartDAO mockCartDAO = mock(CartDAO.class);
+        doThrow(IOException.class).when(mockCartDAO).removeFromCart(anyString(), anyInt());
+        CartController cartController = new CartController(mockCartDAO);
+        ResponseEntity<Cart> responseEntity = cartController.removeItem("username", 1);
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
     }
 }

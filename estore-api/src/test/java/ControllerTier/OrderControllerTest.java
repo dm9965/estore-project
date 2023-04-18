@@ -70,6 +70,18 @@ public class OrderControllerTest {
         ResponseEntity<Order> response = orderController.getOrder("dom");
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals(order, response.getBody());
+
+    }
+
+    @Test
+    public void testGetOrderIOException() throws IOException {
+        String username = "testUser";
+        Mockito.when(mockOrderDAO.getOrder(username)).thenThrow(new IOException("Mock IO exception"));
+
+        ResponseEntity<Order> response = orderController.getOrder(username);
+
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        Assertions.assertNull(response.getBody());
     }
     @Test
     public void testGetAllOrdersSuccess() throws IOException {
@@ -99,6 +111,15 @@ public class OrderControllerTest {
         ResponseEntity<List<Order>> response = orderController.getAllOrders();
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assertions.assertEquals(orders, response.getBody());
+    }
+
+    @Test
+    public void testGetAllOrdersIOException() throws IOException {
+        Mockito.when(mockOrderDAO.getAllOrders()).thenThrow(new IOException());
+
+        ResponseEntity<List<Order>> response = orderController.getAllOrders();
+
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 }
 

@@ -93,13 +93,23 @@ public class ShoeFileDAOTest {
     @Test
     public void testUpdateShoe() throws IOException {
         Shoe shoe = new Shoe(5, "Stan Smiths", MENS, 11, 89.99, "Adidas", "Leather", "White");
-        Shoe result = null;
+        Shoe updatedShoe = new Shoe(5, "Air Jordans", WOMENS, 10, 119.99, "Nike", "Synthetic", "Black");
         try {
-            result = this.mockShoeFileDAO.updateShoe(shoe);
-            Assertions.fail("Exeception not thrown");
-        } catch (Exception ignored) {
+            mockShoeFileDAO.createShoe(shoe);
+            Shoe result = mockShoeFileDAO.updateShoe(updatedShoe);
+
+            Assertions.assertNotNull(result);
+            Assertions.assertEquals(updatedShoe.getId(), result.getId());
+            Assertions.assertEquals(updatedShoe.getStyle(), result.getStyle());
+            Assertions.assertEquals(updatedShoe.getSizing(), result.getSizing());
+            Assertions.assertEquals(updatedShoe.getSize(), result.getSize());
+            Assertions.assertEquals(updatedShoe.getPrice(), result.getPrice());
+            Assertions.assertEquals(updatedShoe.getBrand(), result.getBrand());
+            Assertions.assertEquals(updatedShoe.getMaterial(), result.getMaterial());
+            Assertions.assertEquals(updatedShoe.getColor(), result.getColor());
+        } catch (Exception e) {
+            Assertions.fail("Exception thrown: " + e.getMessage());
         }
-        Assertions.assertNull(result);
     }
 
     @Test
@@ -109,7 +119,7 @@ public class ShoeFileDAOTest {
     }
 
     @Test
-    public void testUpdateHeroNotFound() {
+    public void testUpdateShoeNotFound() {
         Shoe shoe = new Shoe(5, "Stan Smiths", MENS, 11, 89.99, "Adidas", "Leather", "White");
         Shoe result = null;
         try {
@@ -127,5 +137,38 @@ public class ShoeFileDAOTest {
         Assertions.assertThrows(IOException.class, () -> {
             new ShoeFileDAO("data/doesnt_matter.txt", mockObjectMapper);
         }, "IOException not thrown");
+    }
+    @Test
+    public void testDeleteShoeByIdNotFound() throws IOException {
+        boolean result = Assertions.assertDoesNotThrow(() -> {
+            return this.mockShoeFileDAO.deleteShoeById(100);
+        }, "Unexpected exception thrown");
+        Assertions.assertFalse(result);
+        Assertions.assertEquals(this.mockShoeFileDAO.getAllShoes().length, this.mockShoeArray.length);
+    }
+    @Test
+    public void testCreateDuplicateShoe() throws Exception {
+        Shoe shoe = new Shoe(1, "Air Max 90", MENS, 9, 129.99, "Nike", "Leather", "Green");
+        Assertions.assertThrows(Exception.class, () -> {
+            this.mockShoeFileDAO.createShoe(shoe);
+        }, "Expected exception not thrown");
+    }
+    @Test
+    public void testSearchShoesBySize() throws IOException {
+        Shoe[] shoeArray = this.mockShoeFileDAO.searchShoes(String.valueOf(9));
+        Assertions.assertEquals(shoeArray.length, 3);
+        Assertions.assertEquals(shoeArray[0], this.mockShoeArray[0]);
+    }
+    @Test
+    public void testUpdateShoeInvalidId() throws IOException {
+        Shoe shoeToUpdate = new Shoe(100, "Air Max 90", MENS, 9, 129.99, "Nike", "Leather", "Green");
+        Shoe updatedShoe = new Shoe(100, "Air Max 90", MENS, 9, 149.99, "Nike", "Leather", "Green");
+        Shoe result = null;
+        try {
+            result = this.mockShoeFileDAO.updateShoe(updatedShoe);
+            Assertions.fail("Expected exception not thrown");
+        } catch (IOException ignored) {
+        }
+        Assertions.assertNull(result);
     }
 }

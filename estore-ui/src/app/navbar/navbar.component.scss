@@ -15,13 +15,17 @@
 }
 
 .logo-spacing {
+	margin-top: 1.5rem;
 	margin-left: 1rem;
-	margin-right: 4rem;
+	margin-right: 3rem;
+	border: thick black;
+	border-radius: 15px;
 }
 
 .navbar-wrap {
 	display: flex;
 	flex-wrap: wrap;
+	height: 100px;
 	width: 100%;
 }
 
@@ -37,4 +41,10 @@
 .hello-user {
 	margin-left: 2rem;
 	font-size: smaller;
+}
+
+.logo-size {
+	height: 100px;
+	width: 150px;
+	border-radius: 15px;
 }

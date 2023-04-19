@@ -1,7 +1,16 @@
 <mat-toolbar class="navbar-wrap navbar-style light-shadow">
 	<mat-toolbar-row class="navbar-style">
 
-		<a class="logo-spacing" routerLink="/home">{{"7Shoes"}}</a>
+		<a class="logo-spacing logo-size"
+		   routerLink="/home">
+			<img
+				src="/assets/7ShoesLogo.png"
+				alt="Logo"
+				height="70px"
+				width="130px"
+
+			/>
+		</a>
 
 		<a [queryParams]="{query: 'New'}" mat-button routerLink="/browse">New Arrivals</a>
 		<a [queryParams]="{query: 'Mens'}" mat-button routerLink="/browse">Mens</a>
